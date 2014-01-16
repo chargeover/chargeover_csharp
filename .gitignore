@@ -1,0 +1,10 @@
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+*.sln.cache
+
+[Bb]in
+[Oo]bj
+
+localConnectionStrings.config
