@@ -48,12 +48,21 @@ namespace Program
 			Console.Write ("\n\n\n");
 			*/
 
-			List<string> query = new List<string> ();
-			Response resp2 = api.find(typeof(Customer), query);
+			List<string> query1 = new List<string> ();
+			Response resp2 = api.find(typeof(Customer), query1);
 
 			foreach (Customer cust in resp2.list)
 			{
 				Console.WriteLine(cust.customer_id + " => " + cust.company);
+			}
+
+
+			List<string> query2 = new List<string> ();
+			Response resp3 = api.find(typeof(User), query2);
+
+			foreach (User user in resp3.list)
+			{
+				Console.WriteLine(user.user_id + " => " + user.name);
 			}
 
 			Console.WriteLine (api.getLastRequest ());

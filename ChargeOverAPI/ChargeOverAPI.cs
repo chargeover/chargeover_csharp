@@ -78,41 +78,58 @@ namespace ChargeOver
 		{
 			string uri = this._mapToURI (ChargeOverAPI.MethodCreate, obj.GetType ());
 
-			return this._request (ChargeOverAPI.MethodCreate, uri, obj.GetType (), obj);
+			return this.request (ChargeOverAPI.MethodCreate, uri, obj.GetType (), obj);
 		}
 
 		public Response find(Type type, List<string> query = null)
 		{
 			string uri = this._mapToURI (ChargeOverAPI.MethodFind, type, 0, query);
 
-			return this._request (ChargeOverAPI.MethodFind, uri, type);
+			return this.request (ChargeOverAPI.MethodFind, uri, type);
 		}
 
-		/*
-		public Response request(string coMethod, Type type, List<string> query = null)
+		protected Response request(string coMethod, string uri, Type type, Object obj = null, int id = 0)
 		{
-			string uri = this.mapToURI (coMethod, type, query);
+			Tuple<int, string> http = this.raw (coMethod, uri, type, obj, id);
 
-			return this._request (coMethod, uri);
+			// Parse the JSON response
+			Response resp = JsonConvert.DeserializeObject<Response>(http.Item2);
+
+			switch (coMethod) {
+				case ChargeOverAPI.MethodCreate:
+				case ChargeOverAPI.MethodModify:
+
+					JObject ocm = JObject.Parse (http.Item2);
+					resp.id = (int) ocm ["response"] ["id"];
+
+					break;
+				case ChargeOverAPI.MethodFind:
+
+					JObject og = JObject.Parse (http.Item2);
+
+					if (type == typeof(Customer)) {
+						List<Customer> list = JsonConvert.DeserializeObject < List < Customer >> (og ["response"].ToString ());
+						resp.list = list.ConvertAll(i => i as Base);
+						break;
+					}
+					else if (type == typeof(User)) {
+						List<User> list = JsonConvert.DeserializeObject < List < User >> (og ["response"].ToString ());
+						resp.list = list.ConvertAll(i => i as Base);
+						break;
+					}
+
+				break;
+				case ChargeOverAPI.MethodGet:
+
+
+
+				break;
+			}
+
+			return resp;
 		}
-		*/
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="httpMethod">Http method.</param>
-		/// <param name="uri">URI.</param>
-		/// <param name="data">Data.</param>
-		/*
-		public Response request(string coMethod, Object obj, int id = 0)
-		{
-			string uri = this.mapToURI (coMethod, obj, 0);	
-
-			return this._request (coMethod, uri, obj, id);
-		}
-		*/
-
-		protected Response _request(string coMethod, string uri, Type type, Object obj = null, int id = 0)
+		public Tuple<int, string> raw(string coMethod, string uri, Type type, Object obj = null, int id = 0)
 		{
 			string httpMethod = "GET";
 
@@ -173,39 +190,9 @@ namespace ChargeOver
 			string httpResponse = new StreamReader(response.GetResponseStream()).ReadToEnd();
 			int httpCode = (int) response.StatusCode;
 
-			// Parse the JSON response
-			Response resp = JsonConvert.DeserializeObject<Response>(httpResponse);
+			this.lastResponse = httpResponse;
 
-			switch (coMethod) {
-			case ChargeOverAPI.MethodCreate:
-			case ChargeOverAPI.MethodModify:
-					
-				JObject ocm = JObject.Parse (httpResponse);
-				resp.id = (int) ocm ["response"] ["id"];
-
-				break;
-			case ChargeOverAPI.MethodFind:
-
-				JObject og = JObject.Parse (httpResponse);
-
-				if (type == typeof(Customer))
-				{
-					List<Customer> list = JsonConvert.DeserializeObject < List < Customer >> (og ["response"].ToString ());
-					resp.list = list.ConvertAll(i => i as Base);
-					break;
-				}
-
-
-
-				break;
-			case ChargeOverAPI.MethodGet:
-
-
-
-				break;
-			}
-						
-			return resp;
+			return new Tuple<int, string>(httpCode, httpResponse);
 		}
 
 

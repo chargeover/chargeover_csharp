@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{7BEA9EBA-5207-4150-855B-F5D26AA5A359}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ChargeOverAPI</RootNamespace>
+    <RootNamespace>ChargeOver</RootNamespace>
     <AssemblyName>ChargeOverAPI</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -43,6 +43,9 @@
     <Compile Include="ChargeOver\Object\Base.cs" />
     <Compile Include="ChargeOver\Response.cs" />
     <Compile Include="ChargeOver\Object\Customer.cs" />
+    <Compile Include="ChargeOver\Object\Invoice.cs" />
+    <Compile Include="ChargeOver\Date.cs" />
+    <Compile Include="ChargeOver\Object\User.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
