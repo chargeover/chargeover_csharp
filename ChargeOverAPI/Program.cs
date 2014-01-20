@@ -6,16 +6,16 @@ using System.Net;
 using System.Text;
 using System.IO;
 
-using ChargeOverAPI;
+using ChargeOver;
 
-namespace ChargeOverAPI
+namespace Program
 {
 	class MainClass
 	{
 		public static void Main (string[] args)
 		{
 			Example1 ();
-			Example2 ();
+			//Example2 ();
 
 			#if DEBUG
 			Console.WriteLine("Press enter to close...");
@@ -28,12 +28,13 @@ namespace ChargeOverAPI
 			// Here's an example using the ChargeOverAPI class I put together
 			Console.WriteLine ("EXAMPLE #1");
 
-			string endpoint = "http://dev.chargeover.com/signup/api/v3.php";
+			string endpoint = "http://macbookpro.chargeover.com:8888/chargeover/signup/api/v3.php";
 			string username = "7sutWFEO2zKVYIGmZMJ3Nij5hfLxDRb8";
 			string password = "9vCJbmdZKSieVchyrRItFQw8MBN4lOH3";
 
 			ChargeOverAPI api = new ChargeOverAPI (endpoint, username, password);
 
+			/*
 			Customer cust = new Customer ();
 			cust.company = "Test C# Company";
 			cust.bill_addr1 = "72 E Blue Grass Road";
@@ -45,6 +46,18 @@ namespace ChargeOverAPI
 
 			Console.WriteLine ("Status back was: " + resp.status + ", new customer id is " + resp.id);
 			Console.Write ("\n\n\n");
+			*/
+
+			List<string> query = new List<string> ();
+			Response resp2 = api.find(typeof(Customer), query);
+
+			foreach (Customer cust in resp2.list)
+			{
+				Console.WriteLine(cust.customer_id + " => " + cust.company);
+			}
+
+			Console.WriteLine (api.getLastRequest ());
+
 		}
 
 		public static void Example2()

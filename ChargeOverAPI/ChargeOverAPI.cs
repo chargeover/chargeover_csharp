@@ -6,9 +6,9 @@ using System.Net;
 using System.Text;
 using System.IO;
 
-namespace ChargeOverAPI
+namespace ChargeOver
 {
-	public class ChargeOverAPI 
+	public class ChargeOverAPI
 	{
 		public const string MethodCreate = "create";
 		public const string MethodFind = "find";
@@ -21,6 +21,9 @@ namespace ChargeOverAPI
 		protected string username;
 		protected string password;
 
+		protected string lastRequest = "";
+		protected string lastResponse = "";
+
 		public ChargeOverAPI(string endpoint, string username, string password)
 		{
 			this.endpoint = endpoint;
@@ -28,30 +31,71 @@ namespace ChargeOverAPI
 			this.password = password;
 		}
 
-		public string mapToURI(string method, int id, Object obj)
+		/*
+		public string mapToURI(string coMethod, Object obj, int id)
 		{
-			string objType = obj.GetType ().ToString().Replace("ChargeOverAPI.", "").ToLower();
+			return this._mapToURI (coMethod, obj.GetType (), id);
+		}
 
-			if (method == ChargeOverAPI.MethodCreate) {
+		public string mapToURI(string coMethod, Type type)
+		{
+			return this._mapToURI (coMethod, type);
+		}
+		*/
+
+		public string getLastRequest()
+		{
+			return this.lastRequest;
+		}
+
+		public string getLastResponse()
+		{
+			return this.lastResponse;
+		}
+
+		protected string _mapToURI(string coMethod, Type type, int id = 0, List<string> query = null)
+		{
+			string uri = "";
+
+			if (coMethod == ChargeOverAPI.MethodCreate) {
 				id = 0;
 			}
 
 			if (id > 0) {
-				return "/" + objType + "/" + id;
+				uri = "/" + type.ToString().Replace("ChargeOver.", "").ToLower() + "/" + id;
 			} else {
-				return "/" + objType;
+				uri = "/" + type.ToString().Replace("ChargeOver.", "").ToLower();
 			}
+
+			if (query != null) {
+
+			}
+
+			return uri;
 		}
 
 		public Response create(Object obj)
 		{
-			return this.request (ChargeOverAPI.MethodCreate, obj);
+			string uri = this._mapToURI (ChargeOverAPI.MethodCreate, obj.GetType ());
+
+			return this._request (ChargeOverAPI.MethodCreate, uri, obj.GetType (), obj);
 		}
 
-		public Response request(string coMethod, Type coType, List<string> query = null)
+		public Response find(Type type, List<string> query = null)
 		{
-			return null;
+			string uri = this._mapToURI (ChargeOverAPI.MethodFind, type, 0, query);
+
+			return this._request (ChargeOverAPI.MethodFind, uri, type);
 		}
+
+		/*
+		public Response request(string coMethod, Type type, List<string> query = null)
+		{
+			string uri = this.mapToURI (coMethod, type, query);
+
+			return this._request (coMethod, uri);
+		}
+		*/
 
 		/// <summary>
 		/// 
@@ -59,11 +103,19 @@ namespace ChargeOverAPI
 		/// <param name="httpMethod">Http method.</param>
 		/// <param name="uri">URI.</param>
 		/// <param name="data">Data.</param>
+		/*
 		public Response request(string coMethod, Object obj, int id = 0)
+		{
+			string uri = this.mapToURI (coMethod, obj, 0);	
+
+			return this._request (coMethod, uri, obj, id);
+		}
+		*/
+
+		protected Response _request(string coMethod, string uri, Type type, Object obj = null, int id = 0)
 		{
 			string httpMethod = "GET";
 
-			string uri = this.mapToURI (coMethod, 0, obj);
 			string data = "";
 
 			// Find out correct HTTP method 
@@ -102,11 +154,20 @@ namespace ChargeOverAPI
 
 			request.Credentials = new NetworkCredential(this.username, this.password);
 
-			Stream requestStream = request.GetRequestStream();
+			if (postBytes.Length > 0) {
 
-			// Send request 
-			requestStream.Write(postBytes, 0, postBytes.Length);
-			requestStream.Close();
+				Stream requestStream = request.GetRequestStream();
+
+				// Send request 
+				requestStream.Write (postBytes, 0, postBytes.Length);
+				requestStream.Close ();
+			}
+
+			this.lastRequest = "";
+			this.lastRequest += httpMethod + " " + this.endpoint + uri + " HTTP/1.0" + "\r\n";
+			this.lastRequest += "Host: " + "@todo logging" + "\r\n";
+			this.lastRequest += "\r\n";
+			this.lastRequest += data;
 
 			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 			string httpResponse = new StreamReader(response.GetResponseStream()).ReadToEnd();
@@ -126,7 +187,15 @@ namespace ChargeOverAPI
 			case ChargeOverAPI.MethodFind:
 
 				JObject og = JObject.Parse (httpResponse);
-				resp.list = JsonConvert.DeserializeObject < List <Object>> (og ["response"].ToString ());
+
+				if (type == typeof(Customer))
+				{
+					List<Customer> list = JsonConvert.DeserializeObject < List < Customer >> (og ["response"].ToString ());
+					resp.list = list.ConvertAll(i => i as Base);
+					break;
+				}
+
+
 
 				break;
 			case ChargeOverAPI.MethodGet:
@@ -139,69 +208,10 @@ namespace ChargeOverAPI
 			return resp;
 		}
 
-		/** 
-		public Response find(string type, List<string> query = null)
-		{
-			if (query == null)
-			{
-				query = new List<String> ();
-			}
-
-
-		}
-		*/
-	}
-
-	public class Response
-	{
-		public int code;
-		public string status;
-		public string message;
-		public List<Object> list;
-		public Object obj;
-		public int id;
-
-		public Response(int code, string status, string message)
-		{
-			this.code = code;
-			this.status = status;
-			this.message = message;
-		}
-
-		public void setList(List<Object> list)
-		{
-			this.list = list;
-		}
-
-		public void setObj(Object obj)
-		{
-			this.obj = obj;
-		}
-
-		public void setId(int id)
-		{
-			this.id = id;
-		}
-	}
-
-	public class Object
-	{
 
 	}
 
-	public class Customer : Object
-	{
-		public string company = "";
 
-		public string bill_addr1 = "";
-		public string bill_addr2 = "";
-		public string bill_addr3 = "";
-		public string bill_city = "";
-		public string bill_state = "";
-		public string bill_postcode = "";
-		public string bill_country = "";
 
-		public string external_key = "";
-	}
 }
 
