@@ -31,18 +31,6 @@ namespace ChargeOver
 			this.password = password;
 		}
 
-		/*
-		public string mapToURI(string coMethod, Object obj, int id)
-		{
-			return this._mapToURI (coMethod, obj.GetType (), id);
-		}
-
-		public string mapToURI(string coMethod, Type type)
-		{
-			return this._mapToURI (coMethod, type);
-		}
-		*/
-
 		public string getLastRequest()
 		{
 			return this.lastRequest;
@@ -88,6 +76,13 @@ namespace ChargeOver
 			return this.request (ChargeOverAPI.MethodFind, uri, type);
 		}
 
+		public Response get(Type type, int id)
+		{
+			string uri = this._mapToURI (ChargeOverAPI.MethodGet, type, id);
+
+			return this.request (ChargeOverAPI.MethodGet, uri, type, null, id);
+		}
+
 		protected Response request(string coMethod, string uri, Type type, Object obj = null, int id = 0)
 		{
 			Tuple<int, string> http = this.raw (coMethod, uri, type, obj, id);
@@ -103,25 +98,36 @@ namespace ChargeOver
 					resp.id = (int) ocm ["response"] ["id"];
 
 					break;
-				case ChargeOverAPI.MethodFind:
+			case ChargeOverAPI.MethodFind:
 
-					JObject og = JObject.Parse (http.Item2);
+				JObject objf = JObject.Parse (http.Item2);
 
-					if (type == typeof(Customer)) {
-						List<Customer> list = JsonConvert.DeserializeObject < List < Customer >> (og ["response"].ToString ());
-						resp.list = list.ConvertAll(i => i as Base);
-						break;
-					}
-					else if (type == typeof(User)) {
-						List<User> list = JsonConvert.DeserializeObject < List < User >> (og ["response"].ToString ());
-						resp.list = list.ConvertAll(i => i as Base);
-						break;
-					}
+				if (type == typeof(Customer)) {
+					List<Customer> list = JsonConvert.DeserializeObject < List < Customer >> (objf ["response"].ToString ());
+					resp.list = list.ConvertAll (i => i as Base);
+				} else if (type == typeof(User)) {
+					List<User> list = JsonConvert.DeserializeObject < List < User >> (objf ["response"].ToString ());
+					resp.list = list.ConvertAll (i => i as Base);
+				} else if (type == typeof(Invoice)) {
+					List<Invoice> list = JsonConvert.DeserializeObject < List < Invoice >> (objf ["response"].ToString ());
+					resp.list = list.ConvertAll (i => i as Base);
+				}
 
 				break;
-				case ChargeOverAPI.MethodGet:
+			case ChargeOverAPI.MethodGet:
 
+				JObject objg = JObject.Parse (http.Item2);
 
+				if (type == typeof(Customer)) {
+					Customer cust = JsonConvert.DeserializeObject<Customer> (objg ["response"].ToString ());
+					resp.obj = (Customer)cust;
+				} else if (type == typeof(User)) {
+					User user = JsonConvert.DeserializeObject<User> (objg ["response"].ToString ());
+					resp.obj = (User)user;
+				} else if (type == typeof(Invoice)) {
+					Invoice inv = JsonConvert.DeserializeObject<Invoice>(objg["response"].ToString ());
+					resp.obj = (Invoice) inv;
+				}
 
 				break;
 			}

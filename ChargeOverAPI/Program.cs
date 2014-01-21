@@ -48,6 +48,7 @@ namespace Program
 			Console.Write ("\n\n\n");
 			*/
 
+			/*
 			List<string> query1 = new List<string> ();
 			Response resp2 = api.find(typeof(Customer), query1);
 
@@ -66,7 +67,22 @@ namespace Program
 			}
 
 			Console.WriteLine (api.getLastRequest ());
+			*/
 
+			List<string> query3 = new List<string> ();
+			Response resp3 = api.find (typeof(Invoice), query3);
+
+			foreach (Invoice inv in resp3.list)
+			{
+				Console.WriteLine (inv.invoice_id + " => " + inv.date.ToString ());
+
+				// Get the whole invoice
+				Response resp4 = api.get (typeof(Invoice), inv.invoice_id);
+				Invoice thisinv = (Invoice) resp4.obj;
+
+				int count = thisinv.line_items.Count;
+				Console.WriteLine ("    has " + count + " line items");
+			}
 		}
 
 		public static void Example2()

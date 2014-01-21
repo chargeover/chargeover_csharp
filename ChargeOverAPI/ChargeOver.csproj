@@ -46,9 +46,12 @@
     <Compile Include="ChargeOver\Object\Invoice.cs" />
     <Compile Include="ChargeOver\Date.cs" />
     <Compile Include="ChargeOver\Object\User.cs" />
+    <Compile Include="ChargeOver\Object\LineItem.cs" />
+    <Compile Include="ChargeOver\JSON\CODateConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="ChargeOver\" />
+    <Folder Include="ChargeOver\JSON\" />
   </ItemGroup>
 </Project>
