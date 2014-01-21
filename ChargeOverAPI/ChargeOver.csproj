@@ -48,6 +48,8 @@
     <Compile Include="ChargeOver\Object\User.cs" />
     <Compile Include="ChargeOver\Object\LineItem.cs" />
     <Compile Include="ChargeOver\JSON\CODateConverter.cs" />
+    <Compile Include="ChargeOver\Object\Transaction.cs" />
+    <Compile Include="ChargeOver\Object\Item.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

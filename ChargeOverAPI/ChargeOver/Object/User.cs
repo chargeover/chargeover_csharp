@@ -4,14 +4,17 @@ namespace ChargeOver
 {
 	public class User : Base
 	{
-		public int user_id = 0;
+		public int user_id { get; set; }
 
-		public string name = "";
-		public string first_name = "";
-		public string last_name = "";
+		public string name { get; set; }
+		public string first_name { get; set; }
+		public string last_name { get; set; }
 
-		public string phone = "";
-		public string email = "";
+		public string phone { get; set; }
+		public string email { get; set; }
+
+		public string username { get; set; }
+		public string external_key { get; set; }
 	}
 }
 
