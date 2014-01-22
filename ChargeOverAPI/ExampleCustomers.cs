@@ -59,7 +59,27 @@ namespace ChargeOver
 			}
 
 
+			// ************************************
+			// Paging through the list of customers
+			// ************************************
 
+			Console.WriteLine ("");
+			Console.WriteLine ("Paging through a list of customers with .find(...)");
+			Console.WriteLine ("");
+
+			int num_per_page = 10;
+			for (int page = 0; page < 3; page++) 
+			{
+				Console.WriteLine ("  Now fetching page " + (page + 1) + " to get the next " + num_per_page + " customers");
+
+				List<string> query3 = new List<string> ();
+				Response resp3 = api.find (typeof(Customer), query3, null, (num_per_page * page), num_per_page);
+
+				foreach (Customer mycust3 in resp3.list) 
+				{
+					Console.WriteLine ("    " + mycust3.customer_id + " => " + mycust3.company);
+				}
+			}
 		}
 	}
 }

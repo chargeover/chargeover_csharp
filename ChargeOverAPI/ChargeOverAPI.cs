@@ -47,7 +47,7 @@ namespace ChargeOver
 			return this.lastError;
 		}
 
-		protected string _mapToURI(string coMethod, Type type, int id = 0, List<string> query = null)
+		protected string _mapToURI(string coMethod, Type type, int id = 0, List<string> query = null, List<string> sort = null, int offset = 0, int limit = 10)
 		{
 			string uri = "";
 
@@ -66,10 +66,26 @@ namespace ChargeOver
 				uri = "/" + resource;
 			}
 
+			uri += "?_dummy=1";
+
 			if (query != null && 
 			    query.Count > 0) {
 
-				uri += "?where=" + String.Join ("&", query);
+				uri += "&where=" + String.Join (",", query);
+			}
+
+			if (sort != null && 
+			    sort.Count > 0) {
+
+				uri += "&sort=" + String.Join (",", sort);
+			}
+
+			if (offset > 0) {
+				uri += "&offset=" + offset;
+			}
+
+			if (limit > 0) {
+				uri += "&limit=" + limit;
 			}
 
 			return uri;
@@ -82,9 +98,9 @@ namespace ChargeOver
 			return this.request (ChargeOverAPI.MethodCreate, uri, obj.GetType (), obj);
 		}
 
-		public Response find(Type type, List<string> query = null)
+		public Response find(Type type, List<string> query = null, List<string> sort = null, int offset = 0, int limit = 10)
 		{
-			string uri = this._mapToURI (ChargeOverAPI.MethodFind, type, 0, query);
+			string uri = this._mapToURI (ChargeOverAPI.MethodFind, type, 0, query, sort, offset, limit);
 
 			return this.request (ChargeOverAPI.MethodFind, uri, type);
 		}
