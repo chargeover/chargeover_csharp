@@ -6,7 +6,7 @@ namespace ChargeOver
 	{
 		public int transaction_id { get; set; }
 
-		public int gateway_id { get; }
+		public int gateway_id { get; set; }
 		public int currency_id { get; set; }
 
 		public bool gateway_status { get; set; }
@@ -20,10 +20,10 @@ namespace ChargeOver
 		public string transaction_detail { get; set; }
 		public DateTime transaction_datetime { get; set; }
 
-		public DateTime? void_datetime { get; }
+		public DateTime? void_datetime { get; set; }
 
-		public string currency_symbol { get; }
-		public string currency_iso4217 { get; }
+		public string currency_symbol { get; set; }
+		public string currency_iso4217 { get; set; }
 
 		public int customer_id { get; set; }
 	}

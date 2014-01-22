@@ -23,6 +23,7 @@ namespace ChargeOver
 
 		protected string lastRequest = "";
 		protected string lastResponse = "";
+		protected string lastError = "";
 
 		public ChargeOverAPI(string endpoint, string username, string password)
 		{
@@ -41,6 +42,11 @@ namespace ChargeOver
 			return this.lastResponse;
 		}
 
+		public string getLastError()
+		{
+			return this.lastError;
+		}
+
 		protected string _mapToURI(string coMethod, Type type, int id = 0, List<string> query = null)
 		{
 			string uri = "";
@@ -49,14 +55,21 @@ namespace ChargeOver
 				id = 0;
 			}
 
-			if (id > 0) {
-				uri = "/" + type.ToString().Replace("ChargeOver.", "").ToLower() + "/" + id;
-			} else {
-				uri = "/" + type.ToString().Replace("ChargeOver.", "").ToLower();
+			string resource = type.ToString ().Replace ("ChargeOver.", "").ToLower ();
+			if (resource == "billingpackage") {
+				resource = "billing_package";
 			}
 
-			if (query != null) {
+			if (id > 0) {
+				uri = "/" + resource + "/" + id;
+			} else {
+				uri = "/" + resource;
+			}
 
+			if (query != null && 
+			    query.Count > 0) {
+
+				uri += "?where=" + String.Join ("&", query);
 			}
 
 			return uri;
@@ -85,54 +98,75 @@ namespace ChargeOver
 
 		protected Response request(string coMethod, string uri, Type type, Object obj = null, int id = 0)
 		{
-			Tuple<int, string> http = this.raw (coMethod, uri, type, obj, id);
+			try
+			{
+				Tuple<int, string> http = this.raw (coMethod, uri, type, obj, id);
+			
+				// Parse the JSON response
+				Response resp = JsonConvert.DeserializeObject<Response>(http.Item2);
 
-			// Parse the JSON response
-			Response resp = JsonConvert.DeserializeObject<Response>(http.Item2);
+				switch (coMethod) {
+					case ChargeOverAPI.MethodCreate:
+					case ChargeOverAPI.MethodModify:
 
-			switch (coMethod) {
-				case ChargeOverAPI.MethodCreate:
-				case ChargeOverAPI.MethodModify:
+						JObject ocm = JObject.Parse (http.Item2);
+						resp.id = (int) ocm ["response"] ["id"];
 
-					JObject ocm = JObject.Parse (http.Item2);
-					resp.id = (int) ocm ["response"] ["id"];
+						break;
+				case ChargeOverAPI.MethodFind:
+
+					JObject objf = JObject.Parse (http.Item2);
+
+					if (type == typeof(Customer)) {
+						List<Customer> list = JsonConvert.DeserializeObject < List < Customer >> (objf ["response"].ToString ());
+						resp.list = list.ConvertAll (i => i as Base);
+					} else if (type == typeof(User)) {
+						List<User> list = JsonConvert.DeserializeObject < List < User >> (objf ["response"].ToString ());
+						resp.list = list.ConvertAll (i => i as Base);
+					} else if (type == typeof(Invoice)) {
+						List<Invoice> list = JsonConvert.DeserializeObject < List < Invoice >> (objf ["response"].ToString ());
+						resp.list = list.ConvertAll (i => i as Base);
+					}
 
 					break;
-			case ChargeOverAPI.MethodFind:
+				case ChargeOverAPI.MethodGet:
 
-				JObject objf = JObject.Parse (http.Item2);
+					JObject objg = JObject.Parse (http.Item2);
 
-				if (type == typeof(Customer)) {
-					List<Customer> list = JsonConvert.DeserializeObject < List < Customer >> (objf ["response"].ToString ());
-					resp.list = list.ConvertAll (i => i as Base);
-				} else if (type == typeof(User)) {
-					List<User> list = JsonConvert.DeserializeObject < List < User >> (objf ["response"].ToString ());
-					resp.list = list.ConvertAll (i => i as Base);
-				} else if (type == typeof(Invoice)) {
-					List<Invoice> list = JsonConvert.DeserializeObject < List < Invoice >> (objf ["response"].ToString ());
-					resp.list = list.ConvertAll (i => i as Base);
+					if (type == typeof(Customer)) {
+						Customer cust = JsonConvert.DeserializeObject<Customer> (objg ["response"].ToString ());
+						resp.obj = (Customer)cust;
+					} else if (type == typeof(User)) {
+						User user = JsonConvert.DeserializeObject<User> (objg ["response"].ToString ());
+						resp.obj = (User)user;
+					} else if (type == typeof(Invoice)) {
+						Invoice inv = JsonConvert.DeserializeObject<Invoice>(objg["response"].ToString ());
+						resp.obj = (Invoice) inv;
+					}
+
+					break;
 				}
 
-				break;
-			case ChargeOverAPI.MethodGet:
-
-				JObject objg = JObject.Parse (http.Item2);
-
-				if (type == typeof(Customer)) {
-					Customer cust = JsonConvert.DeserializeObject<Customer> (objg ["response"].ToString ());
-					resp.obj = (Customer)cust;
-				} else if (type == typeof(User)) {
-					User user = JsonConvert.DeserializeObject<User> (objg ["response"].ToString ());
-					resp.obj = (User)user;
-				} else if (type == typeof(Invoice)) {
-					Invoice inv = JsonConvert.DeserializeObject<Invoice>(objg["response"].ToString ());
-					resp.obj = (Invoice) inv;
-				}
-
-				break;
+				return resp;
 			}
+			catch (WebException ex) {
 
-			return resp;
+				string msg = "An exception occurred when communicating with the remote server.";
+
+				if (ex.Status == WebExceptionStatus.ProtocolError)
+				{
+					var response = ex.Response as HttpWebResponse;
+					if (response != null)
+					{
+						// Can we decode it? 
+						Response exresp = JsonConvert.DeserializeObject<Response>(new StreamReader(response.GetResponseStream()).ReadToEnd());
+
+						msg = "Remote server returned [" + exresp.code + ": " + exresp.message + "]";
+					}
+				}
+
+				throw new COException(msg, ex);
+			}
 		}
 
 		public Tuple<int, string> raw(string coMethod, string uri, Type type, Object obj = null, int id = 0)
@@ -163,6 +197,12 @@ namespace ChargeOver
 				break;
 			}
 
+			this.lastRequest = "";
+			this.lastRequest += httpMethod + " " + this.endpoint + uri + " HTTP/1.0" + "\r\n";
+			this.lastRequest += "Host: " + "@todo logging" + "\r\n";
+			this.lastRequest += "\r\n";
+			this.lastRequest += data;
+
 			// Create request
 			HttpWebRequest request = (HttpWebRequest) WebRequest.Create(this.endpoint + uri); 
 
@@ -186,17 +226,12 @@ namespace ChargeOver
 				requestStream.Close ();
 			}
 
-			this.lastRequest = "";
-			this.lastRequest += httpMethod + " " + this.endpoint + uri + " HTTP/1.0" + "\r\n";
-			this.lastRequest += "Host: " + "@todo logging" + "\r\n";
-			this.lastRequest += "\r\n";
-			this.lastRequest += data;
-
 			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 			string httpResponse = new StreamReader(response.GetResponseStream()).ReadToEnd();
 			int httpCode = (int) response.StatusCode;
 
 			this.lastResponse = httpResponse;
+
 
 			return new Tuple<int, string>(httpCode, httpResponse);
 		}

@@ -15,6 +15,8 @@ namespace ChargeOver
 
 		public string username { get; set; }
 		public string external_key { get; set; }
+
+		public int? customer_id { get; set; }
 	}
 }
 

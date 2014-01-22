@@ -11,11 +11,11 @@ namespace ChargeOver
 
 		public string name { get; set; }
 		public string description { get; set; }
-		public string? accounting_sku { get; set; }
-		public string? external_key { get; set; }
+		public string accounting_sku { get; set; }
+		public string external_key { get; set; }
 
-		public DateTime write_datetime { get; }
-		public DateTime? mod_datetime { get; }
+		public DateTime write_datetime { get; set; }
+		public DateTime? mod_datetime { get; set; }
 	}
 }
 

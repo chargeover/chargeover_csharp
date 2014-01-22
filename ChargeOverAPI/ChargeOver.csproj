@@ -37,7 +37,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ChargeOverAPI.cs" />
     <Compile Include="ChargeOver\Object\Base.cs" />
@@ -50,6 +49,14 @@
     <Compile Include="ChargeOver\JSON\CODateConverter.cs" />
     <Compile Include="ChargeOver\Object\Transaction.cs" />
     <Compile Include="ChargeOver\Object\Item.cs" />
+    <Compile Include="ExampleInvoices.cs" />
+    <Compile Include="RunExamples.cs" />
+    <Compile Include="ExampleTheHardWay.cs" />
+    <Compile Include="ExampleCustomers.cs" />
+    <Compile Include="ExampleUsers.cs" />
+    <Compile Include="ChargeOver\Object\BillingPackage.cs" />
+    <Compile Include="ExampleBillingPackages.cs" />
+    <Compile Include="ChargeOver\COException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
