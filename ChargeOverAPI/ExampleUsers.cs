@@ -30,7 +30,7 @@ namespace ChargeOver
 			User user = new User ();
 			user.name = "Keith R Palmer";
 			user.email = "keith@chargeover.com";
-			user.customer_id = 16340;
+			user.customer_id = 80;
 
 			// Send it to ChargeOver
 			Response resp1 = api.create (user);
@@ -51,6 +51,29 @@ namespace ChargeOver
 			foreach (User myuser in resp2.list)
 			{
 				Console.WriteLine(myuser.user_id + " => " + myuser.name);
+			}
+
+
+			// **********************************
+			// Check if a username exists already
+			// **********************************
+			Console.WriteLine ("");
+			Console.WriteLine ("Check if a username exists by sending a filtered .find(...) query");
+			Console.WriteLine ("");
+
+			string username = "my-test-username";
+
+			List<string> query3 = new List<string> ();
+			query3.Add ("username:EQUALS:" + username);
+
+			Response resp3 = api.find (typeof(User), query3);
+			if (resp3.list.Count > 0)
+			{
+				Console.WriteLine ("  A user already exists with the username " + username);
+			}
+			else
+			{
+				Console.WriteLine ("  No users exist with the username " + username);
 			}
 		}
 	}

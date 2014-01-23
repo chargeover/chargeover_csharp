@@ -77,7 +77,7 @@ namespace ChargeOver
 			if (sort != null && 
 			    sort.Count > 0) {
 
-				uri += "&sort=" + String.Join (",", sort);
+				uri += "&order=" + String.Join (",", sort);
 			}
 
 			if (offset > 0) {
@@ -180,6 +180,7 @@ namespace ChargeOver
 						msg = "Remote server returned [" + exresp.code + ": " + exresp.message + "]";
 					}
 				}
+
 
 				throw new COException(msg, ex);
 			}

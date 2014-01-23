@@ -49,6 +49,10 @@ namespace RunExamples
 			//	http://chargeover.com/docs/rest-api.html#transactions-payments-refunds-credits
 			// @todo 
 
+			// Examples about NOTES
+			//	http://chargeover.com/docs/rest-api.html#notes
+			// @todo 
+
 			// Alternative ways to use the API
 			ExampleTheHardWay ex99 = new ExampleTheHardWay ();
 			ex99.run ();
