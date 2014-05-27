@@ -142,6 +142,9 @@ namespace ChargeOver
 					} else if (type == typeof(Invoice)) {
 						List<Invoice> list = JsonConvert.DeserializeObject < List < Invoice >> (objf ["response"].ToString ());
 						resp.list = list.ConvertAll (i => i as Base);
+					} else if (type == typeof(Transaction)) {
+						List<Transaction> list = JsonConvert.DeserializeObject < List < Transaction >> (objf ["response"].ToString ());
+						resp.list = list.ConvertAll (i => i as Base);
 					}
 
 					break;
@@ -158,6 +161,9 @@ namespace ChargeOver
 					} else if (type == typeof(Invoice)) {
 						Invoice inv = JsonConvert.DeserializeObject<Invoice>(objg["response"].ToString ());
 						resp.obj = (Invoice) inv;
+					} else if (type == typeof(Transaction)) {
+						Transaction trans = JsonConvert.DeserializeObject<Transaction>(objg["response"].ToString ());
+						resp.obj = (Transaction) trans;
 					}
 
 					break;

@@ -16,11 +16,11 @@ namespace RunExamples
 		{
 			// Get these from your ChargeOver configuration
 			string endpoint = "http://macbookpro.chargeover.com:8888/chargeover/signup/api/v3.php";
-			string username = "7sutWFEO2zKVYIGmZMJ3Nij5hfLxDRb8";
-			string password = "9vCJbmdZKSieVchyrRItFQw8MBN4lOH3";
+			string username = "PtS50vVGLJrpEs1HmyqCi8MhjzBnc3DU";
+			string password = "u1tfwimpXGg8bdWELMzPrHxVFZe9DKNa";
 
 			ChargeOverAPI api = new ChargeOverAPI (endpoint, username, password);
-
+			/*
 			// Examples about INVOICES
 			// 	http://chargeover.com/docs/rest-api.html#invoices
 			ExampleInvoices ex1 = new ExampleInvoices (api);
@@ -44,10 +44,11 @@ namespace RunExamples
 			// 	http://chargeover.com/docs/rest-api.html#billing-packages
 			ExampleBillingPackages ex5 = new ExampleBillingPackages(api);
 			ex5.run();
-
+			*/
 			// Examples about TRANSACTIONS
 			//	http://chargeover.com/docs/rest-api.html#transactions-payments-refunds-credits
-			// @todo 
+			ExampleTransactions ex6 = new ExampleTransactions(api);
+			ex6.run();
 
 			// Examples about NOTES
 			//	http://chargeover.com/docs/rest-api.html#notes

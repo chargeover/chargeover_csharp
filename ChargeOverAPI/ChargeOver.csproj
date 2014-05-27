@@ -57,6 +57,8 @@
     <Compile Include="ChargeOver\Object\BillingPackage.cs" />
     <Compile Include="ExampleBillingPackages.cs" />
     <Compile Include="ChargeOver\COException.cs" />
+    <Compile Include="ChargeOver\Object\Package.cs" />
+    <Compile Include="ExampleTransactions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
