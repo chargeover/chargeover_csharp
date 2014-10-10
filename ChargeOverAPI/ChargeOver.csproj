@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{7BEA9EBA-5207-4150-855B-F5D26AA5A359}</ProjectGuid>
     <OutputType>Exe</OutputType>
@@ -59,6 +59,7 @@
     <Compile Include="ChargeOver\COException.cs" />
     <Compile Include="ChargeOver\Object\Package.cs" />
     <Compile Include="ExampleTransactions.cs" />
+    <Compile Include="ExampleCustomerUpdate.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

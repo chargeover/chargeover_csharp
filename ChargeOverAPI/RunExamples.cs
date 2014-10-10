@@ -16,8 +16,8 @@ namespace RunExamples
 		{
 			// Get these from your ChargeOver configuration
 			string endpoint = "http://macbookpro.chargeover.com:8888/chargeover/signup/api/v3.php";
-			string username = "PtS50vVGLJrpEs1HmyqCi8MhjzBnc3DU";
-			string password = "u1tfwimpXGg8bdWELMzPrHxVFZe9DKNa";
+			string username = "Mjay6XozbPTr0diJOWgs7YL49FBlfIUA";
+			string password = "qTD8NLlCi6BsZUA973JP5upfEHw4FXrd";
 
 			ChargeOverAPI api = new ChargeOverAPI (endpoint, username, password);
 			/*
@@ -44,7 +44,7 @@ namespace RunExamples
 			// 	http://chargeover.com/docs/rest-api.html#billing-packages
 			ExampleBillingPackages ex5 = new ExampleBillingPackages(api);
 			ex5.run();
-			*/
+
 			// Examples about TRANSACTIONS
 			//	http://chargeover.com/docs/rest-api.html#transactions-payments-refunds-credits
 			ExampleTransactions ex6 = new ExampleTransactions(api);
@@ -57,6 +57,10 @@ namespace RunExamples
 			// Alternative ways to use the API
 			ExampleTheHardWay ex99 = new ExampleTheHardWay ();
 			ex99.run ();
+			*/
+
+			ExampleCustomerUpdate ex7 = new ExampleCustomerUpdate (api);
+			ex7.run ();
 
 			#if DEBUG
 			Console.WriteLine ("\n\n\n");

@@ -98,6 +98,13 @@ namespace ChargeOver
 			return this.request (ChargeOverAPI.MethodCreate, uri, obj.GetType (), obj);
 		}
 
+		public Response modify(int id, Object obj)
+		{
+			string uri = this._mapToURI (ChargeOverAPI.MethodModify, obj.GetType (), id);
+
+			return this.request (ChargeOverAPI.MethodModify, uri, obj.GetType(), obj);
+		}
+
 		public Response find(Type type, List<string> query = null, List<string> sort = null, int offset = 0, int limit = 10)
 		{
 			string uri = this._mapToURI (ChargeOverAPI.MethodFind, type, 0, query, sort, offset, limit);
@@ -122,13 +129,18 @@ namespace ChargeOver
 				Response resp = JsonConvert.DeserializeObject<Response>(http.Item2);
 
 				switch (coMethod) {
-					case ChargeOverAPI.MethodCreate:
-					case ChargeOverAPI.MethodModify:
+				case ChargeOverAPI.MethodCreate:
 
-						JObject ocm = JObject.Parse (http.Item2);
-						resp.id = (int) ocm ["response"] ["id"];
+					JObject oc = JObject.Parse (http.Item2);
+					resp.id = (int) oc ["response"] ["id"];
 
-						break;
+					break;
+				case ChargeOverAPI.MethodModify:
+					
+					//JObject om = JObject.Parse (http.Item2);
+
+					
+					break;
 				case ChargeOverAPI.MethodFind:
 
 					JObject objf = JObject.Parse (http.Item2);
@@ -180,10 +192,19 @@ namespace ChargeOver
 					var response = ex.Response as HttpWebResponse;
 					if (response != null)
 					{
-						// Can we decode it? 
-						Response exresp = JsonConvert.DeserializeObject<Response>(new StreamReader(response.GetResponseStream()).ReadToEnd());
+						string resp = new StreamReader (response.GetResponseStream ()).ReadToEnd ();
 
-						msg = "Remote server returned [" + exresp.code + ": " + exresp.message + "]";
+						try 
+						{
+							// Can we decode it? 
+							Response exresp = JsonConvert.DeserializeObject<Response>(resp);
+
+							msg = "Remote server returned [" + exresp.code + ": " + exresp.message + "]";
+						}
+						catch (Exception ex2)
+						{
+							msg = "Remote server returned non-JSON response: " + resp;
+						}
 					}
 				}
 
