@@ -16,8 +16,8 @@ namespace RunExamples
 		{
 			// Get these from your ChargeOver configuration
 			string endpoint = "http://macbookpro.chargeover.com:8888/chargeover/signup/api/v3.php";
-			string username = "Mjay6XozbPTr0diJOWgs7YL49FBlfIUA";
-			string password = "qTD8NLlCi6BsZUA973JP5upfEHw4FXrd";
+			string username = "1EkcsIZRUJwdWmyT6lzqa4Y0pXvgNKCB";
+			string password = "IZah9p134R7OLtHl26BCmFXWUjVQxsNM";
 
 			ChargeOverAPI api = new ChargeOverAPI (endpoint, username, password);
 			/*
@@ -57,10 +57,16 @@ namespace RunExamples
 			// Alternative ways to use the API
 			ExampleTheHardWay ex99 = new ExampleTheHardWay ();
 			ex99.run ();
-			*/
 
+			// Updating a CUSTOMER
 			ExampleCustomerUpdate ex7 = new ExampleCustomerUpdate (api);
 			ex7.run ();
+			*/
+
+			// Bulk requests
+			ExampleBulk ex8 = new ExampleBulk (api);
+			ex8.run ();
+
 
 			#if DEBUG
 			Console.WriteLine ("\n\n\n");

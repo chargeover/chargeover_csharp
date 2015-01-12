@@ -24,7 +24,7 @@ namespace ChargeOver
 			int customer_id = 1;
 
 			// Send it to ChargeOver
-			Response resp1 = api.modify (customer_id, cust);
+			Response resp1 = api.Modify (customer_id, cust);
 
 			Console.WriteLine ("Status back was: " + resp1.status + " (" + resp1.message + ")");
 		}

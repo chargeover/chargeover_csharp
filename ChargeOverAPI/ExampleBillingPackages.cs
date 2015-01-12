@@ -38,7 +38,7 @@ namespace ChargeOver
 			bp.line_items.Add(li);
 			
 			// Send it to ChargeOver
-			Response resp1 = api.create (bp);
+			Response resp1 = api.Create (bp);
 
 			Console.WriteLine ("Status back was: " + resp1.status + ", new package id is " + resp1.id);
 

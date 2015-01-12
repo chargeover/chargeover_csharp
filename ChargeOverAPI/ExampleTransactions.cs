@@ -32,7 +32,7 @@ namespace ChargeOver
 			query1.Add ("gateway_status:EQUALS:1");
 
 			// Find our invoices
-			Response resp1 = api.find (typeof(Transaction), query1);
+			Response resp1 = api.Find (typeof(Transaction), query1);
 
 			foreach (Transaction trans in resp1.list)
 			{

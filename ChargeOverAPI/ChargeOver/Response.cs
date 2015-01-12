@@ -9,6 +9,7 @@ namespace ChargeOver
 		public string status;
 		public string message;
 		public List<Base> list;
+		public List<Response> bulk;
 		public Base obj;
 		public int id;
 
@@ -19,17 +20,17 @@ namespace ChargeOver
 			this.message = message;
 		}
 
-		public void setList<Base>(List<ChargeOver.Base> list)
+		public void SetList<Base>(List<ChargeOver.Base> list)
 		{
 			this.list = list;
 		}
 
-		public void setObj(Base obj)
+		public void SetObj(Base obj)
 		{
 			this.obj = obj;
 		}
 
-		public void setId(int id)
+		public void SetId(int id)
 		{
 			this.id = id;
 		}

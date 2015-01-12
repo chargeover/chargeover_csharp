@@ -1,16 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ChargeOverAPI/ExampleBillingPackages.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ChargeOverAPI/ExampleCustomerUpdate.cs">
     <Files>
       <File FileName="ChargeOverAPI/ExampleUsers.cs" Line="1" Column="1" />
       <File FileName="ChargeOverAPI/ExampleInvoices.cs" Line="1" Column="1" />
-      <File FileName="ChargeOverAPI/RunExamples.cs" Line="1" Column="1" />
-      <File FileName="ChargeOverAPI/ChargeOverAPI.cs" Line="1" Column="1" />
+      <File FileName="ChargeOverAPI/RunExamples.cs" Line="89" Column="89" />
+      <File FileName="ChargeOverAPI/ChargeOverAPI.cs" Line="6" Column="6" />
       <File FileName="ChargeOverAPI/ExampleTransactions.cs" Line="1" Column="1" />
       <File FileName="ChargeOverAPI/ChargeOver/Object/Transaction.cs" Line="1" Column="1" />
       <File FileName="ChargeOverAPI/ExampleTheHardWay.cs" Line="1" Column="1" />
-      <File FileName="ChargeOverAPI/ExampleCustomers.cs" Line="1" Column="1" />
-      <File FileName="ChargeOverAPI/ExampleBillingPackages.cs" Line="1" Column="1" />
+      <File FileName="ChargeOverAPI/ExampleCustomerUpdate.cs" Line="87" Column="87" />
+      <File FileName="ChargeOverAPI/ChargeOver/Response.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

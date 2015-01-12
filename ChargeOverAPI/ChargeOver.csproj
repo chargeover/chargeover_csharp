@@ -60,6 +60,8 @@
     <Compile Include="ChargeOver\Object\Package.cs" />
     <Compile Include="ExampleTransactions.cs" />
     <Compile Include="ExampleCustomerUpdate.cs" />
+    <Compile Include="ExampleBulk.cs" />
+    <Compile Include="ChargeOver\Object\Bulk.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

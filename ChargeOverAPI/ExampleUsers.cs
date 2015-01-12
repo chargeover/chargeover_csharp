@@ -33,7 +33,7 @@ namespace ChargeOver
 			user.customer_id = 80;
 
 			// Send it to ChargeOver
-			Response resp1 = api.create (user);
+			Response resp1 = api.Create (user);
 
 			Console.WriteLine ("Status back was: " + resp1.status + ", new user/contact id is " + resp1.id);
 
@@ -46,7 +46,7 @@ namespace ChargeOver
 			Console.WriteLine ("");
 
 			List<string> query2 = new List<string> ();
-			Response resp2 = api.find(typeof(User), query2);
+			Response resp2 = api.Find(typeof(User), query2);
 
 			foreach (User myuser in resp2.list)
 			{
@@ -66,7 +66,7 @@ namespace ChargeOver
 			List<string> query3 = new List<string> ();
 			query3.Add ("username:EQUALS:" + username);
 
-			Response resp3 = api.find (typeof(User), query3);
+			Response resp3 = api.Find (typeof(User), query3);
 			if (resp3.list.Count > 0)
 			{
 				Console.WriteLine ("  A user already exists with the username " + username);

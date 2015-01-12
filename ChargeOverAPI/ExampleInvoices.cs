@@ -32,14 +32,14 @@ namespace ChargeOver
 			query1.Add ("invoice_status_state:EQUALS:o");
 
 			// Find our invoices
-			Response resp1 = api.find (typeof(Invoice), query1);
+			Response resp1 = api.Find (typeof(Invoice), query1);
 
 			foreach (Invoice inv in resp1.list)
 			{
 				Console.WriteLine ("#" + inv.refnumber + " => " + inv.date.ToString ());
 
 				// Get the whole invoice
-				Response resp4 = api.get (typeof(Invoice), inv.invoice_id);
+				Response resp4 = api.Get (typeof(Invoice), inv.invoice_id);
 				Invoice thisinv = (Invoice) resp4.obj;
 
 				int count = thisinv.line_items.Count;
@@ -55,7 +55,7 @@ namespace ChargeOver
 			Console.WriteLine ("");
 
 			int the_invoice_id = 2718;
-			Response resp2 = api.get (typeof(Invoice), the_invoice_id);
+			Response resp2 = api.Get (typeof(Invoice), the_invoice_id);
 
 			Invoice myinv = (Invoice) resp2.obj;
 

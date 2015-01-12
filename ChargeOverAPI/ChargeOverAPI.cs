@@ -16,6 +16,7 @@ namespace ChargeOver
 		public const string MethodModify = "modify";
 		public const string MethodAction = "action";
 		public const string MethodGet = "get";
+		public const string MethodBulk = "bulk";
 
 		protected string endpoint;
 		protected string username;
@@ -32,17 +33,17 @@ namespace ChargeOver
 			this.password = password;
 		}
 
-		public string getLastRequest()
+		public string GetLastRequest()
 		{
 			return this.lastRequest;
 		}
 
-		public string getLastResponse()
+		public string GetLastResponse()
 		{
 			return this.lastResponse;
 		}
 
-		public string getLastError()
+		public string GetLastError()
 		{
 			return this.lastError;
 		}
@@ -50,6 +51,10 @@ namespace ChargeOver
 		protected string _mapToURI(string coMethod, Type type, int id = 0, List<string> query = null, List<string> sort = null, int offset = 0, int limit = 10)
 		{
 			string uri = "";
+
+			if (coMethod == ChargeOverAPI.MethodBulk) {
+				return "/_bulk";
+			}
 
 			if (coMethod == ChargeOverAPI.MethodCreate) {
 				id = 0;
@@ -91,39 +96,46 @@ namespace ChargeOver
 			return uri;
 		}
 
-		public Response create(Object obj)
+		public Response Bulk(List<Bulk> bulk)
+		{
+			string uri = this._mapToURI (ChargeOverAPI.MethodBulk, null);
+
+			return this.Request (ChargeOverAPI.MethodBulk, uri, null, null, 0, bulk);
+		}
+
+		public Response Create(Object obj)
 		{
 			string uri = this._mapToURI (ChargeOverAPI.MethodCreate, obj.GetType ());
 
-			return this.request (ChargeOverAPI.MethodCreate, uri, obj.GetType (), obj);
+			return this.Request (ChargeOverAPI.MethodCreate, uri, obj.GetType (), obj);
 		}
 
-		public Response modify(int id, Object obj)
+		public Response Modify(int id, Object obj)
 		{
 			string uri = this._mapToURI (ChargeOverAPI.MethodModify, obj.GetType (), id);
 
-			return this.request (ChargeOverAPI.MethodModify, uri, obj.GetType(), obj);
+			return this.Request (ChargeOverAPI.MethodModify, uri, obj.GetType(), obj);
 		}
 
-		public Response find(Type type, List<string> query = null, List<string> sort = null, int offset = 0, int limit = 10)
+		public Response Find(Type type, List<string> query = null, List<string> sort = null, int offset = 0, int limit = 10)
 		{
 			string uri = this._mapToURI (ChargeOverAPI.MethodFind, type, 0, query, sort, offset, limit);
 
-			return this.request (ChargeOverAPI.MethodFind, uri, type);
+			return this.Request (ChargeOverAPI.MethodFind, uri, type);
 		}
 
-		public Response get(Type type, int id)
+		public Response Get(Type type, int id)
 		{
 			string uri = this._mapToURI (ChargeOverAPI.MethodGet, type, id);
 
-			return this.request (ChargeOverAPI.MethodGet, uri, type, null, id);
+			return this.Request (ChargeOverAPI.MethodGet, uri, type, null, id);
 		}
 
-		protected Response request(string coMethod, string uri, Type type, Object obj = null, int id = 0)
+		protected Response Request(string coMethod, string uri, Type type, Object obj = null, int id = 0, List <Bulk> bulk = null)
 		{
 			try
 			{
-				Tuple<int, string> http = this.raw (coMethod, uri, type, obj, id);
+				Tuple<int, string> http = this.Raw (coMethod, uri, type, obj, id, bulk);
 			
 				// Parse the JSON response
 				Response resp = JsonConvert.DeserializeObject<Response>(http.Item2);
@@ -179,6 +191,14 @@ namespace ChargeOver
 					}
 
 					break;
+				case ChargeOverAPI.MethodBulk:
+
+					JObject objb = JObject.Parse(http.Item2);
+
+					List<Response> listb = JsonConvert.DeserializeObject<List<Response>>(objb["response"]["_bulk"].ToString());
+					resp.bulk = listb;
+
+					break;
 				}
 
 				return resp;
@@ -213,7 +233,7 @@ namespace ChargeOver
 			}
 		}
 
-		public Tuple<int, string> raw(string coMethod, string uri, Type type, Object obj = null, int id = 0)
+		public Tuple<int, string> Raw(string coMethod, string uri, Type type, Object obj = null, int id = 0, List<Bulk> bulk = null)
 		{
 			string httpMethod = "GET";
 
@@ -238,6 +258,10 @@ namespace ChargeOver
 			case ChargeOverAPI.MethodModify:
 				httpMethod = "PUT";
 				data = JsonConvert.SerializeObject(obj);
+				break;
+			case ChargeOverAPI.MethodBulk:
+				httpMethod = "POST";
+				data = JsonConvert.SerializeObject(bulk);
 				break;
 			}
 
