@@ -16,10 +16,19 @@ namespace RunExamples
 		{
 			// Get these from your ChargeOver configuration
 			string endpoint = "http://macbookpro.chargeover.com:8888/chargeover/signup/api/v3.php";
-			string username = "1EkcsIZRUJwdWmyT6lzqa4Y0pXvgNKCB";
-			string password = "IZah9p134R7OLtHl26BCmFXWUjVQxsNM";
 
-			ChargeOverAPI api = new ChargeOverAPI (endpoint, username, password);
+			// HTTP basic auth
+			// string username = "1EkcsIZRUJwdWmyT6lzqa4Y0pXvgNKCB";
+			// string username = "IZah9p134R7OLtHl26BCmFXWUjVQxsNM";
+			//string auth = ChargeOverAPI.AuthHttpBasic;
+
+			// Signature auth  (you will have a different set of API tokens for signature auth)
+			string username = "1NolUO63RptPwXaifIgKeYbTGBy5Hdsr";
+			string password = "oXsdYbmD5Gi9n4eJc8BfEOzlKvQURt7w";
+			string auth = ChargeOverAPI.AuthSignatureV1;
+
+			ChargeOverAPI api = new ChargeOverAPI (endpoint, username, password, auth);
+
 			/*
 			// Examples about INVOICES
 			// 	http://chargeover.com/docs/rest-api.html#invoices
@@ -63,10 +72,15 @@ namespace RunExamples
 			ex7.run ();
 			*/
 
+			/*
 			// Bulk requests
 			ExampleBulk ex8 = new ExampleBulk (api);
 			ex8.run ();
+			*/
 
+			// Signature auth example
+			ExampleAuthSignature ex9 = new ExampleAuthSignature (api);
+			ex9.run ();
 
 			#if DEBUG
 			Console.WriteLine ("\n\n\n");

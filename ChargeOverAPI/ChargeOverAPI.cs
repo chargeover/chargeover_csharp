@@ -5,11 +5,16 @@ using Newtonsoft.Json.Linq;
 using System.Net;
 using System.Text;
 using System.IO;
+using System.Globalization;
+using System.Security.Cryptography;
 
 namespace ChargeOver
 {
 	public class ChargeOverAPI
 	{
+		public const string AuthHttpBasic = "http-basic";
+		public const string AuthSignatureV1 = "signature-v1";
+
 		public const string MethodCreate = "create";
 		public const string MethodFind = "find";
 		public const string MethodDelete = "delete";
@@ -21,16 +26,23 @@ namespace ChargeOver
 		protected string endpoint;
 		protected string username;
 		protected string password;
+		protected string auth;
 
 		protected string lastRequest = "";
 		protected string lastResponse = "";
 		protected string lastError = "";
 
-		public ChargeOverAPI(string endpoint, string username, string password)
+		public ChargeOverAPI(string endpoint, string username, string password, string auth = ChargeOverAPI.AuthHttpBasic)
 		{
 			this.endpoint = endpoint;
 			this.username = username;
 			this.password = password;
+			this.auth = auth;
+		}
+
+		public void SetAuth(string auth)
+		{
+			this.auth = auth;
 		}
 
 		public string GetLastRequest()
@@ -223,7 +235,7 @@ namespace ChargeOver
 						}
 						catch (Exception ex2)
 						{
-							msg = "Remote server returned non-JSON response: " + resp;
+							msg = "Remote server returned non-JSON response: " + resp + " [" + ex2.ToString() + "]";
 						}
 					}
 				}
@@ -231,6 +243,34 @@ namespace ChargeOver
 
 				throw new COException(msg, ex);
 			}
+		}
+
+		protected string Signature(string url, string data)
+		{
+			Random random = new Random ();
+			StringBuilder builder = new StringBuilder();
+			char ch;
+			for (int i = 0; i < 8; i++)
+			{
+				ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));                 
+				builder.Append(ch);
+			}
+
+			string nonce = builder.ToString ();
+			Int32 timestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+
+			string str = this.username + "||" + url.ToLower () + "||" + nonce + "||" + timestamp + "||" + data;
+
+			var encoding = new System.Text.ASCIIEncoding();
+			byte[] keyByte = encoding.GetBytes(this.password);
+			byte[] messageBytes = encoding.GetBytes(str);
+			HMACSHA256 hmacsha256 = new HMACSHA256 (keyByte);
+
+			byte[] hash = hmacsha256.ComputeHash (messageBytes);
+
+			string signature = BitConverter.ToString (hash).Replace ("-", "").ToLower ();
+
+			return @"ChargeOver co_public_key=""" + this.username + @""" co_nonce=""" + nonce + @""" co_timestamp=""" + timestamp + @""" co_signature_method=""HMAC-SHA256"" co_version=""1.0"" co_signature=""" + signature + @""" "; 
 		}
 
 		public Tuple<int, string> Raw(string coMethod, string uri, Type type, Object obj = null, int id = 0, List<Bulk> bulk = null)
@@ -283,7 +323,13 @@ namespace ChargeOver
 			request.ContentType = "application/json";
 			request.ContentLength = postBytes.Length;
 
-			request.Credentials = new NetworkCredential(this.username, this.password);
+			if (this.auth == ChargeOverAPI.AuthHttpBasic) {
+				request.Credentials = new NetworkCredential (this.username, this.password);
+			} else {
+				// Authorization: ChargeOver co_public_key="' . $public . '" co_nonce="' . $nonce . '" co_timestamp="' . $time . '" co_signature_method="HMAC-SHA256" co_version="1.0" co_signature="' . $signature . '" 
+
+				request.Headers ["Authorization"] = this.Signature (this.endpoint + uri, data);
+			}
 
 			if (postBytes.Length > 0) {
 

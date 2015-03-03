@@ -62,6 +62,7 @@
     <Compile Include="ExampleCustomerUpdate.cs" />
     <Compile Include="ExampleBulk.cs" />
     <Compile Include="ChargeOver\Object\Bulk.cs" />
+    <Compile Include="ExampleAuthSignature.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
