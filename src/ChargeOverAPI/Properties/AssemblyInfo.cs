@@ -4,9 +4,9 @@ using System.Runtime.CompilerServices;
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 [assembly: AssemblyTitle ("ChargeOverAPI")]
-[assembly: AssemblyDescription ("")]
+[assembly: AssemblyDescription ("This is a C# .NET library for the ChargeOver recurring billing platform")]
 [assembly: AssemblyConfiguration ("")]
-[assembly: AssemblyCompany ("")]
+[assembly: AssemblyCompany ("ChargeOver")]
 [assembly: AssemblyProduct ("")]
 [assembly: AssemblyCopyright ("Keith Palmer")]
 [assembly: AssemblyTrademark ("")]
