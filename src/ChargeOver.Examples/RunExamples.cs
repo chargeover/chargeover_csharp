@@ -8,7 +8,7 @@ using System.IO;
 
 using ChargeOver;
 
-namespace RunExamples
+namespace ChargeOver.Examples
 {
 	class MainClass
 	{

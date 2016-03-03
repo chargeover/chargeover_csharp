@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ChargeOver
+namespace ChargeOver.Examples
 {
 	public class ExampleTransactions
 	{

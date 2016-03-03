@@ -3,7 +3,7 @@ using System.Net;
 using System.Text;
 using System.IO;
 
-namespace ChargeOver
+namespace ChargeOver.Examples
 {
 	public class ExampleTheHardWay
 	{

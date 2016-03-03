@@ -1,6 +1,6 @@
 using System;
 
-namespace ChargeOver
+namespace ChargeOver.Examples
 {
 	public class ExampleBillingPackages
 	{
