@@ -1,8 +1,0 @@
-Z:\chargeover_csharp\ChargeOverAPI\ChargeOverAPI\bin\Debug\ChargeOverAPI.exe
-Z:\chargeover_csharp\ChargeOverAPI\ChargeOverAPI\bin\Debug\ChargeOverAPI.pdb
-Z:\chargeover_csharp\ChargeOverAPI\ChargeOverAPI\obj\x86\Debug\ChargeOverAPI.exe
-Z:\chargeover_csharp\ChargeOverAPI\ChargeOverAPI\obj\x86\Debug\ChargeOverAPI.pdb
-Z:\chargeover_csharp\ChargeOverAPI\ChargeOverAPI\obj\x86\Debug\ChargeOverAPI.csprojResolveAssemblyReference.cache
-Z:\chargeover_csharp\ChargeOverAPI\ChargeOverAPI\bin\Debug\Newtonsoft.Json.dll
-Z:\chargeover_csharp\ChargeOverAPI\ChargeOverAPI\bin\Debug\Newtonsoft.Json.pdb
-Z:\chargeover_csharp\ChargeOverAPI\ChargeOverAPI\bin\Debug\Newtonsoft.Json.xml

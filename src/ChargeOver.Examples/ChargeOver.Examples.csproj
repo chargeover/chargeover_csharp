@@ -67,7 +67,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ChargeOverAPI\ChargeOver.csproj">
+    <ProjectReference Include="..\ChargeOverAPI\ChargeOver.csproj">
       <Project>{7bea9eba-5207-4150-855b-f5d26aa5a359}</Project>
       <Name>ChargeOver</Name>
     </ProjectReference>
