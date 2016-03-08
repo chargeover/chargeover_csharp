@@ -181,6 +181,9 @@ namespace ChargeOver
 					} else if (type == typeof(Transaction)) {
 						List<Transaction> list = JsonConvert.DeserializeObject < List < Transaction >> (objf ["response"].ToString ());
 						resp.list = list.ConvertAll (i => i as Base);
+					} else if (type == typeof(Package)) {
+						List<Package> list = JsonConvert.DeserializeObject < List < Package >> (objf ["response"].ToString());
+						resp.list = list.ConvertAll(i => i as Base);
 					}
 
 					break;
