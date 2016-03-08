@@ -10,6 +10,13 @@ namespace ChargeOver
 
 		public string company { get; set; }
 
+		public int language_id { get; set; }
+		public int terms_id { get; set; }
+		public int class_id { get; set; }
+		public int admin_id { get; set; }
+		public int campaign_id { get; set; }
+		public int custtype_id { get; set; }
+
 		public string bill_addr1 { get; set; }
 		public string bill_addr2 { get; set; }
 		public string bill_addr3 { get; set; }
@@ -34,6 +41,21 @@ namespace ChargeOver
 		public string superuser_email { get; set; }
 
 		public string external_key { get; set; }
+
+		public string custom_1 { get; set; }
+		public string custom_2 { get; set; }
+		public string custom_3 { get; set; }
+
+		public float total { get; set; }
+		public float balance { get; set; }
+		public float paid { get; set; }
+
+		public string url_paymethodlink { get; set; }
+
+		public int customer_status_id { get; set; }
+		public string customer_status_name { get; set; }
+		public string customer_status_str { get; set; }
+		public string customer_status_state { get; set; }
 	}
 }
 
