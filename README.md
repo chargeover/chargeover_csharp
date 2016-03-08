@@ -15,8 +15,8 @@ Use ChargeOver to:
 
 ChargeOver developer documentation:
 
-* REST API: http://chargeover.com/docs/rest-api.html
-* Webhooks: http://chargeover.com/docs/advanced/webhooks.html
+* REST API: https://developer.chargeover.com/apidocs/rest/
+* Webhooks: https://developer.chargeover.com/apidocs/webhooks/
 
 
 ChargeOver developer account sign-up:
