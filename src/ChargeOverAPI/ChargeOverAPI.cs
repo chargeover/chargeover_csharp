@@ -286,7 +286,12 @@ namespace ChargeOver
 			switch (coMethod) {
 			case ChargeOverAPI.MethodCreate:
 				httpMethod = "POST";
-				data = JsonConvert.SerializeObject(obj);
+				data = JsonConvert.SerializeObject(obj,
+					Newtonsoft.Json.Formatting.None,
+					new JsonSerializerSettings
+					{
+						NullValueHandling = NullValueHandling.Ignore
+					});
 				break;
 			case ChargeOverAPI.MethodAction:
 				httpMethod = "POST";

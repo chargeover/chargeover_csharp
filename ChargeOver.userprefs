@@ -1,21 +1,23 @@
-﻿<Properties StartupItem="src/ChargeOver.Examples/ChargeOver.Examples.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="src/ChargeOverAPI/ChargeOver/JSON/CODateConverter.cs">
+﻿<Properties StartupConfiguration="{6EC90A59-FA49-43C7-837D-B5DB9F5E6210}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src/ChargeOverAPI/ChargeOver/Object/LineItem.cs">
     <Files>
-      <File FileName="src/ChargeOver.Examples/ExamplePackages.cs" Line="30" Column="33" />
-      <File FileName="src/ChargeOver.Examples/RunExamples.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Examples/RunExamples.cs" Line="22" Column="20" />
       <File FileName="src/ChargeOver.Examples/ExampleCustomers.cs" Line="1" Column="1" />
-      <File FileName="src/ChargeOver.Examples/ExampleInvoices.cs" Line="1" Column="1" />
-      <File FileName="src/ChargeOverAPI/ChargeOverAPI.cs" Line="9" Column="26" />
-      <File FileName="src/ChargeOverAPI/ChargeOver/Object/Invoice.cs" Line="4" Column="1" />
-      <File FileName="src/ChargeOverAPI/ChargeOver/JSON/CODateConverter.cs" Line="4" Column="2" />
-      <File FileName="src/ChargeOverAPI/ChargeOver/Object/BillingPackage.cs" Line="4" Column="1" />
-      <File FileName="src/ChargeOverAPI/ChargeOver/Object/Package.cs" Line="3" Column="1" />
-      <File FileName="../../../../../Library/Frameworks/Mono.framework/Versions/4.2.3/lib/mono/4.5/Microsoft.Common.targets" Line="1" Column="1" />
+      <File FileName="src/ChargeOverAPI/ChargeOverAPI.cs" Line="248" Column="5" />
+      <File FileName="src/ChargeOverAPI/ChargeOver/Object/Customer.cs" Line="45" Column="16" />
+      <File FileName="src/ChargeOverAPI/ChargeOver/Object/Invoice.cs" Line="16" Column="14" />
+      <File FileName="src/ChargeOverAPI/ChargeOver/Object/Package.cs" Line="54" Column="14" />
+      <File FileName="src/ChargeOverAPI/ChargeOver/Object/Transaction.cs" Line="10" Column="14" />
+      <File FileName="src/ChargeOverAPI/ChargeOver/Object/User.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOverAPI/ChargeOver/Object/Item.cs" Line="10" Column="14" />
+      <File FileName="src/ChargeOverAPI/ChargeOver/Object/LineItem.cs" Line="17" Column="43" />
     </Files>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.ChargeOver.Examples PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
 </Properties>

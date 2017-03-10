@@ -13,7 +13,7 @@ namespace ChargeOver
 		}
 
 		public int invoice_id  { get; set; }
-		public int currency_id { get; set; }
+		public int? currency_id { get; set; }
 
 		public string refnumber { get; set; }
 

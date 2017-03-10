@@ -6,8 +6,8 @@ namespace ChargeOver
 	{
 		public int transaction_id { get; set; }
 
-		public int gateway_id { get; set; }
-		public int currency_id { get; set; }
+		public int? gateway_id { get; set; }
+		public int? currency_id { get; set; }
 
 		public bool gateway_status { get; set; }
 		public string gateway_transid { get; set; }

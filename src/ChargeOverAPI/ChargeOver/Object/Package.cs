@@ -14,9 +14,9 @@ namespace ChargeOver
 
 		public int package_id { get; set; }
 		public int customer_id { get; set; }
-		public int class_id { get; set; }
-		public int terms_id { get; set; }
-		public int currency_id { get; set; }
+		public int? class_id { get; set; }
+		public int? terms_id { get; set; }
+		public int? currency_id { get; set; }
 
 		public string token { get; set; }
 		public string external_key { get; set; }
@@ -24,11 +24,11 @@ namespace ChargeOver
 		public string paymethod { get; set; }
 		public string paycycle { get; set; }
 
-		public int creditcard_id { get; set; }
-		public int ach_id { get; set; }
-		public int tokenized_id { get; set; }
+		public int? creditcard_id { get; set; }
+		public int? ach_id { get; set; }
+		public int? tokenized_id { get; set; }
 
-		public int admin_id { get; set; }
+		public int? admin_id { get; set; }
 		public int admin_name { get; set; }
 
 		public string custom_1 { get; set; }
@@ -51,7 +51,7 @@ namespace ChargeOver
 		public bool is_overdue { get; set; }
 		public int days_overdue { get; set; }
 
-		public int package_status_id { get; set; }
+		public int? package_status_id { get; set; }
 		public string package_status_name { get; set; }
 		public string package_status_str { get; set; }
 		public string package_status_state { get; set; }

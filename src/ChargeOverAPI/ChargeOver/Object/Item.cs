@@ -7,7 +7,7 @@ namespace ChargeOver
 		public int item_id { get; set; }
 
 		public string item_type { get; set; }
-		public int tierset_id { get; set; }
+		public int? tierset_id { get; set; }
 
 		public string name { get; set; }
 		public string description { get; set; }

@@ -49,7 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExampleAuthSignature.cs" />
-    <Compile Include="ExampleBillingPackages.cs" />
     <Compile Include="ExampleBulk.cs" />
     <Compile Include="ExampleCustomers.cs" />
     <Compile Include="ExampleCustomerUpdate.cs" />

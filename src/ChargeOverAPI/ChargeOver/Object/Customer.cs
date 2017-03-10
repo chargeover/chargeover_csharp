@@ -6,16 +6,16 @@ namespace ChargeOver
 	{
 		public int customer_id { get; set; }
 
-		public int superuser_id { get; set; }
+		public int? superuser_id { get; set; }
 
 		public string company { get; set; }
 
-		public int language_id { get; set; }
-		public int terms_id { get; set; }
-		public int class_id { get; set; }
-		public int admin_id { get; set; }
-		public int campaign_id { get; set; }
-		public int custtype_id { get; set; }
+		public int? language_id { get; set; }
+		public int? terms_id { get; set; }
+		public int? class_id { get; set; }
+		public int? admin_id { get; set; }
+		public int? campaign_id { get; set; }
+		public int? custtype_id { get; set; }
 
 		public string bill_addr1 { get; set; }
 		public string bill_addr2 { get; set; }
@@ -25,7 +25,7 @@ namespace ChargeOver
 		public string bill_postcode { get; set; }
 		public string bill_country { get; set; }
 
-		public int currency_id { get; set; }
+		public int? currency_id { get; set; }
 		public string currency_symbol { get; set; }
 		public string currency_iso4217 { get; set; }
 
@@ -52,7 +52,7 @@ namespace ChargeOver
 
 		public string url_paymethodlink { get; set; }
 
-		public int customer_status_id { get; set; }
+		public int? customer_status_id { get; set; }
 		public string customer_status_name { get; set; }
 		public string customer_status_str { get; set; }
 		public string customer_status_state { get; set; }
