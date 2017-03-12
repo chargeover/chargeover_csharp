@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{03E09695-088D-4971-8888-EB16A8565EEB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ChargeOver.Wrapper</RootNamespace>
+    <AssemblyName>ChargeOver.Wrapper</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\ACHAccount.cs" />
+    <Compile Include="Models\ACHPayment.cs" />
+    <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\Brand.cs" />
+    <Compile Include="Models\Campaign.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\ChargeOverResponse.cs" />
+    <Compile Include="Models\ChargeOverResponseDetails.cs" />
+    <Compile Include="Models\ContactEntity.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\CrediCard.cs" />
+    <Compile Include="Models\CreditCardPayment.cs" />
+    <Compile Include="Models\Currencies.cs" />
+    <Compile Include="Models\InvoiceEntity.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\Note.cs" />
+    <Compile Include="Models\Paymenthod.cs" />
+    <Compile Include="Models\PayMethod.cs" />
+    <Compile Include="Models\PendingRequest.cs" />
+    <Compile Include="Models\Refund.cs" />
+    <Compile Include="Models\RefundPayment.cs" />
+    <Compile Include="Models\RestHook.cs" />
+    <Compile Include="Models\Subscription.cs" />
+    <Compile Include="Models\SystemLog.cs" />
+    <Compile Include="Models\Terms.cs" />
+    <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\UpgradeSubscription.cs" />
+    <Compile Include="Models\Usage.cs" />
+    <Compile Include="Services\ChargeOverApiConfiguration.cs" />
+    <Compile Include="Services\ChargeOverApiProvider.cs" />
+    <Compile Include="Services\ConfigurationManagerChargeOverApiConfiguration.cs" />
+    <Compile Include="IFindResponse.cs" />
+    <Compile Include="Models\CustomerEntity.cs" />
+    <Compile Include="Models\Entity.cs" />
+    <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Services\IACHAccountService.cs" />
+    <Compile Include="Services\IAdminWorkersService.cs" />
+    <Compile Include="Services\IBrandsService.cs" />
+    <Compile Include="Services\ICampaignsService.cs" />
+    <Compile Include="Services\ICategoriesService.cs" />
+    <Compile Include="Services\IChargeOverAPIConfiguration.cs" />
+    <Compile Include="IResponse.cs" />
+    <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\Response.cs" />
+    <Compile Include="Services\IChargeOverApiProvider.cs" />
+    <Compile Include="Services\IChargeOverJsService.cs" />
+    <Compile Include="Services\IContractsService.cs" />
+    <Compile Include="Services\ICountriesService.cs" />
+    <Compile Include="Services\ICreditCardService.cs" />
+    <Compile Include="Services\ICurrenciesService.cs" />
+    <Compile Include="Services\ICustomerService.cs" />
+    <Compile Include="Services\IInvoiceService.cs" />
+    <Compile Include="Services\IItemsService.cs" />
+    <Compile Include="Services\ILanguagesService.cs" />
+    <Compile Include="Services\INotesService.cs" />
+    <Compile Include="Services\IRestHooksService.cs" />
+    <Compile Include="Services\ISubscriptionsService.cs" />
+    <Compile Include="Services\ISystemLogService.cs" />
+    <Compile Include="Services\ITermsService.cs" />
+    <Compile Include="Services\ITokenizedPayMethodService.cs" />
+    <Compile Include="Services\ITransactionService.cs" />
+    <Compile Include="Services\IUsagesService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ChargeOverAPI\ChargeOver.csproj">
+      <Project>{7bea9eba-5207-4150-855b-f5d26aa5a359}</Project>
+      <Name>ChargeOver</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
