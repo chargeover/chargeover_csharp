@@ -1,3 +1,5 @@
+using ChargeOver.Wrapper.Models;
+
 namespace ChargeOver.Wrapper.Services
 {
 	public sealed class ItemsService : BaseService, IItemsService
@@ -19,9 +21,9 @@ namespace ChargeOver.Wrapper.Services
 		/// Querying for items
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-item
 		/// </summary>
-		public IResponse QueryingForItems(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
+		public IResponse<ItemDetails> QueryingForItems(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
-			return Query<int>("item");
+			return Query<ItemDetails>("item");
 		}
 	}
 }

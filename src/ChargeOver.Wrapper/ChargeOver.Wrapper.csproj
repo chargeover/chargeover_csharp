@@ -73,6 +73,7 @@
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\PendingRequestDetail.cs" />
     <Compile Include="Models\PrintInvoice.cs" />
+    <Compile Include="Models\ItemDetails.cs" />
     <Compile Include="Models\Refund.cs" />
     <Compile Include="Models\RefundPayment.cs" />
     <Compile Include="Models\RejectChargeOver.cs" />
