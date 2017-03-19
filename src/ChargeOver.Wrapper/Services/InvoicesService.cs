@@ -43,15 +43,9 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a specific invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-for-invoices
 		/// </summary>
-		public IResponse GetSpecificInvoice()
+		public ICustomResponse<InvoiceDetails> GetSpecificInvoice(int id)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("", "/invoice", null);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return GetCustom<InvoiceDetails>("invoice", id);
 		}
 
 		/// <summary>

@@ -20,6 +20,8 @@ namespace TestsChargeOver.Wrapper.Services
 		public void should_call_CreateInvoice()
 		{
 			//arrange
+			var id = TakeItemId();
+
 			var request = new Invoice
 			{
 				CustomerId = 1,
@@ -27,12 +29,12 @@ namespace TestsChargeOver.Wrapper.Services
 				BillCity = "Willington",
 				BillState = "Connecticut",
 				BillPostcode = "06279",
-				LineItems = new []
+				LineItems = new[]
 				{
 					new InvoiceLineItem
 					{
 						Descrip = "My description goes here",
-						ItemId = 307,
+						ItemId = id,
 						LineQuantity = 12,
 						LineRate = 29.95F
 					}
@@ -44,6 +46,22 @@ namespace TestsChargeOver.Wrapper.Services
 			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
+		}
+
+		private static int TakeItemId()
+		{
+			var id = new ItemsService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config)).CreateItem(new Item
+			{
+				Name = "My Test Item " + Guid.NewGuid(),
+				Type = "service",
+				Pricemodel = new ItemPricemodel
+				{
+					Base = 295.95F,
+					Paycycle = "mon",
+					Pricemodel = "fla"
+				}
+			}).Id;
+			return id;
 		}
 
 		[Test]
@@ -68,7 +86,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.GetSpecificInvoice();
+			var actual = Sut.GetSpecificInvoice(-1);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

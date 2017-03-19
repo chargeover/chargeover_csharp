@@ -15,7 +15,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a specific transaction
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-transaction
 		/// </summary>
-		IResponse GetSpecificTransaction();
+		ICustomResponse<TransactionDetails> GetSpecificTransaction(int id);
 
 		/// <summary>
 		/// List transactions
@@ -27,7 +27,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Query for transactions
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-for-transactions
 		/// </summary>
-		IResponse<Transaction> QueryForTransactions(params string[] queries);
+		IResponse<Transaction> QueryForTransactions(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10);
 
 		/// <summary>
 		/// Attempt a payment

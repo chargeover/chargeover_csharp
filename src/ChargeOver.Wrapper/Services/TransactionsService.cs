@@ -1,17 +1,12 @@
-using System;
 using ChargeOver.Wrapper.Models;
+using Newtonsoft.Json;
 
 namespace ChargeOver.Wrapper.Services
 {
-	public sealed class TransactionsService : ITransactionsService
+	public sealed class TransactionsService : BaseService, ITransactionsService
 	{
-		private readonly IChargeOverApiProvider _provider;
-
-		public TransactionsService(IChargeOverApiProvider provider)
+		public TransactionsService(IChargeOverApiProvider provider) : base(provider)
 		{
-			if (provider == null) throw new ArgumentNullException(nameof(provider));
-
-			_provider = provider;
 		}
 
 		/// <summary>
@@ -20,28 +15,16 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse CreatePayment(Payment request)
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("create", "/transaction ", null, request);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			return Create("transaction", request);
 		}
 
 		/// <summary>
 		/// Get a specific transaction
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-transaction
 		/// </summary>
-		public IResponse GetSpecificTransaction()
+		public ICustomResponse<TransactionDetails> GetSpecificTransaction(int id)
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("", "/transaction", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			return GetCustom<TransactionDetails>("transaction", id);
 		}
 
 		/// <summary>
@@ -50,28 +33,16 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IResponse<Transaction> ListTransactions()
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("get", "/transaction", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<ChargeOverResponse<Transaction>>(result.Item2);
-			
-			return new Models.Response<Transaction>(resultObject);
+			return GetList<Transaction>("transaction");
 		}
 
 		/// <summary>
 		/// Query for transactions
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-for-transactions
 		/// </summary>
-		public IResponse<Transaction> QueryForTransactions(params string[] queries)
+		public IResponse<Transaction> QueryForTransactions(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("find", "/transaction", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<ChargeOverResponse<Transaction>>(result.Item2);
-			
-			return new Models.Response<Transaction>(resultObject);
+			return Query<Transaction>("transaction", queries, orders, offset, limit);
 		}
 
 		/// <summary>
@@ -80,13 +51,13 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse AttemptPayment(AttemptPayment request)
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
 			var result = api.Raw("", "/transaction", null, request);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+
+			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+
+			return new IdentityResponse(resultObject);
 		}
 
 		/// <summary>
@@ -95,13 +66,13 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse CreateRefund(Refund request)
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
 			var result = api.Raw("create", "/transaction", null, request);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+
+			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+
+			return new IdentityResponse(resultObject);
 		}
 
 		/// <summary>
@@ -110,13 +81,13 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse RefundPayment(RefundPayment request)
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
 			var result = api.Raw("", "/transaction", null, request);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+
+			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+
+			return new IdentityResponse(resultObject);
 		}
 
 		/// <summary>
@@ -125,13 +96,13 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IResponse VoidTransaction()
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
 			var result = api.Raw("", "/transaction", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+
+			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+
+			return new IdentityResponse(resultObject);
 		}
 
 		/// <summary>
@@ -140,13 +111,13 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse EmailReceipt(EmailInvoice request)
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
 			var result = api.Raw("", "/transaction", null, request);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+
+			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+
+			return new IdentityResponse(resultObject);
 		}
 	}
 }

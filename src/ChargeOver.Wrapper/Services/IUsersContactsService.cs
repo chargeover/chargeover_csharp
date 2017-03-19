@@ -14,7 +14,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a specific contact
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-users
 		/// </summary>
-		IResponse GetSpecificContact(int id);
+		ICustomResponse<ContactDetails> GetSpecificContact(int id);
 
 		/// <summary>
 		/// Get a list of contacts

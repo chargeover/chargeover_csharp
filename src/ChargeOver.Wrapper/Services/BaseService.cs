@@ -52,6 +52,17 @@ namespace ChargeOver.Wrapper.Services
 			return new Response<T>(resultObject);
 		}
 
+		protected ICustomResponse<T> GetCustom<T>(string endpint, int id)
+		{
+			var api = Provider.Create();
+
+			var result = api.Raw("get", $"/{endpint}/" + id, null);
+
+			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<T>>(result.Item2);
+
+			return new CustomResponse<T>(resultObject);
+		}
+
 		protected IResponse<T> Query<T>(string endpoint, string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
 			var api = _provider.Create();

@@ -22,15 +22,9 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a specific contact
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-users
 		/// </summary>
-		public IResponse GetSpecificContact(int id)
+		public ICustomResponse<ContactDetails> GetSpecificContact(int id)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("get", "/user/" + id, null);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return GetCustom<ContactDetails>("user", id);
 		}
 
 		/// <summary>

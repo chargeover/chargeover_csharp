@@ -1,4 +1,3 @@
-using System;
 using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
@@ -21,7 +20,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a specific invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-for-invoices
 		/// </summary>
-		IResponse GetSpecificInvoice();
+		ICustomResponse<InvoiceDetails> GetSpecificInvoice(int id);
 
 		/// <summary>
 		/// Query for invoices

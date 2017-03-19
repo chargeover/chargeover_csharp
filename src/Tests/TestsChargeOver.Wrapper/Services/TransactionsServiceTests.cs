@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using ChargeOver.Wrapper.Models;
 using ChargeOver.Wrapper.Services;
 using NUnit.Framework;
@@ -8,7 +9,7 @@ namespace TestsChargeOver.Wrapper.Services
 	[TestFixture]
 	public sealed class TransactionsServiceTests
 	{
-		private TransactionsService Sut{get;set;}
+		private TransactionsService Sut { get; set; }
 
 		[SetUp]
 		public void SetUp()
@@ -33,8 +34,15 @@ namespace TestsChargeOver.Wrapper.Services
 				TransactionDetail = "here are some details",
 				TransactionDatetime = DateTime.Parse("2013-06-20 18:48:17"),
 				Comment = "	newest, or 'best fit' invoices (based on amount/date).",
-				//AppliedTo = "[  {    "invoice_id": 10071,    "applied": 10.95  },  {    "invoice_id": 10072,    "applied": 5.0  }]"
-				//AutoApply = "best_fit"
+				//AppliedTo = new[]
+				//{
+				//	new AppliedInvoide
+				//	{
+				//		InvoiceId = 10071,
+				//		Applied = 10.95F
+				//	}
+				//},
+				AutoApply = "best_fit"
 			};
 			//act
 			var actual = Sut.CreatePayment(request);
@@ -49,7 +57,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.GetSpecificTransaction();
+			var actual = Sut.GetSpecificTransaction(AddTransaction());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -73,7 +81,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryForTransactions();
+			var actual = Sut.QueryForTransactions(limit: 5);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -166,6 +174,33 @@ namespace TestsChargeOver.Wrapper.Services
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
+		}
+
+		private int AddTransaction()
+		{
+			return Sut.CreatePayment(new Payment
+			{
+				CustomerId = 1,
+				GatewayId = 1,
+				GatewayStatus = 1,
+				GatewayTransid = "abcd1234",
+				GatewayMsg = "test gateway message",
+				GatewayMethod = "check",
+				Amount = 15.95F,
+				TransactionType = "pay",
+				TransactionDetail = "here are some details",
+				TransactionDatetime = DateTime.Parse("2013-06-20 18:48:17"),
+				Comment = "	newest, or 'best fit' invoices (based on amount/date).",
+				//AppliedTo = new[]
+				//{
+				//	new AppliedInvoide
+				//	{
+				//		InvoiceId = 10071,
+				//		Applied = 10.95F
+				//	}
+				//},
+				AutoApply = "best_fit"
+			}).Id;
 		}
 	}
 }
