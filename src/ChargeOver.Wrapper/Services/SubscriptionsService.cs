@@ -1,17 +1,12 @@
-using System;
 using ChargeOver.Wrapper.Models;
+using Newtonsoft.Json;
 
 namespace ChargeOver.Wrapper.Services
 {
-	public sealed class SubscriptionsService : ISubscriptionsService
+	public sealed class SubscriptionsService : BaseService, ISubscriptionsService
 	{
-		private readonly IChargeOverApiProvider _provider;
-
-		public SubscriptionsService(IChargeOverApiProvider provider)
+		public SubscriptionsService(IChargeOverApiProvider provider) : base(provider)
 		{
-			if (provider == null) throw new ArgumentNullException(nameof(provider));
-
-			_provider = provider;
 		}
 
 		/// <summary>
@@ -20,13 +15,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse CreateSubscription(Subscription request)
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("create", "/package ", null, request);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			return Create("package", request);
 		}
 
 		/// <summary>
@@ -35,43 +24,32 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse UpdateSubscription(UpdateSubscription request)
 		{
-			var api = _provider.Create();
+			return null;
+			//var api = Provider.Create();
 
-			var result = api.Raw("modify", "/package", null, request);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			//var result = api.Raw("modify", "/package", null, request);
+
+			//var resultObject = JsonConvert.DeserializeObject<ChargeOverResponse>(result.Item2);
+
+			//return new Models.Response(resultObject);
 		}
 
 		/// <summary>
 		/// Get a specific subscription
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-subscription
 		/// </summary>
-		public IResponse GetSpecificSubscription()
+		public ICustomResponse<SubscriptionDetails> GetSpecificSubscription(int id)
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("", "/package", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			return GetCustom<SubscriptionDetails>("package", id);
 		}
 
 		/// <summary>
 		/// Querying for subscriptions
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-subscription
 		/// </summary>
-		public IResponse QueryingForSubscriptions(params string[] queries)
+		public IResponse<Subscription> QueryingForSubscriptions(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("find", "/package", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			return Query<Subscription>("package", queries, orders, offset, limit);
 		}
 
 		/// <summary>
@@ -80,13 +58,13 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse UpgradeDowngradesubscription(UpgradeDowngradesubscription request)
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
 			var result = api.Raw("", "/package", null, request);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+
+			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+
+			return new IdentityResponse(resultObject);
 		}
 
 		/// <summary>
@@ -95,13 +73,13 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse ChangePricingOnSubscription(ChangePricingOnSubscription request)
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
 			var result = api.Raw("", "/package", null, request);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+
+			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+
+			return new IdentityResponse(resultObject);
 		}
 
 		/// <summary>
@@ -110,13 +88,13 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IResponse InvoiceSubscriptionNow()
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
 			var result = api.Raw("", "/package", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+
+			var resultObject = JsonConvert.DeserializeObject<ChargeOverResponse>(result.Item2);
+
+			return new Models.Response(resultObject);
 		}
 
 		/// <summary>
@@ -125,13 +103,13 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IResponse SuspendSubscription()
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
 			var result = api.Raw("", "/package", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+
+			var resultObject = JsonConvert.DeserializeObject<ChargeOverResponse>(result.Item2);
+
+			return new Models.Response(resultObject);
 		}
 
 		/// <summary>
@@ -140,13 +118,13 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IResponse UnsuspendSubscription()
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
 			var result = api.Raw("", "/package", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+
+			var resultObject = JsonConvert.DeserializeObject<ChargeOverResponse>(result.Item2);
+
+			return new Models.Response(resultObject);
 		}
 
 		/// <summary>
@@ -155,13 +133,13 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IResponse CancelSubscription()
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
 			var result = api.Raw("", "/package", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+
+			var resultObject = JsonConvert.DeserializeObject<ChargeOverResponse>(result.Item2);
+
+			return new Models.Response(resultObject);
 		}
 
 		/// <summary>
@@ -170,13 +148,13 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse SetThePaymentMethod(SetThePaymentMethod request)
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
 			var result = api.Raw("", "/package", null, request);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+
+			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+
+			return new IdentityResponse(resultObject);
 		}
 
 		/// <summary>
@@ -185,13 +163,13 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IResponse SendWelcomeEmail()
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
 			var result = api.Raw("", "/package", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+
+			var resultObject = JsonConvert.DeserializeObject<ChargeOverResponse>(result.Item2);
+
+			return new Models.Response(resultObject);
 		}
 	}
 }

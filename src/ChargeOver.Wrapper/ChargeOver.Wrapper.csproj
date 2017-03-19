@@ -59,6 +59,7 @@
     <Compile Include="Models\CustomChargeOverResponse.cs" />
     <Compile Include="Models\CustomResponse.cs" />
     <Compile Include="Models\ContactDetails.cs" />
+    <Compile Include="Models\SubscriptionDetails.cs" />
     <Compile Include="Models\TransactionDetails.cs" />
     <Compile Include="Models\InvoiceDetails.cs" />
     <Compile Include="Models\IdentityChargeOverResponse.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Models\Subscribing.cs" />
     <Compile Include="Models\Subscription.cs" />
     <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\TrialInvoiceLineItem.cs" />
     <Compile Include="Models\UpdateCustomer.cs" />
     <Compile Include="Models\UpdateInvoice.cs" />
     <Compile Include="Models\UpdateSubscription.cs" />

@@ -8,7 +8,7 @@ namespace TestsChargeOver.Wrapper.Services
 	[TestFixture]
 	public sealed class SubscriptionsServiceTests
 	{
-		private SubscriptionsService Sut{get;set;}
+		private SubscriptionsService Sut { get; set; }
 
 		[SetUp]
 		public void SetUp()
@@ -23,8 +23,7 @@ namespace TestsChargeOver.Wrapper.Services
 			var request = new Subscription
 			{
 				CustomerId = 5,
-				HolduntilDatetime = DateTime.Parse("2013-10-01"),
-				//LineItems = "[  {    "item_id": 239,    "descrip": "Here is a description for my line item.",    "line_quantity": 15  }]"
+				HolduntilDatetime = DateTime.Parse("2013-10-01")
 			};
 			//act
 			var actual = Sut.CreateSubscription(request);
@@ -55,7 +54,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.GetSpecificSubscription();
+			var actual = Sut.GetSpecificSubscription(AddSubscription());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -181,6 +180,15 @@ namespace TestsChargeOver.Wrapper.Services
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
+		}
+
+		private int AddSubscription()
+		{
+			return Sut.CreateSubscription(new Subscription
+			{
+				CustomerId = 5,
+				HolduntilDatetime = DateTime.Parse("2013-10-01")
+			}).Id;
 		}
 	}
 }

@@ -1,4 +1,3 @@
-using System;
 using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
@@ -21,13 +20,13 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a specific subscription
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-subscription
 		/// </summary>
-		IResponse GetSpecificSubscription();
+		ICustomResponse<SubscriptionDetails> GetSpecificSubscription(int id);
 
 		/// <summary>
 		/// Querying for subscriptions
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-subscription
 		/// </summary>
-		IResponse QueryingForSubscriptions(params string[] queries);
+		IResponse<Subscription> QueryingForSubscriptions(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10);
 
 		/// <summary>
 		/// Upgrade/downgrade a subscription

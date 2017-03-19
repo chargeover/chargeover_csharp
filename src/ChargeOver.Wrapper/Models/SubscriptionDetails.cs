@@ -3,8 +3,13 @@ using Newtonsoft.Json;
 
 namespace ChargeOver.Wrapper.Models
 {
-	public sealed class Subscription
+	public sealed class SubscriptionDetails
 	{
+		/// <summary>
+		/// Package ID #
+		/// </summary>
+		[JsonProperty("package_id")]
+		public int? PackageId { get; set; }
 		/// <summary>
 		/// Customer ID #
 		/// </summary>
@@ -20,6 +25,11 @@ namespace ChargeOver.Wrapper.Models
 		/// </summary>
 		[JsonProperty("external_key")]
 		public string ExternalKey { get; set; }
+		/// <summary>
+		/// Unique token
+		/// </summary>
+		[JsonProperty("token")]
+		public string Token { get; set; }
 		/// <summary>
 		/// Nickname for the package
 		/// </summary>
@@ -50,6 +60,11 @@ namespace ChargeOver.Wrapper.Models
 		/// </summary>
 		[JsonProperty("admin_id")]
 		public int? AdminId { get; set; }
+		/// <summary>
+		/// Admin/worker name
+		/// </summary>
+		[JsonProperty("admin_name")]
+		public string AdminName { get; set; }
 		/// <summary>
 		/// Billing address line 1
 		/// </summary>
@@ -131,15 +146,125 @@ namespace ChargeOver.Wrapper.Models
 		[JsonProperty("ship_notes")]
 		public string ShipNotes { get; set; }
 		/// <summary>
+		/// Currency ID #
+		/// </summary>
+		[JsonProperty("currency_id")]
+		public int? CurrencyId { get; set; }
+		/// <summary>
+		/// Currency ISO 4217 code
+		/// </summary>
+		[JsonProperty("currency_iso4217")]
+		public string CurrencyIso4217 { get; set; }
+		/// <summary>
+		/// Currency symbol
+		/// </summary>
+		[JsonProperty("currency_symbol")]
+		public string CurrencySymbol { get; set; }
+		/// <summary>
+		/// Total amount collected so far for this package
+		/// </summary>
+		[JsonProperty("amount_collected")]
+		public float? AmountCollected { get; set; }
+		/// <summary>
+		/// Total amount invoiced so far
+		/// </summary>
+		[JsonProperty("amount_invoiced")]
+		public float? AmountInvoiced { get; set; }
+		/// <summary>
+		/// Total amount due (invoiced - collected)
+		/// </summary>
+		[JsonProperty("amount_due")]
+		public float? AmountDue { get; set; }
+		/// <summary>
+		/// Date/time this package was suspended from
+		/// </summary>
+		[JsonProperty("suspendfrom_datetime")]
+		public DateTime? SuspendfromDatetime { get; set; }
+		/// <summary>
+		/// Date/time this package was suspended to
+		/// </summary>
+		[JsonProperty("suspendto_datetime")]
+		public DateTime? SuspendtoDatetime { get; set; }
+		/// <summary>
+		/// The date the next invoice will be generated
+		/// </summary>
+		[JsonProperty("next_invoice_datetime")]
+		public DateTime? NextInvoiceDatetime { get; set; }
+		/// <summary>
+		/// Whether or not the invoice is overdue
+		/// </summary>
+		[JsonProperty("is_overdue")]
+		public bool IsOverdue { get; set; }
+		/// <summary>
+		/// # of days overdue the package is
+		/// </summary>
+		[JsonProperty("days_overdue")]
+		public int? DaysOverdue { get; set; }
+		/// <summary>
+		/// Date/time this package was started/effective
+		/// </summary>
+		[JsonProperty("start_datetime")]
+		public DateTime? StartDatetime { get; set; }
+		/// <summary>
+		/// Date/time this package was cancelled
+		/// </summary>
+		[JsonProperty("cancel_datetime")]
+		public DateTime? CancelDatetime { get; set; }
+		/// <summary>
+		/// Date/time this package was created
+		/// </summary>
+		[JsonProperty("write_datetime")]
+		public DateTime? WriteDatetime { get; set; }
+		/// <summary>
+		/// Date/time this package was last updated
+		/// </summary>
+		[JsonProperty("mod_datetime")]
+		public DateTime? ModDatetime { get; set; }
+		/// <summary>
 		/// Date/time invoicing for this package is being held until
 		/// </summary>
 		[JsonProperty("holduntil_datetime")]
 		public DateTime? HolduntilDatetime { get; set; }
 		/// <summary>
+		/// 
+		/// </summary>
+		[JsonProperty("package_status_id")]
+		public string PackageStatusId { get; set; }
+		/// <summary>
+		/// User-friendly subscription status
+		/// </summary>
+		[JsonProperty("package_status_name")]
+		public string PackageStatusName { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[JsonProperty("package_status_str")]
+		public string PackageStatusStr { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[JsonProperty("package_status_state")]
+		public string PackageStatusState { get; set; }
+		/// <summary>
+		/// Date of the next invoice
+		/// </summary>
+		[JsonProperty("cache_next_invoice")]
+		public DateTime? CacheNextInvoice { get; set; }
+		/// <summary>
 		/// Terms ID #
 		/// </summary>
 		[JsonProperty("terms_id")]
 		public int? TermsId { get; set; }
+		/// <summary>
+		/// Payment terms
+		/// </summary>
+		[JsonProperty("terms_name")]
+		public string TermsName { get; set; }
+		/// <summary>
+		/// Terms # of days
+		/// </summary>
+		[JsonProperty("terms_days")]
+		public int? TermsDays { get; set; }
 		/// <summary>
 		/// Payment cycle
 		/// </summary>
@@ -175,5 +300,10 @@ namespace ChargeOver.Wrapper.Models
 		/// </summary>
 		[JsonProperty("line_items")]
 		public InvoiceLineItem[] LineItems { get; set; }
+		/// <summary>
+		/// URL for viewing the subscription in the GUI
+		/// </summary>
+		[JsonProperty("url_self")]
+		public string UrlSelf { get; set; }
 	}
 }
