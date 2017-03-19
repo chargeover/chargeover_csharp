@@ -52,6 +52,7 @@
     <Compile Include="Models\AdminWorkers.cs" />
     <Compile Include="Models\AppliedInvoide.cs" />
     <Compile Include="Models\ApplyOpenCustomerBalance.cs" />
+    <Compile Include="Models\AttemptInvoiceData.cs" />
     <Compile Include="Models\AttemptPayment.cs" />
     <Compile Include="Models\ChangePricingOnSubscription.cs" />
     <Compile Include="Models\ChargeOverResponse.cs" />

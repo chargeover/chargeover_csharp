@@ -1,4 +1,3 @@
-using System;
 using Newtonsoft.Json;
 
 namespace  ChargeOver.Wrapper.Models
@@ -19,7 +18,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("applied_to")]
-		public string AppliedTo { get; set; }
+		public AttemptInvoiceData[] AppliedTo { get; set; }
 		/// <summary>
 		/// 
 		/// </summary>

@@ -79,6 +79,6 @@ namespace  ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("applied_to")]
-		public string AppliedTo { get; set; }
+		public AppliedInvoide[] AppliedTo { get; set; }
 	}
 }

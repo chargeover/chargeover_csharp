@@ -45,18 +45,18 @@ namespace ChargeOver.Wrapper.Services
 		/// Refund a payment
 		/// details: https://developer.chargeover.com/apidocs/rest/#refund-transaction
 		/// </summary>
-		IIdentityResponse RefundPayment(RefundPayment request);
+		IIdentityResponse RefundPayment(int id, RefundPayment request);
 
 		/// <summary>
 		/// Void a transaction
 		/// details: https://developer.chargeover.com/apidocs/rest/#void-a-transaction
 		/// </summary>
-		IResponse VoidTransaction();
+		ICustomResponse<bool> VoidTransaction(int id);
 
 		/// <summary>
 		/// Email a receipt
 		/// details: https://developer.chargeover.com/apidocs/rest/#email-a-transaction
 		/// </summary>
-		IIdentityResponse EmailReceipt(EmailInvoice request);
+		ICustomResponse<bool> EmailReceipt(int id, EmailInvoice request);
 	}
 }

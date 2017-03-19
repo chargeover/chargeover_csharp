@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using ChargeOver.Wrapper.Models;
 using ChargeOver.Wrapper.Services;
 using NUnit.Framework;
@@ -97,8 +96,13 @@ namespace TestsChargeOver.Wrapper.Services
 				CustomerId = 1,
 				Comment = "Optional: You can optionally specify a list of payment methods to attempt, otherwise the already stored credit cards/bank accounts for the customer will be used",
 				Amount = 15.95F,
-				//AppliedTo = "[  {    "invoice_id": 16891  }]"
-				//Paymethods = "[  {    "creditcard_id": 1234  },  {    "ach_id": 1235  }]"
+				//AppliedTo = new[]
+				//{
+				//	new AttemptInvoiceData
+				//	{
+				//		InvoiceId = 1288
+				//	}
+				//}
 			};
 			//act
 			var actual = Sut.AttemptPayment(request);
@@ -114,7 +118,7 @@ namespace TestsChargeOver.Wrapper.Services
 			//arrange
 			var request = new Refund
 			{
-				CustomerId = 83,
+				CustomerId = 1,
 				GatewayStatus = 1,
 				GatewayTransid = "abcd1234",
 				GatewayMsg = "My test message",
@@ -124,7 +128,14 @@ namespace TestsChargeOver.Wrapper.Services
 				TransactionMethod = "Visa",
 				TransactionDetail = "",
 				TransactionDate = DateTime.Parse("2016-08-16"),
-				//AppliedTo = "[  {    "invoice_id": 10099,    "applied": -50  }]"
+				//AppliedTo = new[]
+				//{
+				//	new AppliedInvoide
+				//	{
+				//		InvoiceId = 10099,
+				//		Applied = -50
+				//	}
+				//}
 			};
 			//act
 			var actual = Sut.CreateRefund(request);
@@ -140,9 +151,10 @@ namespace TestsChargeOver.Wrapper.Services
 			//arrange
 			var request = new RefundPayment
 			{
+				Amount = 10
 			};
 			//act
-			var actual = Sut.RefundPayment(request);
+			var actual = Sut.RefundPayment(AddTransaction(), request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -154,7 +166,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.VoidTransaction();
+			var actual = Sut.VoidTransaction(AddTransaction());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -167,9 +179,10 @@ namespace TestsChargeOver.Wrapper.Services
 			//arrange
 			var request = new EmailInvoice
 			{
+				Email = "mail@mail.com"
 			};
 			//act
-			var actual = Sut.EmailReceipt(request);
+			var actual = Sut.EmailReceipt(AddTransaction(), request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

@@ -53,7 +53,7 @@ namespace ChargeOver.Wrapper.Services
 		{
 			var api = Provider.Create();
 
-			var result = api.Raw("", "/transaction", null, request);
+			var result = api.Raw("create", "/transaction?action=pay", null, request);
 
 			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
 
@@ -66,24 +66,18 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse CreateRefund(Refund request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("create", "/transaction", null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return Create("transaction", request);
 		}
 
 		/// <summary>
 		/// Refund a payment
 		/// details: https://developer.chargeover.com/apidocs/rest/#refund-transaction
 		/// </summary>
-		public IIdentityResponse RefundPayment(RefundPayment request)
+		public IIdentityResponse RefundPayment(int id, RefundPayment request)
 		{
 			var api = Provider.Create();
 
-			var result = api.Raw("", "/transaction", null, request);
+			var result = api.Raw(PostRequest, $"/transaction/{id}?action=refund", null, request);
 
 			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
 
@@ -94,30 +88,30 @@ namespace ChargeOver.Wrapper.Services
 		/// Void a transaction
 		/// details: https://developer.chargeover.com/apidocs/rest/#void-a-transaction
 		/// </summary>
-		public IResponse VoidTransaction()
+		public ICustomResponse<bool> VoidTransaction(int id)
 		{
 			var api = Provider.Create();
 
-			var result = api.Raw("", "/transaction", null);
+			var result = api.Raw(PostRequest, $"/transaction/{id}/?action=void", null);
 
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<bool>>(result.Item2);
 
-			return new IdentityResponse(resultObject);
+			return new CustomResponse<bool>(resultObject);
 		}
 
 		/// <summary>
 		/// Email a receipt
 		/// details: https://developer.chargeover.com/apidocs/rest/#email-a-transaction
 		/// </summary>
-		public IIdentityResponse EmailReceipt(EmailInvoice request)
+		public ICustomResponse<bool> EmailReceipt(int id, EmailInvoice request)
 		{
 			var api = Provider.Create();
 
-			var result = api.Raw("", "/transaction", null, request);
+			var result = api.Raw(PostRequest, $"/transaction/{id}?action=email", null, request);
 
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<bool>>(result.Item2);
 
-			return new IdentityResponse(resultObject);
+			return new CustomResponse<bool>(resultObject);
 		}
 	}
 }
