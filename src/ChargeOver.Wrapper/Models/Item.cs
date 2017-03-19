@@ -1,7 +1,6 @@
-using System;
 using Newtonsoft.Json;
 
-namespace  ChargeOver.Wrapper.Models
+namespace ChargeOver.Wrapper.Models
 {
 	public sealed class Item
 	{
@@ -64,6 +63,6 @@ namespace  ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("pricemodel")]
-		public string Pricemodel { get; set; }
+		public ItemPricemodel Pricemodel { get; set; }
 	}
 }

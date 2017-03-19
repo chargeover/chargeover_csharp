@@ -65,7 +65,9 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerResult.cs" />
     <Compile Include="Models\EmailInvoice.cs" />
+    <Compile Include="Models\InvoiceLineItem.cs" />
     <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\ItemPricemodel.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\Payment.cs" />

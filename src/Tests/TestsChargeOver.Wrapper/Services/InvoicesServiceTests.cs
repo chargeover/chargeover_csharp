@@ -8,7 +8,7 @@ namespace TestsChargeOver.Wrapper.Services
 	[TestFixture]
 	public sealed class InvoicesServiceTests
 	{
-		private InvoicesService Sut{get;set;}
+		private InvoicesService Sut { get; set; }
 
 		[SetUp]
 		public void SetUp()
@@ -27,7 +27,16 @@ namespace TestsChargeOver.Wrapper.Services
 				BillCity = "Willington",
 				BillState = "Connecticut",
 				BillPostcode = "06279",
-				//LineItems = "[  {    "item_id": 307,    "descrip": "My description goes here",    "line_rate": 29.95,    "line_quantity": 12  },  {    "item_id": 293,    "descrip": "Another description",    "line_rate": 12.95,    "line_quantity": 2  }]"
+				LineItems = new []
+				{
+					new InvoiceLineItem
+					{
+						Descrip = "My description goes here",
+						ItemId = 307,
+						LineQuantity = 12,
+						LineRate = 29.95F
+					}
+				}
 			};
 			//act
 			var actual = Sut.CreateInvoice(request);

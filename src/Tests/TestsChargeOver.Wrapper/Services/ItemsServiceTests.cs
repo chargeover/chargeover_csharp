@@ -8,7 +8,7 @@ namespace TestsChargeOver.Wrapper.Services
 	[TestFixture]
 	public sealed class ItemsServiceTests
 	{
-		private ItemsService Sut{get;set;}
+		private ItemsService Sut { get; set; }
 
 		[SetUp]
 		public void SetUp()
@@ -22,9 +22,14 @@ namespace TestsChargeOver.Wrapper.Services
 			//arrange
 			var request = new Item
 			{
-				Name = "My Test Item 832",
+				Name = "My Test Item " + Guid.NewGuid(),
 				Type = "service",
-				//Pricemodel = "{  "base": 295.95,  "paycycle": "mon",  "pricemodel": "fla"}"
+				Pricemodel = new ItemPricemodel
+				{
+					Base = 295.95F,
+					Paycycle = "mon",
+					Pricemodel = "fla"
+				}
 			};
 			//act
 			var actual = Sut.CreateItem(request);

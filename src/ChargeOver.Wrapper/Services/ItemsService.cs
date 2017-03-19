@@ -1,17 +1,9 @@
-using System;
-using ChargeOver.Wrapper.Models;
-
 namespace ChargeOver.Wrapper.Services
 {
-	public sealed class ItemsService : IItemsService
+	public sealed class ItemsService : BaseService, IItemsService
 	{
-		private readonly IChargeOverApiProvider _provider;
-
-		public ItemsService(IChargeOverApiProvider provider)
+		public ItemsService(IChargeOverApiProvider provider) : base(provider)
 		{
-			if (provider == null) throw new ArgumentNullException(nameof(provider));
-
-			_provider = provider;
 		}
 
 		/// <summary>
@@ -20,28 +12,16 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse CreateItem(Models.Item request)
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("create", "/item ", null, request);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			return Create("item", request);
 		}
 
 		/// <summary>
 		/// Querying for items
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-item
 		/// </summary>
-		public IResponse QueryingForItems(params string[] queries)
+		public IResponse QueryingForItems(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("find", "/item", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			return Query<int>("item");
 		}
 	}
 }
