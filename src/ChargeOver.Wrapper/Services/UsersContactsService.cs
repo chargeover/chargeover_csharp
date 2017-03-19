@@ -22,11 +22,11 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a specific contact
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-users
 		/// </summary>
-		public IResponse GetSpecificContact()
+		public IResponse GetSpecificContact(int id)
 		{
 			var api = Provider.Create();
 
-			var result = api.Raw("", "/user", null);
+			var result = api.Raw("get", "/user/" + id, null);
 
 			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
 
@@ -55,45 +55,45 @@ namespace ChargeOver.Wrapper.Services
 		/// Send a password reset
 		/// details: https://developer.chargeover.com/apidocs/rest/#reset-a-password
 		/// </summary>
-		public IResponse SendPasswordReset()
+		public ICustomResponse<bool> SendPasswordReset(int userId)
 		{
 			var api = Provider.Create();
 
-			var result = api.Raw("", "/user", null);
+			var result = api.Raw(PostRequest, $"/user/{userId}?action=password", null);
 
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<bool>>(result.Item2);
 
-			return new IdentityResponse(resultObject);
+			return new CustomResponse<bool>(resultObject);
 		}
 
 		/// <summary>
 		/// Set a password
 		/// details: https://developer.chargeover.com/apidocs/rest/#set-a-password
 		/// </summary>
-		public IIdentityResponse SetPassword(SetPassword request)
+		public ICustomResponse<bool> SetPassword(int userId, SetPassword request)
 		{
 			var api = Provider.Create();
 
-			var result = api.Raw("", "/user", null, request);
+			var result = api.Raw(PostRequest, "/user/{userId}?action=password", null, request);
 
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<bool>>(result.Item2);
 
-			return new IdentityResponse(resultObject);
+			return new CustomResponse<bool>(resultObject);
 		}
 
 		/// <summary>
 		/// Log in a user
 		/// details: https://developer.chargeover.com/apidocs/rest/#login-a-user
 		/// </summary>
-		public IResponse LogInUser()
+		public ICustomResponse<string> LogInUser(int id)
 		{
 			var api = Provider.Create();
 
-			var result = api.Raw("", "/user", null);
+			var result = api.Raw(PostRequest, $"/user/{id}?action=login", null);
 
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<string>>(result.Item2);
 
-			return new IdentityResponse(resultObject);
+			return new CustomResponse<string>(resultObject);
 		}
 
 		/// <summary>

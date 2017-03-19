@@ -1,4 +1,3 @@
-using System;
 using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
@@ -15,7 +14,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a specific contact
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-users
 		/// </summary>
-		IResponse GetSpecificContact();
+		IResponse GetSpecificContact(int id);
 
 		/// <summary>
 		/// Get a list of contacts
@@ -33,19 +32,19 @@ namespace ChargeOver.Wrapper.Services
 		/// Send a password reset
 		/// details: https://developer.chargeover.com/apidocs/rest/#reset-a-password
 		/// </summary>
-		IResponse SendPasswordReset();
+		ICustomResponse<bool> SendPasswordReset(int userId);
 
 		/// <summary>
 		/// Set a password
 		/// details: https://developer.chargeover.com/apidocs/rest/#set-a-password
 		/// </summary>
-		IIdentityResponse SetPassword(SetPassword request);
+		ICustomResponse<bool> SetPassword(int userId, SetPassword request);
 
 		/// <summary>
 		/// Log in a user
 		/// details: https://developer.chargeover.com/apidocs/rest/#login-a-user
 		/// </summary>
-		IResponse LogInUser();
+		ICustomResponse<string> LogInUser(int id);
 
 		/// <summary>
 		/// Delete a contact

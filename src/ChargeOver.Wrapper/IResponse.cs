@@ -26,6 +26,9 @@ namespace ChargeOver.Wrapper
 	/// </summary>
 	public interface IResponse<T> : IResponse
 	{
+		/// <summary>
+		/// Response
+		/// </summary>
 		IEnumerable<T> Response { get; }
 	}
 }

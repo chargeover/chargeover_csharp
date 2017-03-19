@@ -8,7 +8,7 @@ namespace TestsChargeOver.Wrapper.Services
 	[TestFixture]
 	public sealed class UsersContactsServiceTests
 	{
-		private UsersContactsService Sut{get;set;}
+		private UsersContactsService Sut { get; set; }
 
 		[SetUp]
 		public void SetUp()
@@ -41,8 +41,9 @@ namespace TestsChargeOver.Wrapper.Services
 		public void should_call_GetSpecificContact()
 		{
 			//arrange
+			var id = AddContact();
 			//act
-			var actual = Sut.GetSpecificContact();
+			var actual = Sut.GetSpecificContact(id);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -77,8 +78,9 @@ namespace TestsChargeOver.Wrapper.Services
 		public void should_call_SendPasswordReset()
 		{
 			//arrange
+			var userId = AddContact();
 			//act
-			var actual = Sut.SendPasswordReset();
+			var actual = Sut.SendPasswordReset(userId);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -89,12 +91,13 @@ namespace TestsChargeOver.Wrapper.Services
 		public void should_call_SetPassword()
 		{
 			//arrange
+			var userId = AddContact();
 			var request = new SetPassword
 			{
 				Password = "here is the new password",
 			};
 			//act
-			var actual = Sut.SetPassword(request);
+			var actual = Sut.SetPassword(userId, request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -105,8 +108,9 @@ namespace TestsChargeOver.Wrapper.Services
 		public void should_call_LogInUser()
 		{
 			//arrange
+			var id = AddContact();
 			//act
-			var actual = Sut.LogInUser();
+			var actual = Sut.LogInUser(id);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -117,15 +121,27 @@ namespace TestsChargeOver.Wrapper.Services
 		public void should_call_DeleteContact()
 		{
 			//arrange
-			var request = new int
-			{
-			};
+			var request = AddContact();
 			//act
 			var actual = Sut.DeleteContact(request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
+		}
+
+		private int AddContact()
+		{
+			var request = new AddContact
+			{
+				CustomerId = 21,
+				Username = "my_test_username_" + Guid.NewGuid(),
+				Password = "some test password",
+				Name = "Ryan Bantz",
+				Email = "ryan@adgadgagadg.com",
+				Phone = "888-555-1212",
+			};
+			return Sut.AddContact(request).Id;
 		}
 	}
 }

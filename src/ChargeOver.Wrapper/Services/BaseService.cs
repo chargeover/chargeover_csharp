@@ -10,6 +10,8 @@ namespace ChargeOver.Wrapper.Services
 		private readonly IChargeOverApiProvider _provider;
 		protected IChargeOverApiProvider Provider => _provider;
 
+		protected string PostRequest => "create";
+
 		protected BaseService(IChargeOverApiProvider provider)
 		{
 			if (provider == null) throw new ArgumentNullException(nameof(provider));
@@ -21,7 +23,7 @@ namespace ChargeOver.Wrapper.Services
 		{
 			var api = Provider.Create();
 
-			var result = api.Raw("create", $"/{endpoint} ", null, request);
+			var result = api.Raw(PostRequest, $"/{endpoint} ", null, request);
 
 			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
 

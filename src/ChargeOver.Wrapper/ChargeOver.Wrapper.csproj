@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICustomResponse.cs" />
     <Compile Include="IIdentityResponse.cs" />
     <Compile Include="Models\ACHCheckPayment.cs" />
     <Compile Include="Models\AddContact.cs" />
@@ -53,6 +54,8 @@
     <Compile Include="Models\AttemptPayment.cs" />
     <Compile Include="Models\ChangePricingOnSubscription.cs" />
     <Compile Include="Models\ChargeOverResponse.cs" />
+    <Compile Include="Models\CustomChargeOverResponse.cs" />
+    <Compile Include="Models\CustomResponse.cs" />
     <Compile Include="Models\IdentityChargeOverResponse.cs" />
     <Compile Include="Models\ChargeOverResponseDetails.cs" />
     <Compile Include="Models\CommitChargeOver.cs" />
