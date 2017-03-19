@@ -59,6 +59,7 @@
     <Compile Include="Models\CustomChargeOverResponse.cs" />
     <Compile Include="Models\CustomResponse.cs" />
     <Compile Include="Models\ContactDetails.cs" />
+    <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\SubscriptionDetails.cs" />
     <Compile Include="Models\TransactionDetails.cs" />
     <Compile Include="Models\InvoiceDetails.cs" />

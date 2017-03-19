@@ -1,32 +1,20 @@
-using System;
 using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
 {
-	public sealed class BrandsService : IBrandsService
+	public sealed class BrandsService : BaseService, IBrandsService
 	{
-		private readonly IChargeOverApiProvider _provider;
-
-		public BrandsService(IChargeOverApiProvider provider)
+		public BrandsService(IChargeOverApiProvider provider) : base(provider)
 		{
-			if (provider == null) throw new ArgumentNullException(nameof(provider));
-
-			_provider = provider;
 		}
 
 		/// <summary>
 		/// Retrieve brand list
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-brand
 		/// </summary>
-		public IResponse RetrieveBrandList()
+		public IResponse<Brand> RetrieveBrandList()
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("", "/brand", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			return GetList<Brand>("brand");
 		}
 	}
 }

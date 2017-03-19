@@ -1,5 +1,4 @@
-using System;
-using ChargeOver.Wrapper.Models;
+using System.Linq;
 using ChargeOver.Wrapper.Services;
 using NUnit.Framework;
 
@@ -8,7 +7,7 @@ namespace TestsChargeOver.Wrapper.Services
 	[TestFixture]
 	public sealed class AdminWorkersServiceTests
 	{
-		private AdminWorkersService Sut{get;set;}
+		private AdminWorkersService Sut { get; set; }
 
 		[SetUp]
 		public void SetUp()
@@ -45,7 +44,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.GetSpecificAdminWorker();
+			var actual = Sut.GetSpecificAdminWorker(Sut.GetListAdminWorkers().Response.First().AdminId);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

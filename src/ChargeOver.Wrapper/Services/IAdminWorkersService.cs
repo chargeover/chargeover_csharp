@@ -1,4 +1,3 @@
-using System;
 using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
@@ -15,12 +14,12 @@ namespace ChargeOver.Wrapper.Services
 		/// Query for admin workers
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-admins
 		/// </summary>
-		IResponse QueryForAdminWorkers(params string[] queries);
+		IResponse<AdminWorkers> QueryForAdminWorkers(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10);
 
 		/// <summary>
 		/// Get a specific admin worker
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-admin
 		/// </summary>
-		IResponse GetSpecificAdminWorker();
+		ICustomResponse<AdminWorkers> GetSpecificAdminWorker(int id);
 	}
 }

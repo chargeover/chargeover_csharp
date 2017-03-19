@@ -1,4 +1,3 @@
-using System;
 using ChargeOver.Wrapper.Models;
 using ChargeOver.Wrapper.Services;
 using NUnit.Framework;
@@ -22,7 +21,7 @@ namespace TestsChargeOver.Wrapper.Services
 			//arrange
 			var request = new StoreACHAccount
 			{
-				CustomerId = 1560,
+				CustomerId = 1,
 				Type = "chec",
 				Number = "45678123789",
 				Routing = "062346234",

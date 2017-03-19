@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace  ChargeOver.Wrapper.Models
+namespace ChargeOver.Wrapper.Models
 {
 	public sealed class AdminWorkers
 	{
@@ -9,7 +9,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// Admin ID #
 		/// </summary>
 		[JsonProperty("admin_id")]
-		public int? AdminId { get; set; }
+		public int AdminId { get; set; }
 		/// <summary>
 		/// Username
 		/// </summary>

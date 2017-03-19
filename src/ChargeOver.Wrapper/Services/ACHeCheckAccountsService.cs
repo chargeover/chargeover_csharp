@@ -1,17 +1,12 @@
-using System;
 using ChargeOver.Wrapper.Models;
+using Newtonsoft.Json;
 
 namespace ChargeOver.Wrapper.Services
 {
-	public sealed class ACHeCheckAccountsService : IACHeCheckAccountsService
+	public sealed class ACHeCheckAccountsService : BaseService, IACHeCheckAccountsService
 	{
-		private readonly IChargeOverApiProvider _provider;
-
-		public ACHeCheckAccountsService(IChargeOverApiProvider provider)
+		public ACHeCheckAccountsService(IChargeOverApiProvider provider) : base(provider)
 		{
-			if (provider == null) throw new ArgumentNullException(nameof(provider));
-
-			_provider = provider;
 		}
 
 		/// <summary>
@@ -20,13 +15,13 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse StoreACHAccount(StoreACHAccount request)
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
-			var result = api.Raw("", "/ach ", null, request);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			var result = api.Raw(PostRequest, "/ach ", null, request);
+
+			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+
+			return new IdentityResponse(resultObject);
 		}
 
 		/// <summary>
@@ -35,13 +30,13 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IResponse DeleteACHAccount(int id)
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
 			var result = api.Raw("delete", "/ach", null, id);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+
+			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+
+			return new IdentityResponse(resultObject);
 		}
 	}
 }

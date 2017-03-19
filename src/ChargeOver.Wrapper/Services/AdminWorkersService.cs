@@ -1,17 +1,11 @@
-using System;
 using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
 {
-	public sealed class AdminWorkersService : IAdminWorkersService
+	public sealed class AdminWorkersService : BaseService, IAdminWorkersService
 	{
-		private readonly IChargeOverApiProvider _provider;
-
-		public AdminWorkersService(IChargeOverApiProvider provider)
+		public AdminWorkersService(IChargeOverApiProvider provider) : base(provider)
 		{
-			if (provider == null) throw new ArgumentNullException(nameof(provider));
-
-			_provider = provider;
 		}
 
 		/// <summary>
@@ -20,43 +14,25 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IResponse<AdminWorkers> GetListAdminWorkers()
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("get", "/admin", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<ChargeOverResponse<AdminWorkers>>(result.Item2);
-			
-			return new Models.Response<AdminWorkers>(resultObject);
+			return GetList<AdminWorkers>("admin");
 		}
 
 		/// <summary>
 		/// Query for admin workers
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-admins
 		/// </summary>
-		public IResponse QueryForAdminWorkers(params string[] queries)
+		public IResponse<AdminWorkers> QueryForAdminWorkers(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("find", "/admin", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			return Query<AdminWorkers>("admin", queries, orders, offset, limit);
 		}
 
 		/// <summary>
 		/// Get a specific admin worker
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-admin
 		/// </summary>
-		public IResponse GetSpecificAdminWorker()
+		public ICustomResponse<AdminWorkers> GetSpecificAdminWorker(int id)
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("", "/admin", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			return GetCustom<AdminWorkers>("admin", id);
 		}
 	}
 }
