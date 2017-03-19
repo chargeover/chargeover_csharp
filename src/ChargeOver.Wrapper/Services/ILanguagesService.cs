@@ -1,9 +1,14 @@
-﻿using ChargeOver.Wrapper.Models;
+using System;
+using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
 {
 	public interface ILanguagesService
 	{
-		IFindResponse<Language> Retrieve();
+		/// <summary>
+		/// List languages
+		/// details: https://developer.chargeover.com/apidocs/rest/#list-language
+		/// </summary>
+		IResponse<Language> ListLanguages();
 	}
 }

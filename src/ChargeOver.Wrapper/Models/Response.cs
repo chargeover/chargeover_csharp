@@ -1,25 +1,42 @@
+using System.Collections.Generic;
+
 namespace ChargeOver.Wrapper.Models
 {
-	internal sealed class Response : IResponse
+	internal sealed class Response<T> : IResponse<T>
 	{
+		private readonly T[] _data;
+
 		public Response(ChargeOver.Response response)
 		{
 			Code = response.code;
 			Status = response.status;
 			Message = response.message;
-			Id = response.id;
 		}
 
-		public Response(ChargeOverResponse response)
+		public Response(ChargeOverResponse<T> response)
 		{
 			Code = response.Code;
 			Status = response.Status;
-			Id = response.Response.Id;
+			_data = response.Response;
 		}
 
 		public int Code { get; }
 		public string Status { get; }
 		public string Message { get; } = string.Empty;
-		public int Id { get; }
+		IEnumerable<T> IResponse<T>.Response => _data;
+	}
+
+	internal sealed class Response : IResponse
+	{
+		public Response(ChargeOverResponse response)
+		{
+			Code = response.Code;
+			Status = response.Status;
+			Message = response.Message;
+		}
+
+		public int Code { get; }
+		public string Status { get; }
+		public string Message { get; }
 	}
 }

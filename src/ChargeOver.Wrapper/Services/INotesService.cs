@@ -1,10 +1,20 @@
+using System;
 using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
 {
 	public interface INotesService
 	{
-		IResponse Create(Note note);
-		IFindResponse<Note> Query(params string[] queries);
+		/// <summary>
+		/// Create a note
+		/// details: https://developer.chargeover.com/apidocs/rest/#create_note
+		/// </summary>
+		IIdentityResponse CreateNote(Note request);
+
+		/// <summary>
+		/// Query notes for an object
+		/// details: https://developer.chargeover.com/apidocs/rest/#query_note
+		/// </summary>
+		IResponse QueryNotesForObject(params string[] queries);
 	}
 }

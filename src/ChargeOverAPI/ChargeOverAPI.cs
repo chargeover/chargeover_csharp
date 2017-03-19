@@ -348,7 +348,15 @@ namespace ChargeOver
 				requestStream.Close ();
 			}
 
-			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+			HttpWebResponse response = null;
+			try
+			{
+				response = (HttpWebResponse) request.GetResponse();
+			}
+			catch (WebException e)
+			{
+				var dataM = new StreamReader(e.Response.GetResponseStream()).ReadToEnd();
+			}
 			string httpResponse = new StreamReader(response.GetResponseStream()).ReadToEnd();
 			int httpCode = (int) response.StatusCode;
 

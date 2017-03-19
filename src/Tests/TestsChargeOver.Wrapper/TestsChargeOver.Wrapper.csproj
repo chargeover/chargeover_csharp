@@ -50,8 +50,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChargeOverAPIConfiguration.cs" />
-    <Compile Include="CustomerServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ACHeCheckAccountsServiceTests.cs" />
+    <Compile Include="Services\AdminWorkersServiceTests.cs" />
+    <Compile Include="Services\BrandsServiceTests.cs" />
+    <Compile Include="Services\CampaignsServiceTests.cs" />
+    <Compile Include="Services\CategoriesServiceTests.cs" />
+    <Compile Include="Services\ChargeOverServiceTests.cs" />
+    <Compile Include="Services\CountriesServiceTests.cs" />
+    <Compile Include="Services\CreditCardsServiceTests.cs" />
+    <Compile Include="Services\CurrenciesServiceTests.cs" />
+    <Compile Include="Services\CustomersServiceTests.cs" />
+    <Compile Include="Services\InvoicesServiceTests.cs" />
+    <Compile Include="Services\ItemsServiceTests.cs" />
+    <Compile Include="Services\LanguagesServiceTests.cs" />
+    <Compile Include="Services\NotesServiceTests.cs" />
+    <Compile Include="Services\RESTHooksServiceTests.cs" />
+    <Compile Include="Services\SubscriptionsServiceTests.cs" />
+    <Compile Include="Services\SystemLogServiceTests.cs" />
+    <Compile Include="Services\TermsServiceTests.cs" />
+    <Compile Include="Services\TokenizedPayMethodsServiceTests.cs" />
+    <Compile Include="Services\TransactionsServiceTests.cs" />
+    <Compile Include="Services\UsageServiceTests.cs" />
+    <Compile Include="Services\UsersContactsServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ChargeOver.Wrapper\ChargeOver.Wrapper.csproj">

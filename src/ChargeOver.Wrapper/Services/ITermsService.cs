@@ -1,9 +1,14 @@
-﻿using ChargeOver.Wrapper.Models;
+using System;
+using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
 {
 	public interface ITermsService
 	{
-		IFindResponse<Terms> Retrieve();
+		/// <summary>
+		/// List terms
+		/// details: https://developer.chargeover.com/apidocs/rest/#list-terms
+		/// </summary>
+		IResponse ListTerms();
 	}
 }

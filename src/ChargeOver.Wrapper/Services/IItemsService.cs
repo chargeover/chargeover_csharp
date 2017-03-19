@@ -1,8 +1,20 @@
+using System;
+using ChargeOver.Wrapper.Models;
+
 namespace ChargeOver.Wrapper.Services
 {
 	public interface IItemsService
 	{
-		IResponse Create(Models.Item item);
-		IFindResponse<Models.Item> Query(params string[] queries);
+		/// <summary>
+		/// Create an item
+		/// details: https://developer.chargeover.com/apidocs/rest/#create-item
+		/// </summary>
+		IIdentityResponse CreateItem(Models.Item request);
+
+		/// <summary>
+		/// Querying for items
+		/// details: https://developer.chargeover.com/apidocs/rest/#query-item
+		/// </summary>
+		IResponse QueryingForItems(params string[] queries);
 	}
 }

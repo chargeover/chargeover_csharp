@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace ChargeOver.Wrapper
 {
 	/// <summary>
@@ -17,9 +19,13 @@ namespace ChargeOver.Wrapper
 		/// Response message
 		/// </summary>
 		string Message { get; }
-		/// <summary>
-		/// Response Id
-		/// </summary>
-		int Id { get; }
+	}
+
+	/// <summary>
+	/// Response from ChargeOverAPI
+	/// </summary>
+	public interface IResponse<T> : IResponse
+	{
+		IEnumerable<T> Response { get; }
 	}
 }

@@ -1,9 +1,14 @@
-﻿using ChargeOver.Wrapper.Models;
+using System;
+using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
 {
 	public interface ICategoriesService
 	{
-		IFindResponse<Category> Query(params string[] queries);
+		/// <summary>
+		/// Query for categories
+		/// details: https://developer.chargeover.com/apidocs/rest/#list-category
+		/// </summary>
+		IResponse QueryForCategories(params string[] queries);
 	}
 }

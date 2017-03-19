@@ -1,9 +1,14 @@
-﻿using ChargeOver.Wrapper.Models;
+using System;
+using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
 {
 	public interface ICurrenciesService
 	{
-		IFindResponse<Currencies> Retrieve();
+		/// <summary>
+		/// List currencies
+		/// details: https://developer.chargeover.com/apidocs/rest/#list-currency
+		/// </summary>
+		IResponse ListCurrencies();
 	}
 }

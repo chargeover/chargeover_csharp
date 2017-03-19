@@ -1,22 +1,80 @@
-﻿using ChargeOver.Wrapper.Models;
+using System;
+using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
 {
 	public interface ISubscriptionsService
 	{
-		IResponse Create(Subscription subscription);
-		IResponse Update(Subscription subscription);
-		IFindResponse<Subscription> Query(params string[] queries);
 		/// <summary>
-		/// Upgrade/downgrade subscription
+		/// Create a subscription
+		/// details: https://developer.chargeover.com/apidocs/rest/#create-recurring-package
 		/// </summary>
-		/// <returns></returns>
-		IResponse Upgrade(UpgradeSubscription request);
-		IResponse Invoice(int id);
-		IResponse Suspend(int id);
-		IResponse Unsuspend(int id);
-		IResponse Cancel(int id);
-		IResponse Paymenthod(Paymenthod paymenthod);
-		IResponse SendWelcomeEmail(int id);
+		IIdentityResponse CreateSubscription(Subscription request);
+
+		/// <summary>
+		/// Update a subscription
+		/// details: https://developer.chargeover.com/apidocs/rest/#update-recurring-package
+		/// </summary>
+		IIdentityResponse UpdateSubscription(UpdateSubscription request);
+
+		/// <summary>
+		/// Get a specific subscription
+		/// details: https://developer.chargeover.com/apidocs/rest/#get-subscription
+		/// </summary>
+		IResponse GetSpecificSubscription();
+
+		/// <summary>
+		/// Querying for subscriptions
+		/// details: https://developer.chargeover.com/apidocs/rest/#query-subscription
+		/// </summary>
+		IResponse QueryingForSubscriptions(params string[] queries);
+
+		/// <summary>
+		/// Upgrade/downgrade a subscription
+		/// details: https://developer.chargeover.com/apidocs/rest/#subscription-upgrade-downgrade
+		/// </summary>
+		IIdentityResponse UpgradeDowngradesubscription(UpgradeDowngradesubscription request);
+
+		/// <summary>
+		/// Change pricing on a subscription
+		/// details: https://developer.chargeover.com/apidocs/rest/#subscription-change-pricing
+		/// </summary>
+		IIdentityResponse ChangePricingOnSubscription(ChangePricingOnSubscription request);
+
+		/// <summary>
+		/// Invoice a subscription now
+		/// details: https://developer.chargeover.com/apidocs/rest/#example-package-invoice
+		/// </summary>
+		IResponse InvoiceSubscriptionNow();
+
+		/// <summary>
+		/// Suspend a subscription (indefinitely)
+		/// details: https://developer.chargeover.com/apidocs/rest/#suspend-recurring-package-indefinitely
+		/// </summary>
+		IResponse SuspendSubscription();
+
+		/// <summary>
+		/// Unsuspend a subscription
+		/// details: https://developer.chargeover.com/apidocs/rest/#contract-unsuspend
+		/// </summary>
+		IResponse UnsuspendSubscription();
+
+		/// <summary>
+		/// Cancel a subscription
+		/// details: https://developer.chargeover.com/apidocs/rest/#cancel-package
+		/// </summary>
+		IResponse CancelSubscription();
+
+		/// <summary>
+		/// Set the payment method
+		/// details: https://developer.chargeover.com/apidocs/rest/#example-package-set-paymethod
+		/// </summary>
+		IIdentityResponse SetThePaymentMethod(SetThePaymentMethod request);
+
+		/// <summary>
+		/// Send a welcome e-mail
+		/// details: https://developer.chargeover.com/apidocs/rest/#example-package-send-welcome
+		/// </summary>
+		IResponse SendWelcomeEmail();
 	}
 }
