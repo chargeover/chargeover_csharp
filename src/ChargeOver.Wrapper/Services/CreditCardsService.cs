@@ -1,17 +1,12 @@
-using System;
 using ChargeOver.Wrapper.Models;
+using Newtonsoft.Json;
 
 namespace ChargeOver.Wrapper.Services
 {
-	public sealed class CreditCardsService : ICreditCardsService
+	public sealed class CreditCardsService : BaseService, ICreditCardsService
 	{
-		private readonly IChargeOverApiProvider _provider;
-
-		public CreditCardsService(IChargeOverApiProvider provider)
+		public CreditCardsService(IChargeOverApiProvider provider) : base(provider)
 		{
-			if (provider == null) throw new ArgumentNullException(nameof(provider));
-
-			_provider = provider;
 		}
 
 		/// <summary>
@@ -20,28 +15,16 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse StoreCreditCard(StoreCreditCard request)
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("", "/creditcard ", null, request);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			return Create("creditcard", request);
 		}
 
 		/// <summary>
 		/// Querying for credit cards
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-card
 		/// </summary>
-		public IResponse<CreditCardDetails> QueryingForCreditCards()
+		public IResponse<CreditCardDetails> QueryingForCreditCards(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("get", "/creditcard", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<ChargeOverResponse<CreditCardDetails>>(result.Item2);
-			
-			return new Models.Response<CreditCardDetails>(resultObject);
+			return Query<CreditCardDetails>("creditcard", queries, orders, offset, limit);
 		}
 
 		/// <summary>
@@ -50,13 +33,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IResponse DeleteCreditCard(int id)
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("delete", "/creditcard", null, id);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			return Delete("creditcard", id);
 		}
 	}
 }

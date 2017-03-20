@@ -1,17 +1,12 @@
-using System;
 using ChargeOver.Wrapper.Models;
+using Newtonsoft.Json;
 
 namespace ChargeOver.Wrapper.Services
 {
-	public sealed class ChargeOverService : IChargeOverService
+	public sealed class ChargeOverService : BaseService, IChargeOverService
 	{
-		private readonly IChargeOverApiProvider _provider;
-
-		public ChargeOverService(IChargeOverApiProvider provider)
+		public ChargeOverService(IChargeOverApiProvider provider) : base(provider)
 		{
-			if (provider == null) throw new ArgumentNullException(nameof(provider));
-
-			_provider = provider;
 		}
 
 		/// <summary>
@@ -20,13 +15,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IResponse<PendingRequestDetail> GetListPendingRequests()
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("get", "/_chargeoverjs", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<ChargeOverResponse<PendingRequestDetail>>(result.Item2);
-			
-			return new Models.Response<PendingRequestDetail>(resultObject);
+			return GetList<PendingRequestDetail>("_chargeoverjs");
 		}
 
 		/// <summary>
@@ -35,13 +24,13 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse CommitChargeOver(CommitChargeOver request)
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
-			var result = api.Raw("", "/_chargeoverjs ", null, request);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			var result = api.Raw(PostRequest, "/_chargeoverjs ", null, request);
+
+			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+
+			return new IdentityResponse(resultObject);
 		}
 
 		/// <summary>
@@ -50,13 +39,13 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse RejectChargeOver(RejectChargeOver request)
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
 			var result = api.Raw("", "/_chargeoverjs ", null, request);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+
+			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+
+			return new IdentityResponse(resultObject);
 		}
 	}
 }

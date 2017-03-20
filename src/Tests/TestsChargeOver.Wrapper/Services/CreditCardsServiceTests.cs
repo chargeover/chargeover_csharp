@@ -8,7 +8,7 @@ namespace TestsChargeOver.Wrapper.Services
 	[TestFixture]
 	public sealed class CreditCardsServiceTests
 	{
-		private CreditCardsService Sut{get;set;}
+		private CreditCardsService Sut { get; set; }
 
 		[SetUp]
 		public void SetUp()
@@ -22,9 +22,9 @@ namespace TestsChargeOver.Wrapper.Services
 			//arrange
 			var request = new StoreCreditCard
 			{
-				CustomerId = 475,
+				CustomerId = 1,
 				Number = "4111 1111 1111 1111",
-				ExpdateYear = "2015",
+				ExpdateYear = (DateTime.UtcNow.Year + 1).ToString(),
 				ExpdateMonth = "11",
 				Name = "Keith Palmer",
 				Address = "72 E Blue Grass Road",
@@ -36,7 +36,7 @@ namespace TestsChargeOver.Wrapper.Services
 			//act
 			var actual = Sut.StoreCreditCard(request);
 			//assert
-			Assert.AreEqual(200, actual.Code);
+			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
 		}
@@ -57,15 +57,31 @@ namespace TestsChargeOver.Wrapper.Services
 		public void should_call_DeleteCreditCard()
 		{
 			//arrange
-			var request = new int
-			{
-			};
 			//act
-			var actual = Sut.DeleteCreditCard(request);
+			var actual = Sut.DeleteCreditCard(AddCard());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
+		}
+
+		private int AddCard()
+		{
+			var request = new StoreCreditCard
+			{
+				CustomerId = 1,
+				Number = "4111 1111 1111 1111",
+				ExpdateYear = (DateTime.UtcNow.Year + 1).ToString(),
+				ExpdateMonth = "11",
+				Name = "Keith Palmer",
+				Address = "72 E Blue Grass Road",
+				City = "Willington",
+				//state = "CT"
+				Postcode = "06279",
+				Country = "United States",
+			};
+			//act
+			return Sut.StoreCreditCard(request).Id;
 		}
 	}
 }

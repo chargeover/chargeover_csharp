@@ -1,4 +1,3 @@
-using System;
 using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
@@ -9,6 +8,6 @@ namespace ChargeOver.Wrapper.Services
 		/// Retrieve country list
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-country
 		/// </summary>
-		IResponse RetrieveCountryList();
+		IResponse<Country> RetrieveCountryList();
 	}
 }

@@ -1,32 +1,20 @@
-using System;
 using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
 {
-	public sealed class CategoriesService : ICategoriesService
+	public sealed class CategoriesService : BaseService, ICategoriesService
 	{
-		private readonly IChargeOverApiProvider _provider;
-
-		public CategoriesService(IChargeOverApiProvider provider)
+		public CategoriesService(IChargeOverApiProvider provider) : base(provider)
 		{
-			if (provider == null) throw new ArgumentNullException(nameof(provider));
-
-			_provider = provider;
 		}
 
 		/// <summary>
 		/// Query for categories
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-category
 		/// </summary>
-		public IResponse QueryForCategories(params string[] queries)
+		public IResponse QueryForCategories(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("find", "/item_category", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			return Query<Category>("item_category", queries, orders, offset, limit);
 		}
 	}
 }

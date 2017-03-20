@@ -1,4 +1,3 @@
-using System;
 using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
@@ -9,6 +8,6 @@ namespace ChargeOver.Wrapper.Services
 		/// List currencies
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-currency
 		/// </summary>
-		IResponse ListCurrencies();
+		IResponse<Currency> ListCurrencies();
 	}
 }

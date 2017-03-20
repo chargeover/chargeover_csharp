@@ -1,32 +1,20 @@
-using System;
 using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
 {
-	public sealed class CurrenciesService : ICurrenciesService
+	public sealed class CurrenciesService : BaseService, ICurrenciesService
 	{
-		private readonly IChargeOverApiProvider _provider;
-
-		public CurrenciesService(IChargeOverApiProvider provider)
+		public CurrenciesService(IChargeOverApiProvider provider) : base(provider)
 		{
-			if (provider == null) throw new ArgumentNullException(nameof(provider));
-
-			_provider = provider;
 		}
 
 		/// <summary>
 		/// List currencies
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-currency
 		/// </summary>
-		public IResponse ListCurrencies()
+		public IResponse<Currency> ListCurrencies()
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("", "/currency", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			return GetList<Currency>("currency");
 		}
 	}
 }

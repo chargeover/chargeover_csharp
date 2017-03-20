@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace  ChargeOver.Wrapper.Models
+namespace ChargeOver.Wrapper.Models
 {
 	public sealed class CreditCardDetails
 	{
@@ -99,6 +99,6 @@ namespace  ChargeOver.Wrapper.Models
 		/// IP address that created the card
 		/// </summary>
 		[JsonProperty("write_ipaddr")]
-		public DateTime? WriteIpaddr { get; set; }
+		public string WriteIpaddr { get; set; }
 	}
 }

@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace  ChargeOver.Wrapper.Models
+namespace ChargeOver.Wrapper.Models
 {
 	public sealed class Contact
 	{

@@ -1,17 +1,12 @@
-using System;
 using ChargeOver.Wrapper.Models;
+using Newtonsoft.Json;
 
 namespace ChargeOver.Wrapper.Services
 {
-	public sealed class NotesService : INotesService
+	public sealed class NotesService : BaseService, INotesService
 	{
-		private readonly IChargeOverApiProvider _provider;
-
-		public NotesService(IChargeOverApiProvider provider)
+		public NotesService(IChargeOverApiProvider provider) : base(provider)
 		{
-			if (provider == null) throw new ArgumentNullException(nameof(provider));
-
-			_provider = provider;
 		}
 
 		/// <summary>
@@ -20,13 +15,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse CreateNote(Note request)
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("create", "/note ", null, request);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			return Create("note", request);
 		}
 
 		/// <summary>
@@ -35,13 +24,13 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IResponse QueryNotesForObject(params string[] queries)
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
 			var result = api.Raw("find", "/note?_dummy=1", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+
+			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+
+			return new IdentityResponse(resultObject);
 		}
 	}
 }

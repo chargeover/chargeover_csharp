@@ -1,5 +1,3 @@
-using System;
-using ChargeOver.Wrapper.Models;
 using ChargeOver.Wrapper.Services;
 using NUnit.Framework;
 
