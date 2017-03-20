@@ -8,7 +8,7 @@ namespace TestsChargeOver.Wrapper.Services
 	[TestFixture]
 	public sealed class RESTHooksServiceTests
 	{
-		private RESTHooksService Sut{get;set;}
+		private RESTHooksService Sut { get; set; }
 
 		[SetUp]
 		public void SetUp()
@@ -28,7 +28,7 @@ namespace TestsChargeOver.Wrapper.Services
 			//act
 			var actual = Sut.Subscribing(request);
 			//assert
-			Assert.AreEqual(200, actual.Code);
+			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
 		}
@@ -38,11 +38,22 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.Unsubscribing();
+			var actual = Sut.Unsubscribing(AddSubscription());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
+		}
+
+		private int AddSubscription()
+		{
+			var request = new Subscribing
+			{
+				TargetUrl = "http://example.org/your_webhook_url",
+				Event = "customer.insert",
+			};
+
+			return Sut.Subscribing(request).Id;
 		}
 	}
 }

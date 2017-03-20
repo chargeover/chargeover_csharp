@@ -1,4 +1,3 @@
-using System;
 using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
@@ -15,6 +14,6 @@ namespace ChargeOver.Wrapper.Services
 		/// Query notes for an object
 		/// details: https://developer.chargeover.com/apidocs/rest/#query_note
 		/// </summary>
-		IResponse QueryNotesForObject(params string[] queries);
+		IResponse<NoteDetails> QueryNotesForObject(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10);
 	}
 }

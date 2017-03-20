@@ -1,17 +1,12 @@
-using System;
 using ChargeOver.Wrapper.Models;
+using Newtonsoft.Json;
 
 namespace ChargeOver.Wrapper.Services
 {
-	public sealed class RESTHooksService : IRESTHooksService
+	public sealed class RESTHooksService : BaseService, IRESTHooksService
 	{
-		private readonly IChargeOverApiProvider _provider;
-
-		public RESTHooksService(IChargeOverApiProvider provider)
+		public RESTHooksService(IChargeOverApiProvider provider) : base(provider)
 		{
-			if (provider == null) throw new ArgumentNullException(nameof(provider));
-
-			_provider = provider;
 		}
 
 		/// <summary>
@@ -20,28 +15,22 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse Subscribing(Subscribing request)
 		{
-			var api = _provider.Create();
+			var api = Provider.Create();
 
-			var result = api.Raw("", "/_resthook", null, request);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			var result = api.Raw(PostRequest, "/_resthook", null, request);
+
+			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+
+			return new IdentityResponse(resultObject);
 		}
 
 		/// <summary>
 		/// Unsubscribing
 		/// details: https://developer.chargeover.com/apidocs/rest/#unsubscribe-resthook
 		/// </summary>
-		public IResponse Unsubscribing()
+		public IResponse Unsubscribing(int id)
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("", "/_resthook", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			return Delete("_resthook", id);
 		}
 	}
 }

@@ -1,5 +1,4 @@
 using ChargeOver.Wrapper.Models;
-using Newtonsoft.Json;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -22,15 +21,9 @@ namespace ChargeOver.Wrapper.Services
 		/// Query notes for an object
 		/// details: https://developer.chargeover.com/apidocs/rest/#query_note
 		/// </summary>
-		public IResponse QueryNotesForObject(params string[] queries)
+		public IResponse<NoteDetails> QueryNotesForObject(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("find", "/note?_dummy=1", null);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return Query<NoteDetails>("note", queries, orders, offset, limit);
 		}
 	}
 }

@@ -1,4 +1,3 @@
-using System;
 using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
@@ -15,6 +14,6 @@ namespace ChargeOver.Wrapper.Services
 		/// Unsubscribing
 		/// details: https://developer.chargeover.com/apidocs/rest/#unsubscribe-resthook
 		/// </summary>
-		IResponse Unsubscribing();
+		IResponse Unsubscribing(int id);
 	}
 }

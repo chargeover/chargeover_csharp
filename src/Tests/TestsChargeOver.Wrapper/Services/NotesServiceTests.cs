@@ -47,7 +47,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryNotesForObject("where=obj_type:EQUALS:customer");
+			var actual = Sut.QueryNotesForObject();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
