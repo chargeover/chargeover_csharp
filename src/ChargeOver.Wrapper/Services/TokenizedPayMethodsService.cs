@@ -1,17 +1,11 @@
-using System;
 using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
 {
-	public sealed class TokenizedPayMethodsService : ITokenizedPayMethodsService
+	public sealed class TokenizedPayMethodsService : BaseService, ITokenizedPayMethodsService
 	{
-		private readonly IChargeOverApiProvider _provider;
-
-		public TokenizedPayMethodsService(IChargeOverApiProvider provider)
+		public TokenizedPayMethodsService(IChargeOverApiProvider provider) : base(provider)
 		{
-			if (provider == null) throw new ArgumentNullException(nameof(provider));
-
-			_provider = provider;
 		}
 
 		/// <summary>
@@ -20,13 +14,14 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse StorePayMethodToken(StorePayMethodToken request)
 		{
-			var api = _provider.Create();
+			return Create("tokenized", request);
+			//var api = _provider.Create();
 
-			var result = api.Raw("", "/tokenized ", null, request);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			//var result = api.Raw("", "/tokenized ", null, request);
+
+			//var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+
+			//return new IdentityResponse(resultObject);
 		}
 
 		/// <summary>
@@ -35,13 +30,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IResponse DeleteTokenizedPayMethod(int id)
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("delete", "/tokenized", null, id);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-			
-			return new Models.IdentityResponse(resultObject);
+			return Delete("tokenized", id);
 		}
 	}
 }

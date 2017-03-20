@@ -1,4 +1,3 @@
-using System;
 using ChargeOver.Wrapper.Models;
 using ChargeOver.Wrapper.Services;
 using NUnit.Framework;
@@ -8,7 +7,7 @@ namespace TestsChargeOver.Wrapper.Services
 	[TestFixture]
 	public sealed class TokenizedPayMethodsServiceTests
 	{
-		private TokenizedPayMethodsService Sut{get;set;}
+		private TokenizedPayMethodsService Sut { get; set; }
 
 		[SetUp]
 		public void SetUp()
@@ -29,7 +28,7 @@ namespace TestsChargeOver.Wrapper.Services
 			//act
 			var actual = Sut.StorePayMethodToken(request);
 			//assert
-			Assert.AreEqual(200, actual.Code);
+			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
 		}
@@ -38,15 +37,23 @@ namespace TestsChargeOver.Wrapper.Services
 		public void should_call_DeleteTokenizedPayMethod()
 		{
 			//arrange
-			var request = new int
-			{
-			};
 			//act
-			var actual = Sut.DeleteTokenizedPayMethod(request);
+			var actual = Sut.DeleteTokenizedPayMethod(AddPayMethod());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
+		}
+
+		private int AddPayMethod()
+		{
+			var request = new StorePayMethodToken
+			{
+				CustomerId = 1,
+				Token = "cus_5tSkoQ6mDrXOMQ",
+				Type = "customer",
+			};
+			return Sut.StorePayMethodToken(request).Id;
 		}
 	}
 }

@@ -1,4 +1,3 @@
-using System;
 using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
@@ -9,6 +8,6 @@ namespace ChargeOver.Wrapper.Services
 		/// Retrieve the system log
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-syslog
 		/// </summary>
-		IResponse RetrieveTheSystemLog();
+		IResponse<Log> RetrieveTheSystemLog();
 	}
 }

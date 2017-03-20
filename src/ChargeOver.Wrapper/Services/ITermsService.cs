@@ -1,4 +1,3 @@
-using System;
 using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
@@ -9,6 +8,6 @@ namespace ChargeOver.Wrapper.Services
 		/// List terms
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-terms
 		/// </summary>
-		IResponse ListTerms();
+		IResponse<Term> ListTerms();
 	}
 }
