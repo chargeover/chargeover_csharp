@@ -21,10 +21,11 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			var id = TakeItemId();
+			var customer = TakeCustomerId();
 
 			var request = new Invoice
 			{
-				CustomerId = 1,
+				CustomerId = customer,
 				BillAddr1 = "72 E Blue Grass Road",
 				BillCity = "Willington",
 				BillState = "Connecticut",
@@ -48,7 +49,21 @@ namespace TestsChargeOver.Wrapper.Services
 			Assert.AreEqual("OK", actual.Status);
 		}
 
-		private static int TakeItemId()
+		private int TakeCustomerId()
+		{
+			var id = new CustomersService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config)).CreateCustomer(new Customer
+			{
+				Company = "Test Company Name",
+				BillAddr1 = "16 Dog Lane",
+				BillAddr2 = "Suite D",
+				BillCity = "Storrs",
+				BillState = "CT",
+			}).Id;
+
+			return id;
+		}
+
+		private int TakeItemId()
 		{
 			var id = new ItemsService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config)).CreateItem(new Item
 			{
@@ -62,6 +77,33 @@ namespace TestsChargeOver.Wrapper.Services
 				}
 			}).Id;
 			return id;
+		}
+
+		private int TakeInvoice()
+		{
+			var id = TakeItemId();
+			var customer = TakeCustomerId();
+
+			var request = new Invoice
+			{
+				CustomerId = customer,
+				BillAddr1 = "72 E Blue Grass Road",
+				BillCity = "Willington",
+				BillState = "Connecticut",
+				BillPostcode = "06279",
+				LineItems = new[]
+				{
+					new InvoiceLineItem
+					{
+						Descrip = "My description goes here",
+						ItemId = id,
+						LineQuantity = 12,
+						LineRate = 29.95F
+					}
+				}
+			};
+
+			return Sut.CreateInvoice(request).Id;
 		}
 
 		[Test]
@@ -86,7 +128,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.GetSpecificInvoice(-1);
+			var actual = Sut.GetSpecificInvoice(TakeInvoice());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -122,7 +164,7 @@ namespace TestsChargeOver.Wrapper.Services
 				Country = "United States",
 			};
 			//act
-			var actual = Sut.CreditCardPayment(request);
+			var actual = Sut.CreditCardPayment(TakeInvoice(), request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -154,10 +196,10 @@ namespace TestsChargeOver.Wrapper.Services
 			//arrange
 			var request = new ApplyOpenCustomerBalance
 			{
-				UseCustomerBalance = "True",
+				UseCustomerBalance = true,
 			};
 			//act
-			var actual = Sut.ApplyOpenCustomerBalance(request);
+			var actual = Sut.ApplyOpenCustomerBalance(TakeInvoice(), request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -169,7 +211,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.VoidInvoice();
+			var actual = Sut.VoidInvoice(TakeInvoice());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -182,9 +224,10 @@ namespace TestsChargeOver.Wrapper.Services
 			//arrange
 			var request = new EmailInvoice
 			{
+				Email = "mail@mail.com"
 			};
 			//act
-			var actual = Sut.EmailInvoice(request);
+			var actual = Sut.EmailInvoice(TakeInvoice(), request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -199,7 +242,7 @@ namespace TestsChargeOver.Wrapper.Services
 			{
 			};
 			//act
-			var actual = Sut.PrintInvoice(request);
+			var actual = Sut.PrintInvoice(TakeInvoice(), request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

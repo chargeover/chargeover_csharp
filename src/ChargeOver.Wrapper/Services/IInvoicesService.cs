@@ -26,13 +26,13 @@ namespace ChargeOver.Wrapper.Services
 		/// Query for invoices
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-for-invoices
 		/// </summary>
-		IResponse QueryForInvoices(params string[] queries);
+		IResponse<InvoiceDetails> QueryForInvoices(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10);
 
 		/// <summary>
 		/// Credit card payment (specify card details)
 		/// details: https://developer.chargeover.com/apidocs/rest/#payment-for-invoice-cc
 		/// </summary>
-		IIdentityResponse CreditCardPayment(CreditCardPayment request);
+		ICustomResponse<bool> CreditCardPayment(int invoiceId, CreditCardPayment request);
 
 		/// <summary>
 		/// ACH/eCheck payment (specify ACH details)
@@ -44,24 +44,24 @@ namespace ChargeOver.Wrapper.Services
 		/// Apply an open customer balance
 		/// details: https://developer.chargeover.com/apidocs/rest/#payment-for-invoice-balance
 		/// </summary>
-		IIdentityResponse ApplyOpenCustomerBalance(ApplyOpenCustomerBalance request);
+		ICustomResponse<bool> ApplyOpenCustomerBalance(int invoiceId, ApplyOpenCustomerBalance request);
 
 		/// <summary>
 		/// Void an invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#void-an-invoice
 		/// </summary>
-		IResponse VoidInvoice();
+		IResponse VoidInvoice(int invoiceId);
 
 		/// <summary>
 		/// Email an invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#email-an-invoice
 		/// </summary>
-		IIdentityResponse EmailInvoice(EmailInvoice request);
+		ICustomResponse<bool> EmailInvoice(int invoiceId, EmailInvoice request);
 
 		/// <summary>
 		/// Print & mail an invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#print-an-invoice
 		/// </summary>
-		IIdentityResponse PrintInvoice(PrintInvoice request);
+		ICustomResponse<bool> PrintInvoice(int invoiceId, PrintInvoice request);
 	}
 }

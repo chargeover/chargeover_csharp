@@ -63,6 +63,17 @@ namespace ChargeOver.Wrapper.Services
 			return new CustomResponse<T>(resultObject);
 		}
 
+		protected ICustomResponse<bool> GetCustomBool<T>(string endpoint, T requeset)
+		{
+			var api = Provider.Create();
+
+			var result = api.Raw(PostRequest, endpoint, null, requeset);
+
+			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<bool>>(result.Item2);
+
+			return new CustomResponse<bool>(resultObject);
+		}
+
 		protected IResponse<T> Query<T>(string endpoint, string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
 			var api = _provider.Create();

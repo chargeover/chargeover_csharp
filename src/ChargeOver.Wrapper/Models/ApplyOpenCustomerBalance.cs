@@ -1,4 +1,3 @@
-using System;
 using Newtonsoft.Json;
 
 namespace  ChargeOver.Wrapper.Models
@@ -9,6 +8,6 @@ namespace  ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("use_customer_balance")]
-		public string UseCustomerBalance { get; set; }
+		public bool UseCustomerBalance { get; set; }
 	}
 }

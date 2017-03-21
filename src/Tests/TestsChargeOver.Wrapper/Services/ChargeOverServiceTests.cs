@@ -34,7 +34,7 @@ namespace TestsChargeOver.Wrapper.Services
 			//arrange
 			var request = new CommitChargeOver
 			{
-				Commit = "9w5jdiqz1pf7h8ga",
+				Commit = "6KHW4JiguocfQEO2yhmq58ZsVNGlIPb0",
 			};
 			//act
 			var actual = Sut.CommitChargeOver(request);

@@ -52,30 +52,24 @@ namespace ChargeOver.Wrapper.Services
 		/// Query for invoices
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-for-invoices
 		/// </summary>
-		public IResponse QueryForInvoices(params string[] queries)
+		public IResponse<InvoiceDetails> QueryForInvoices(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("find", "/invoice", null);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return Query<InvoiceDetails>("invoice", queries, orders, offset, limit);
 		}
 
 		/// <summary>
 		/// Credit card payment (specify card details)
 		/// details: https://developer.chargeover.com/apidocs/rest/#payment-for-invoice-cc
 		/// </summary>
-		public IIdentityResponse CreditCardPayment(CreditCardPayment request)
+		public ICustomResponse<bool> CreditCardPayment(int invoiceId, CreditCardPayment request)
 		{
 			var api = Provider.Create();
 
-			var result = api.Raw("", "/invoice", null, request);
+			var result = api.Raw(PostRequest, $"/invoice/{invoiceId}?action=pay", null, request);
 
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<bool>>(result.Item2);
 
-			return new IdentityResponse(resultObject);
+			return new CustomResponse<bool>(resultObject);
 		}
 
 		/// <summary>
@@ -97,60 +91,48 @@ namespace ChargeOver.Wrapper.Services
 		/// Apply an open customer balance
 		/// details: https://developer.chargeover.com/apidocs/rest/#payment-for-invoice-balance
 		/// </summary>
-		public IIdentityResponse ApplyOpenCustomerBalance(ApplyOpenCustomerBalance request)
+		public ICustomResponse<bool> ApplyOpenCustomerBalance(int invoiceId, ApplyOpenCustomerBalance request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("", "/invoice", null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return GetCustomBool($"/invoice/{invoiceId}?action=pay", request);
 		}
 
 		/// <summary>
 		/// Void an invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#void-an-invoice
 		/// </summary>
-		public IResponse VoidInvoice()
+		public IResponse VoidInvoice(int invoiceId)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("", "/invoice", null);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return GetCustomBool($"/invoice/{invoiceId}?action=void", new { });
 		}
 
 		/// <summary>
 		/// Email an invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#email-an-invoice
 		/// </summary>
-		public IIdentityResponse EmailInvoice(EmailInvoice request)
+		public ICustomResponse<bool> EmailInvoice(int invoiceId, EmailInvoice request)
 		{
 			var api = Provider.Create();
 
-			var result = api.Raw("", "/invoice", null, request);
+			var result = api.Raw(PostRequest, $"/invoice/{invoiceId}?action=email", null, request);
 
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<bool>>(result.Item2);
 
-			return new IdentityResponse(resultObject);
+			return new CustomResponse<bool>(resultObject);
 		}
 
 		/// <summary>
 		/// Print & mail an invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#print-an-invoice
 		/// </summary>
-		public IIdentityResponse PrintInvoice(PrintInvoice request)
+		public ICustomResponse<bool> PrintInvoice(int invoiceId, PrintInvoice request)
 		{
 			var api = Provider.Create();
 
-			var result = api.Raw("", "/invoice", null, request);
+			var result = api.Raw(PostRequest, "/invoice", null, request);
 
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<bool>>(result.Item2);
 
-			return new IdentityResponse(resultObject);
+			return new CustomResponse<bool>(resultObject);
 		}
 	}
 }

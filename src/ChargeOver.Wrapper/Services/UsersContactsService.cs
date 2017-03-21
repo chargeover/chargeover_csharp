@@ -68,7 +68,7 @@ namespace ChargeOver.Wrapper.Services
 		{
 			var api = Provider.Create();
 
-			var result = api.Raw(PostRequest, "/user/{userId}?action=password", null, request);
+			var result = api.Raw(PostRequest, $"/user/{userId}?action=password", null, request);
 
 			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<bool>>(result.Item2);
 

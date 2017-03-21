@@ -93,7 +93,7 @@ namespace TestsChargeOver.Wrapper.Services
 			//arrange
 			var request = new AttemptPayment
 			{
-				CustomerId = 1,
+				CustomerId = 38,
 				Comment = "Optional: You can optionally specify a list of payment methods to attempt, otherwise the already stored credit cards/bank accounts for the customer will be used",
 				Amount = 15.95F,
 				//AppliedTo = new[]
