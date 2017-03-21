@@ -38,7 +38,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Change pricing on a subscription
 		/// details: https://developer.chargeover.com/apidocs/rest/#subscription-change-pricing
 		/// </summary>
-		IIdentityResponse ChangePricingOnSubscription(ChangePricingOnSubscription request);
+		ICustomResponse<bool> ChangePricingOnSubscription(int subscriptionId, ChangePricingOnSubscription request);
 
 		/// <summary>
 		/// Invoice a subscription now

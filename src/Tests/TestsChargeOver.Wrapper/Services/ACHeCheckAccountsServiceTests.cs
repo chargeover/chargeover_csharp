@@ -21,7 +21,7 @@ namespace TestsChargeOver.Wrapper.Services
 			//arrange
 			var request = new StoreACHAccount
 			{
-				CustomerId = 1,
+				CustomerId = 2,
 				Type = "chec",
 				Number = "45678123789",
 				Routing = "062346234",

@@ -8,7 +8,7 @@ namespace TestsChargeOver.Wrapper.Services
 	[TestFixture]
 	public sealed class UsageServiceTests
 	{
-		private UsageService Sut{get;set;}
+		private UsageService Sut { get; set; }
 
 		[SetUp]
 		public void SetUp()
@@ -22,10 +22,10 @@ namespace TestsChargeOver.Wrapper.Services
 			//arrange
 			var request = new StoringUsageData
 			{
-				LineItemId = "609",
-				UsageValue = "265.2",
+				LineItemId = 609,
+				UsageValue = 265.2F,
 				From = DateTime.Parse("2013-10-16"),
-				To = DateTime.Parse("2013-10-16"),
+				To = DateTime.Parse("2013-10-16")
 			};
 			//act
 			var actual = Sut.StoringUsageData(request);

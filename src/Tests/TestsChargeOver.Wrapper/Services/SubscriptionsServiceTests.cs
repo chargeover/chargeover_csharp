@@ -6,14 +6,11 @@ using NUnit.Framework;
 namespace TestsChargeOver.Wrapper.Services
 {
 	[TestFixture]
-	public sealed class SubscriptionsServiceTests
+	public sealed class SubscriptionsServiceTests : BaseServiceTests<SubscriptionsService>
 	{
-		private SubscriptionsService Sut { get; set; }
-
-		[SetUp]
-		public void SetUp()
+		protected override SubscriptionsService Initialize(IChargeOverApiProvider provider)
 		{
-			Sut = new SubscriptionsService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config));
+			return new SubscriptionsService(provider);
 		}
 
 		[Test]
@@ -95,10 +92,27 @@ namespace TestsChargeOver.Wrapper.Services
 			//arrange
 			var request = new ChangePricingOnSubscription
 			{
-				//LineItems = "[  {    "line_item_id": 590,    "item_id": 1,    "descrip": "Upgraded description goes here",    "tierset": {      "setup": 10,      "base": 135,      "pricemodel": "uni",      "tiers": [        {          "unit_from": 1,          "unit_to": 9999,          "amount": 60        }      ]    }  }]"
+				LineItems = new[]
+				{
+					new ChangePricingLineItem
+					{
+						Descrip = "Upgraded description goes here",
+						ItemId = 1,
+						LineItemId = TakeLineItem(),
+						Tierset = new []
+						{
+							new ChangePricingTierset
+							{
+								Amount = 60,
+								UnitFrom = 1,
+								UnitTo = 9999
+							}
+						}
+					}
+				}
 			};
 			//act
-			var actual = Sut.ChangePricingOnSubscription(request);
+			var actual = Sut.ChangePricingOnSubscription(AddSubscription(), request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -188,6 +202,21 @@ namespace TestsChargeOver.Wrapper.Services
 			{
 				CustomerId = 5,
 				HolduntilDatetime = DateTime.Parse("2013-10-01")
+			}).Id;
+		}
+
+		private int TakeLineItem()
+		{
+			return new ItemsService(Provider).CreateItem(new Item
+			{
+				Name = "My Test Item " + Guid.NewGuid(),
+				Type = "service",
+				Pricemodel = new ItemPricemodel
+				{
+					Base = 295.95F,
+					Paycycle = "mon",
+					Pricemodel = "fla"
+				}
 			}).Id;
 		}
 	}

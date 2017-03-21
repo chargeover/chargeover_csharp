@@ -71,15 +71,16 @@ namespace ChargeOver.Wrapper.Services
 		/// Change pricing on a subscription
 		/// details: https://developer.chargeover.com/apidocs/rest/#subscription-change-pricing
 		/// </summary>
-		public IIdentityResponse ChangePricingOnSubscription(ChangePricingOnSubscription request)
+		public ICustomResponse<bool> ChangePricingOnSubscription(int subscription, ChangePricingOnSubscription request)
 		{
-			var api = Provider.Create();
+			return GetCustomBool($"/package/{subscription}?action=upgrade", request);
+			//var api = Provider.Create();
 
-			var result = api.Raw("", "/package", null, request);
+			//var result = api.Raw("", "/package", null, request);
 
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
+			//var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
 
-			return new IdentityResponse(resultObject);
+			//return new IdentityResponse(resultObject);
 		}
 
 		/// <summary>

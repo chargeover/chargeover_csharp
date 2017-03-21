@@ -9,12 +9,12 @@ namespace  ChargeOver.Wrapper.Models
 		/// Line Item ID Usage is associated to
 		/// </summary>
 		[JsonProperty("line_item_id")]
-		public string LineItemId { get; set; }
+		public int LineItemId { get; set; }
 		/// <summary>
 		/// Usage value
 		/// </summary>
 		[JsonProperty("usage_value")]
-		public string UsageValue { get; set; }
+		public float UsageValue { get; set; }
 		/// <summary>
 		/// Starting Date/time for the usage period
 		/// </summary>

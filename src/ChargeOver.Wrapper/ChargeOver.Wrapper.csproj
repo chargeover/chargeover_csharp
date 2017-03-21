@@ -55,7 +55,9 @@
     <Compile Include="Models\AttemptInvoiceData.cs" />
     <Compile Include="Models\AttemptPayment.cs" />
     <Compile Include="Models\Campaign.cs" />
+    <Compile Include="Models\ChangePricingLineItem.cs" />
     <Compile Include="Models\ChangePricingOnSubscription.cs" />
+    <Compile Include="Models\ChangePricingTierset.cs" />
     <Compile Include="Models\ChargeOverResponse.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\CustomChargeOverResponse.cs" />
