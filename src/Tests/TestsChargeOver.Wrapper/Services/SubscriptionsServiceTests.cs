@@ -109,13 +109,20 @@ namespace TestsChargeOver.Wrapper.Services
 						Descrip = "Upgraded description goes here",
 						ItemId = TakeLineItem(),
 						LineItemId = TakeLineItem(),
-						Tierset = new []
+						Tierset = new ChangePricingTierset
 						{
-							new ChangePricingTierset
+							Setup = 10,
+							Base = 135,
+							Pricemodel = "uni",
+
+							Tiers = new[]
 							{
-								Amount = 60,
-								UnitFrom = 1,
-								UnitTo = 9999
+								new ChangePricingTier
+								{
+									Amount = 60,
+									UnitFrom = 1,
+									UnitTo = 9999
+								}
 							}
 						}
 					}

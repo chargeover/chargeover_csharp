@@ -6,14 +6,11 @@ using NUnit.Framework;
 namespace TestsChargeOver.Wrapper.Services
 {
 	[TestFixture]
-	public sealed class InvoicesServiceTests
+	public sealed class InvoicesServiceTests : BaseServiceTests<InvoicesService>
 	{
-		private InvoicesService Sut { get; set; }
-
-		[SetUp]
-		public void SetUp()
+		protected override InvoicesService Initialize(IChargeOverApiProvider provider)
 		{
-			Sut = new InvoicesService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config));
+			return new InvoicesService(provider);
 		}
 
 		[Test]
@@ -51,7 +48,7 @@ namespace TestsChargeOver.Wrapper.Services
 
 		private int TakeCustomerId()
 		{
-			var id = new CustomersService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config)).CreateCustomer(new Customer
+			var id = new CustomersService(Provider).CreateCustomer(new Customer
 			{
 				Company = "Test Company Name",
 				BillAddr1 = "16 Dog Lane",
@@ -65,7 +62,7 @@ namespace TestsChargeOver.Wrapper.Services
 
 		private int TakeItemId()
 		{
-			var id = new ItemsService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config)).CreateItem(new Item
+			var id = new ItemsService(Provider).CreateItem(new Item
 			{
 				Name = "My Test Item " + Guid.NewGuid(),
 				Type = "service",
@@ -79,10 +76,11 @@ namespace TestsChargeOver.Wrapper.Services
 			return id;
 		}
 
-		private int TakeInvoice()
+		private int TakeInvoice(int? customer = null)
 		{
 			var id = TakeItemId();
-			var customer = TakeCustomerId();
+			if (!customer.HasValue)
+				customer = TakeCustomerId();
 
 			var request = new Invoice
 			{
@@ -106,6 +104,24 @@ namespace TestsChargeOver.Wrapper.Services
 			};
 
 			return Sut.CreateInvoice(request).Id;
+		}
+
+		private int TakePayment(int customerId)
+		{
+			return new TransactionsService(Provider).CreatePayment(new Payment
+			{
+				CustomerId = customerId,
+				GatewayId = 1,
+				GatewayStatus = 1,
+				GatewayTransid = "abcd1234",
+				GatewayMsg = "test gateway message",
+				GatewayMethod = "check",
+				Amount = 15.95F,
+				TransactionType = "pay",
+				TransactionDetail = "here are some details",
+				TransactionDatetime = DateTime.Parse("2013-06-20 18:48:17"),
+				Comment = "	newest, or 'best fit' invoices (based on amount/date).",
+			}).Id;
 		}
 
 		[Test]
@@ -205,6 +221,10 @@ namespace TestsChargeOver.Wrapper.Services
 		public void should_call_ApplyOpenCustomerBalance()
 		{
 			//arrange
+			var customer = TakeCustomerId();
+			var payment = TakePayment(customer);
+			var invoice = TakeInvoice(customer);
+
 			var request = new ApplyOpenCustomerBalance
 			{
 				UseCustomerBalance = true,

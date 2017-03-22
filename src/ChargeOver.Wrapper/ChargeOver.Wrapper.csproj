@@ -59,6 +59,7 @@
     <Compile Include="Models\ChangePricingOnSubscription.cs" />
     <Compile Include="Models\ChangePricingTierset.cs" />
     <Compile Include="Models\ChargeOverResponse.cs" />
+    <Compile Include="Models\ChangePricingTier.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\CustomChargeOverResponse.cs" />
     <Compile Include="Models\CustomResponse.cs" />

@@ -11,6 +11,6 @@ namespace ChargeOver.Wrapper.Models
 		[JsonProperty("descrip")]
 		public string Descrip { get; set; }
 		[JsonProperty("tierset")]
-		public ChangePricingTierset[] Tierset { get; set; }
+		public ChangePricingTierset Tierset { get; set; }
 	}
 }

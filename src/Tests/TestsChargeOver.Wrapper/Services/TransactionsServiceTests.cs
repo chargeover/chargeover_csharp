@@ -152,8 +152,22 @@ namespace TestsChargeOver.Wrapper.Services
 			{
 				Amount = 10
 			};
+			var customer = AddCustomer();
+			new CreditCardsService(Provider).StoreCreditCard(new StoreCreditCard
+			{
+				CustomerId = customer,
+				Number = "4111 1111 1111 1111",
+				ExpdateYear = (DateTime.UtcNow.Year + 1).ToString(),
+				ExpdateMonth = "11",
+				Name = "Keith Palmer",
+				Address = "72 E Blue Grass Road",
+				City = "Willington",
+				//state = "CT"
+				Postcode = "06279",
+				Country = "United States",
+			});
 			//act
-			var actual = Sut.RefundPayment(AddTransaction(), request);
+			var actual = Sut.RefundPayment(AddTransaction(customer), request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -180,37 +194,33 @@ namespace TestsChargeOver.Wrapper.Services
 			{
 				Email = "mail@mail.com"
 			};
+			var customer = AddCustomer();
 			//act
-			var actual = Sut.EmailReceipt(AddTransaction(), request);
+			var actual = Sut.EmailReceipt(AddTransaction(customer), request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
 		}
 
-		private int AddTransaction()
+		private int AddTransaction(int? customer = null)
 		{
+			if (!customer.HasValue)
+				customer = AddCustomer();
+
 			return Sut.CreatePayment(new Payment
 			{
-				CustomerId = 1,
+				CustomerId = customer,
 				GatewayId = 1,
 				GatewayStatus = 1,
 				GatewayTransid = "abcd1234",
 				GatewayMsg = "test gateway message",
-				GatewayMethod = "check",
+				GatewayMethod = "credit",
 				Amount = 15.95F,
 				TransactionType = "pay",
 				TransactionDetail = "here are some details",
 				TransactionDatetime = DateTime.Parse("2013-06-20 18:48:17"),
 				Comment = "	newest, or 'best fit' invoices (based on amount/date).",
-				//AppliedTo = new[]
-				//{
-				//	new AppliedInvoide
-				//	{
-				//		InvoiceId = 10071,
-				//		Applied = 10.95F
-				//	}
-				//},
 				AutoApply = "best_fit"
 			}).Id;
 		}

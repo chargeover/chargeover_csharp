@@ -5,14 +5,11 @@ using NUnit.Framework;
 namespace TestsChargeOver.Wrapper.Services
 {
 	[TestFixture]
-	public sealed class NotesServiceTests
+	public sealed class NotesServiceTests : BaseServiceTests<NotesService>
 	{
-		private NotesService Sut { get; set; }
-
-		[SetUp]
-		public void SetUp()
+		protected override NotesService Initialize(IChargeOverApiProvider provider)
 		{
-			Sut = new NotesService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config));
+			return new NotesService(provider);
 		}
 
 		[Test]
@@ -47,11 +44,23 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryNotesForObject();
+			var actual = Sut.QueryNotesForObject(new[] { "obj_type:EQUALS:customer,obj_id:EQUALS:" + TakeCustomerId() });
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
+		}
+
+		private int TakeCustomerId()
+		{
+			return new CustomersService(Provider).CreateCustomer(new Customer
+			{
+				Company = "Test Company Name",
+				BillAddr1 = "16 Dog Lane",
+				BillAddr2 = "Suite D",
+				BillCity = "Storrs",
+				BillState = "CT",
+			}).Id;
 		}
 	}
 }
