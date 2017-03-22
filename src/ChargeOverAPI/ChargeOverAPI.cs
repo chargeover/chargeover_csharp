@@ -305,7 +305,12 @@ namespace ChargeOver
 				break;
 			case ChargeOverAPI.MethodModify:
 				httpMethod = "PUT";
-				data = JsonConvert.SerializeObject(obj);
+				data = JsonConvert.SerializeObject(obj,
+					Newtonsoft.Json.Formatting.None,
+					new JsonSerializerSettings
+					{
+						NullValueHandling = NullValueHandling.Ignore
+					});
 				break;
 			case ChargeOverAPI.MethodBulk:
 				httpMethod = "POST";

@@ -18,7 +18,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse StoringUsageData(StoringUsageData request)
 		{
-			return Create("/usage", request);
+			return Create("usage", request);
 		}
 	}
 }

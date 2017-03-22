@@ -55,7 +55,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse AttemptPayment(AttemptPayment request)
 		{
-			return Create("/transaction?action=pay", request);
+			return Create("transaction?action=pay", request);
 		}
 
 		/// <summary>
@@ -73,7 +73,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse RefundPayment(int id, RefundPayment request)
 		{
-			return Create($"/transaction/{id}?action=refund", request);
+			return Create($"transaction/{id}?action=refund", request);
 		}
 
 		/// <summary>
