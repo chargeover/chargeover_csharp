@@ -8,6 +8,10 @@ namespace ChargeOver.Wrapper.Services
 		{
 		}
 
+		public CampaignsService()
+		{
+		}
+
 		/// <summary>
 		/// Retrieve campaign list
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-campaign

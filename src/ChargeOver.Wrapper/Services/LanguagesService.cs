@@ -1,17 +1,15 @@
-using System;
 using ChargeOver.Wrapper.Models;
 
 namespace ChargeOver.Wrapper.Services
 {
-	public sealed class LanguagesService : ILanguagesService
+	public sealed class LanguagesService : BaseService, ILanguagesService
 	{
-		private readonly IChargeOverApiProvider _provider;
-
-		public LanguagesService(IChargeOverApiProvider provider)
+		public LanguagesService(IChargeOverApiProvider provider) : base(provider)
 		{
-			if (provider == null) throw new ArgumentNullException(nameof(provider));
+		}
 
-			_provider = provider;
+		public LanguagesService()
+		{
 		}
 
 		/// <summary>
@@ -20,13 +18,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IResponse<Language> ListLanguages()
 		{
-			var api = _provider.Create();
-
-			var result = api.Raw("get", "/language", null);
-			
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<ChargeOverResponse<Language>>(result.Item2);
-			
-			return new Models.Response<Language>(resultObject);
+			return GetList<Language>("/language");
 		}
 	}
 }

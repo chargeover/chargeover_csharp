@@ -9,6 +9,10 @@ namespace ChargeOver.Wrapper.Services
 		{
 		}
 
+		public TransactionsService()
+		{
+		}
+
 		/// <summary>
 		/// Create a payment
 		/// details: https://developer.chargeover.com/apidocs/rest/#create-transaction
@@ -51,13 +55,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse AttemptPayment(AttemptPayment request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("create", "/transaction?action=pay", null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return Create("/transaction?action=pay", request);
 		}
 
 		/// <summary>
@@ -75,13 +73,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse RefundPayment(int id, RefundPayment request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw(PostRequest, $"/transaction/{id}?action=refund", null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return Create($"/transaction/{id}?action=refund", request);
 		}
 
 		/// <summary>

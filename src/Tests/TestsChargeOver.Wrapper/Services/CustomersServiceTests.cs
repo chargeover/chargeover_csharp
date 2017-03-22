@@ -52,8 +52,7 @@ namespace TestsChargeOver.Wrapper.Services
 				BillPostcode = "55416",
 				BillCountry = "USA",
 				LanguageId = 1,
-				TermsId = 3,
-				ClassId = 0
+				TermsId = 3
 			};
 			//act
 			var actual = Sut.UpdateCustomer(customerId, request);

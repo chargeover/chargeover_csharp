@@ -14,7 +14,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Update a subscription
 		/// details: https://developer.chargeover.com/apidocs/rest/#update-recurring-package
 		/// </summary>
-		IIdentityResponse UpdateSubscription(UpdateSubscription request);
+		IIdentityResponse UpdateSubscription(int id, UpdateSubscription request);
 
 		/// <summary>
 		/// Get a specific subscription
@@ -32,7 +32,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Upgrade/downgrade a subscription
 		/// details: https://developer.chargeover.com/apidocs/rest/#subscription-upgrade-downgrade
 		/// </summary>
-		IIdentityResponse UpgradeDowngradesubscription(UpgradeDowngradesubscription request);
+		ICustomResponse<bool> UpgradeDowngradesubscription(int id, UpgradeDowngradesubscription request);
 
 		/// <summary>
 		/// Change pricing on a subscription
@@ -68,12 +68,12 @@ namespace ChargeOver.Wrapper.Services
 		/// Set the payment method
 		/// details: https://developer.chargeover.com/apidocs/rest/#example-package-set-paymethod
 		/// </summary>
-		IIdentityResponse SetThePaymentMethod(SetThePaymentMethod request);
+		ICustomResponse<bool> SetThePaymentMethod(int id, SetThePaymentMethod request);
 
 		/// <summary>
 		/// Send a welcome e-mail
 		/// details: https://developer.chargeover.com/apidocs/rest/#example-package-send-welcome
 		/// </summary>
-		IResponse SendWelcomeEmail();
+		ICustomResponse<bool> SendWelcomeEmail(int id);
 	}
 }

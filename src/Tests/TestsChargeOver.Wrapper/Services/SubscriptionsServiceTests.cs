@@ -39,7 +39,7 @@ namespace TestsChargeOver.Wrapper.Services
 				Nickname = "My new nickname",
 			};
 			//act
-			var actual = Sut.UpdateSubscription(request);
+			var actual = Sut.UpdateSubscription(AddSubscription(), request);
 			//assert
 			Assert.AreEqual(202, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -76,10 +76,20 @@ namespace TestsChargeOver.Wrapper.Services
 			//arrange
 			var request = new UpgradeDowngradesubscription
 			{
-				//LineItems = "[  {    "line_item_id": 1953,    "item_id": 239,    "descrip": "A new description goes here",    "line_quantity": 123,    "trial_days": 120  }]"
+				LineItems = new[]
+				{
+					new TrialInvoiceLineItem
+					{
+						Descrip = "A new description goes here",
+						ItemId = TakeLineItem(),
+						LineQuantity = 123,
+						LineItemId = TakeLineItem(),
+						TrialDays = 10
+					}
+				}
 			};
 			//act
-			var actual = Sut.UpgradeDowngradesubscription(request);
+			var actual = Sut.UpgradeDowngradesubscription(AddSubscription(), request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -97,7 +107,7 @@ namespace TestsChargeOver.Wrapper.Services
 					new ChangePricingLineItem
 					{
 						Descrip = "Upgraded description goes here",
-						ItemId = 1,
+						ItemId = TakeLineItem(),
 						LineItemId = TakeLineItem(),
 						Tierset = new []
 						{
@@ -174,10 +184,10 @@ namespace TestsChargeOver.Wrapper.Services
 			var request = new SetThePaymentMethod
 			{
 				Paymethod = "crd",
-				CreditcardId = "64",
+				CreditcardId = TakeCreditCard(),
 			};
 			//act
-			var actual = Sut.SetThePaymentMethod(request);
+			var actual = Sut.SetThePaymentMethod(AddSubscription(), request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -189,7 +199,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.SendWelcomeEmail();
+			var actual = Sut.SendWelcomeEmail(AddSubscription());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -217,6 +227,22 @@ namespace TestsChargeOver.Wrapper.Services
 					Paycycle = "mon",
 					Pricemodel = "fla"
 				}
+			}).Id;
+		}
+
+		private int TakeCreditCard()
+		{
+			return new CreditCardsService(Provider).StoreCreditCard(new StoreCreditCard
+			{
+				CustomerId = 5,
+				Number = "4111 1111 1111 1111",
+				ExpdateYear = (DateTime.UtcNow.Year + 1).ToString(),
+				ExpdateMonth = "11",
+				Name = "Keith Palmer",
+				Address = "72 E Blue Grass Road",
+				City = "Willington",
+				Postcode = "06279",
+				Country = "United States",
 			}).Id;
 		}
 	}

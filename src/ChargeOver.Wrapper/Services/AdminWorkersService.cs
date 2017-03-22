@@ -8,6 +8,10 @@ namespace ChargeOver.Wrapper.Services
 		{
 		}
 
+		public AdminWorkersService()
+		{
+		}
+
 		/// <summary>
 		/// Get a list of admin workers
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-admins

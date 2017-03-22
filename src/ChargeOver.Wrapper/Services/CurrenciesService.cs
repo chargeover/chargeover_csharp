@@ -8,6 +8,10 @@ namespace ChargeOver.Wrapper.Services
 		{
 		}
 
+		public CurrenciesService()
+		{
+		}
+
 		/// <summary>
 		/// List currencies
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-currency

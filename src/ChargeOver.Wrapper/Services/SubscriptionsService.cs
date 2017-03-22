@@ -9,6 +9,10 @@ namespace ChargeOver.Wrapper.Services
 		{
 		}
 
+		public SubscriptionsService()
+		{
+		}
+
 		/// <summary>
 		/// Create a subscription
 		/// details: https://developer.chargeover.com/apidocs/rest/#create-recurring-package
@@ -22,16 +26,15 @@ namespace ChargeOver.Wrapper.Services
 		/// Update a subscription
 		/// details: https://developer.chargeover.com/apidocs/rest/#update-recurring-package
 		/// </summary>
-		public IIdentityResponse UpdateSubscription(UpdateSubscription request)
+		public IIdentityResponse UpdateSubscription(int id, UpdateSubscription request)
 		{
-			return null;
-			//var api = Provider.Create();
+			var api = Provider.Create();
 
-			//var result = api.Raw("modify", "/package", null, request);
+			var result = api.Raw("modify", "/package/" + id, null, request);
 
-			//var resultObject = JsonConvert.DeserializeObject<ChargeOverResponse>(result.Item2);
+			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
 
-			//return new Models.Response(resultObject);
+			return new IdentityResponse(resultObject);
 		}
 
 		/// <summary>
@@ -56,15 +59,9 @@ namespace ChargeOver.Wrapper.Services
 		/// Upgrade/downgrade a subscription
 		/// details: https://developer.chargeover.com/apidocs/rest/#subscription-upgrade-downgrade
 		/// </summary>
-		public IIdentityResponse UpgradeDowngradesubscription(UpgradeDowngradesubscription request)
+		public ICustomResponse<bool> UpgradeDowngradesubscription(int id, UpgradeDowngradesubscription request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("", "/package", null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return GetCustomBool($"/package/{id}?action=upgrade", request);
 		}
 
 		/// <summary>
@@ -74,13 +71,6 @@ namespace ChargeOver.Wrapper.Services
 		public ICustomResponse<bool> ChangePricingOnSubscription(int subscription, ChangePricingOnSubscription request)
 		{
 			return GetCustomBool($"/package/{subscription}?action=upgrade", request);
-			//var api = Provider.Create();
-
-			//var result = api.Raw("", "/package", null, request);
-
-			//var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			//return new IdentityResponse(resultObject);
 		}
 
 		/// <summary>
@@ -147,30 +137,18 @@ namespace ChargeOver.Wrapper.Services
 		/// Set the payment method
 		/// details: https://developer.chargeover.com/apidocs/rest/#example-package-set-paymethod
 		/// </summary>
-		public IIdentityResponse SetThePaymentMethod(SetThePaymentMethod request)
+		public ICustomResponse<bool> SetThePaymentMethod(int id, SetThePaymentMethod request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("", "/package", null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return GetCustomBool($"/package/{id}?action=paymethod", request);
 		}
 
 		/// <summary>
 		/// Send a welcome e-mail
 		/// details: https://developer.chargeover.com/apidocs/rest/#example-package-send-welcome
 		/// </summary>
-		public IResponse SendWelcomeEmail()
+		public ICustomResponse<bool> SendWelcomeEmail(int id)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("", "/package", null);
-
-			var resultObject = JsonConvert.DeserializeObject<ChargeOverResponse>(result.Item2);
-
-			return new Models.Response(resultObject);
+			return GetCustomBool($"/package/{id}?action=welcome", new { });
 		}
 	}
 }

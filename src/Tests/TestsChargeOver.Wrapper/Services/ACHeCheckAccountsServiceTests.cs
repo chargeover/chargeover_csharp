@@ -23,13 +23,13 @@ namespace TestsChargeOver.Wrapper.Services
 			{
 				CustomerId = 2,
 				Type = "chec",
-				Number = "45678123789",
-				Routing = "062346234",
+				Number = "856667",
+				Routing = "072403004",
 			};
 			//act
 			var actual = Sut.StoreACHAccount(request);
 			//assert
-			Assert.AreEqual(200, actual.Code);
+			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
 		}
@@ -38,15 +38,24 @@ namespace TestsChargeOver.Wrapper.Services
 		public void should_call_DeleteACHAccount()
 		{
 			//arrange
-			var request = new int
-			{
-			};
 			//act
-			var actual = Sut.DeleteACHAccount(request);
+			var actual = Sut.DeleteACHAccount(AddACHAccount());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
+		}
+
+		private int AddACHAccount()
+		{
+			var request = new StoreACHAccount
+			{
+				CustomerId = 2,
+				Type = "chec",
+				Number = "856667",
+				Routing = "072403004",
+			};
+			return Sut.StoreACHAccount(request).Id;
 		}
 	}
 }

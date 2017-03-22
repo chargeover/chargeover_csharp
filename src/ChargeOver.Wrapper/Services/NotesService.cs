@@ -8,6 +8,10 @@ namespace ChargeOver.Wrapper.Services
 		{
 		}
 
+		public NotesService()
+		{
+		}
+
 		/// <summary>
 		/// Create a note
 		/// details: https://developer.chargeover.com/apidocs/rest/#create_note

@@ -19,6 +19,8 @@ namespace ChargeOver.Wrapper.Services
 			_provider = provider;
 		}
 
+		protected BaseService() : this(new ChargeOverApiProvider()) { }
+
 		protected IIdentityResponse Create<T>(string endpoint, T request)
 		{
 			var api = Provider.Create();

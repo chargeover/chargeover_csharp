@@ -8,6 +8,10 @@ namespace ChargeOver.Wrapper.Services
 		{
 		}
 
+		public CategoriesService()
+		{
+		}
+
 		/// <summary>
 		/// Query for categories
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-category

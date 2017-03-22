@@ -8,6 +8,10 @@ namespace ChargeOver.Wrapper.Services
 		{
 		}
 
+		public SystemLogService()
+		{
+		}
+
 		/// <summary>
 		/// Retrieve the system log
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-syslog

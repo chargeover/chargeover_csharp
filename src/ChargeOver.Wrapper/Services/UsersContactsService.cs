@@ -9,6 +9,10 @@ namespace ChargeOver.Wrapper.Services
 		{
 		}
 
+		public UsersContactsService()
+		{
+		}
+
 		/// <summary>
 		/// Add a contact
 		/// details: https://developer.chargeover.com/apidocs/rest/#create-a-user

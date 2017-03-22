@@ -6,14 +6,11 @@ using NUnit.Framework;
 namespace TestsChargeOver.Wrapper.Services
 {
 	[TestFixture]
-	public sealed class TransactionsServiceTests
+	public sealed class TransactionsServiceTests : BaseServiceTests<TransactionsService>
 	{
-		private TransactionsService Sut { get; set; }
-
-		[SetUp]
-		public void SetUp()
+		protected override TransactionsService Initialize(IChargeOverApiProvider provider)
 		{
-			Sut = new TransactionsService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config));
+			return new TransactionsService(provider);
 		}
 
 		[Test]
@@ -91,18 +88,20 @@ namespace TestsChargeOver.Wrapper.Services
 		public void should_call_AttemptPayment()
 		{
 			//arrange
+			var customerId = AddCustomer();
+			AddPayment(customerId);
 			var request = new AttemptPayment
 			{
-				CustomerId = 38,
+				CustomerId = customerId,
 				Comment = "Optional: You can optionally specify a list of payment methods to attempt, otherwise the already stored credit cards/bank accounts for the customer will be used",
 				Amount = 15.95F,
-				//AppliedTo = new[]
-				//{
-				//	new AttemptInvoiceData
-				//	{
-				//		InvoiceId = 1288
-				//	}
-				//}
+				AppliedTo = new[]
+				{
+					new AttemptInvoiceData
+					{
+						InvoiceId = TakeInvoice(customerId)
+					}
+				}
 			};
 			//act
 			var actual = Sut.AttemptPayment(request);
@@ -214,6 +213,74 @@ namespace TestsChargeOver.Wrapper.Services
 				//},
 				AutoApply = "best_fit"
 			}).Id;
+		}
+
+		private int AddCustomer()
+		{
+			return new CustomersService(Provider).CreateCustomer(new Customer
+			{
+				Company = "Test Company Name",
+				BillAddr1 = "16 Dog Lane",
+				BillAddr2 = "Suite D",
+				BillCity = "Storrs",
+				BillState = "CT"
+			}).Id;
+		}
+
+		private int TakeInvoice(int customer)
+		{
+			return new InvoicesService(Provider).CreateInvoice(new Invoice
+			{
+				CustomerId = customer,
+				BillAddr1 = "72 E Blue Grass Road",
+				BillCity = "Willington",
+				BillState = "Connecticut",
+				BillPostcode = "06279",
+				LineItems = new[]
+				{
+					new InvoiceLineItem
+					{
+						Descrip = "My description goes here",
+						ItemId = TakeItemId(),
+						LineQuantity = 12,
+						LineRate = 29.95F
+					}
+				}
+			}).Id;
+		}
+
+		private int TakeItemId()
+		{
+			var id = new ItemsService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config)).CreateItem(new Item
+			{
+				Name = "My Test Item " + Guid.NewGuid(),
+				Type = "service",
+				Pricemodel = new ItemPricemodel
+				{
+					Base = 295.95F,
+					Paycycle = "mon",
+					Pricemodel = "fla"
+				}
+			}).Id;
+			return id;
+		}
+
+		private void AddPayment(int customer)
+		{
+			Sut.CreatePayment(new Payment
+			{
+				CustomerId = customer,
+				GatewayId = 1,
+				GatewayStatus = 1,
+				GatewayTransid = "abcd1234",
+				GatewayMsg = "test gateway message",
+				GatewayMethod = "check",
+				Amount = 15.95F,
+				TransactionType = "pay",
+				TransactionDetail = "here are some details",
+				TransactionDatetime = DateTime.Parse("2013-06-20 18:48:17"),
+				Comment = "	newest, or 'best fit' invoices (based on amount/date).",
+			});
 		}
 	}
 }

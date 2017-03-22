@@ -91,6 +91,8 @@ namespace TestsChargeOver.Wrapper.Services
 				BillCity = "Willington",
 				BillState = "Connecticut",
 				BillPostcode = "06279",
+				BillCountry = "US",
+				ShipCountry = "US",
 				LineItems = new[]
 				{
 					new InvoiceLineItem
@@ -113,10 +115,19 @@ namespace TestsChargeOver.Wrapper.Services
 			var request = new UpdateInvoice
 			{
 				Date = DateTime.Parse("2015-06-08"),
-				//LineItems = "[  {    "item_id": 3,    "line_rate": 29.95,    "line_quantity": 3,    "descrip": "Add this new line item to the invoice."  },  {    "line_item_id": 2575  }]"
+				LineItems = new[]
+				{
+					new InvoiceLineItem
+					{
+						Descrip = "Add this new line item to the invoice.",
+						ItemId = TakeItemId(),
+						LineQuantity = 3,
+						LineRate = 29.95F
+					}
+				}
 			};
 			//act
-			var actual = Sut.UpdateInvoice(request);
+			var actual = Sut.UpdateInvoice(TakeInvoice(), request);
 			//assert
 			Assert.AreEqual(202, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -177,13 +188,13 @@ namespace TestsChargeOver.Wrapper.Services
 			//arrange
 			var request = new ACHCheckPayment
 			{
-				Number = "1234-1234-1234",
+				Number = "856667",
 				Routing = "072403004",
 				Name = "Keith Palmer",
 				Type = "chec",
 			};
 			//act
-			var actual = Sut.ACHCheckpayment(request);
+			var actual = Sut.ACHCheckpayment(TakeInvoice(), request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

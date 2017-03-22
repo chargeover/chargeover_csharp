@@ -1,4 +1,3 @@
-using System;
 using Newtonsoft.Json;
 
 namespace  ChargeOver.Wrapper.Models
@@ -14,7 +13,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("creditcard_id")]
-		public string CreditcardId { get; set; }
+		public int CreditcardId { get; set; }
 		/// <summary>
 		/// 
 		/// </summary>

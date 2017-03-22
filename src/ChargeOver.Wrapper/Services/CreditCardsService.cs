@@ -1,11 +1,14 @@
 using ChargeOver.Wrapper.Models;
-using Newtonsoft.Json;
 
 namespace ChargeOver.Wrapper.Services
 {
 	public sealed class CreditCardsService : BaseService, ICreditCardsService
 	{
 		public CreditCardsService(IChargeOverApiProvider provider) : base(provider)
+		{
+		}
+
+		public CreditCardsService()
 		{
 		}
 

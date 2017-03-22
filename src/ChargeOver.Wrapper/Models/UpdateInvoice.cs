@@ -114,7 +114,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// A list of line items for the invoice
 		/// </summary>
 		[JsonProperty("line_items")]
-		public object LineItems { get; set; }
+		public InvoiceLineItem[] LineItems { get; set; }
 		/// <summary>
 		/// 
 		/// </summary>

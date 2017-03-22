@@ -8,6 +8,10 @@ namespace ChargeOver.Wrapper.Services
 		{
 		}
 
+		public UsageService()
+		{
+		}
+
 		/// <summary>
 		/// Storing Usage Data
 		/// details: https://developer.chargeover.com/apidocs/rest/#create-usage

@@ -9,6 +9,10 @@ namespace ChargeOver.Wrapper.Services
 		{
 		}
 
+		public InvoicesService()
+		{
+		}
+
 		/// <summary>
 		/// Create an invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#create-an-invoice
@@ -28,11 +32,11 @@ namespace ChargeOver.Wrapper.Services
 		/// Update an invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#update-an-invoice
 		/// </summary>
-		public IIdentityResponse UpdateInvoice(UpdateInvoice request)
+		public IIdentityResponse UpdateInvoice(int invoiceId, UpdateInvoice request)
 		{
 			var api = Provider.Create();
 
-			var result = api.Raw("modify", "/invoice", null, request);
+			var result = api.Raw("modify", $"/invoice/{invoiceId}", null, request);
 
 			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
 
@@ -76,15 +80,9 @@ namespace ChargeOver.Wrapper.Services
 		/// ACH/eCheck payment (specify ACH details)
 		/// details: https://developer.chargeover.com/apidocs/rest/#payment-for-invoice-ach-new
 		/// </summary>
-		public IIdentityResponse ACHCheckpayment(ACHCheckPayment request)
+		public ICustomResponse<bool> ACHCheckpayment(int invoiceId, ACHCheckPayment request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("", "/invoice", null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return GetCustomBool($"/invoice/{invoiceId}?action=pay", request);
 		}
 
 		/// <summary>
@@ -126,13 +124,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public ICustomResponse<bool> PrintInvoice(int invoiceId, PrintInvoice request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw(PostRequest, "/invoice", null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<bool>>(result.Item2);
-
-			return new CustomResponse<bool>(resultObject);
+			return GetCustomBool($"/invoice/{invoiceId}?action=print", request);
 		}
 	}
 }

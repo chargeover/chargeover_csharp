@@ -14,7 +14,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Update an invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#update-an-invoice
 		/// </summary>
-		IIdentityResponse UpdateInvoice(UpdateInvoice request);
+		IIdentityResponse UpdateInvoice(int invoiceId, UpdateInvoice request);
 
 		/// <summary>
 		/// Get a specific invoice
@@ -38,7 +38,7 @@ namespace ChargeOver.Wrapper.Services
 		/// ACH/eCheck payment (specify ACH details)
 		/// details: https://developer.chargeover.com/apidocs/rest/#payment-for-invoice-ach-new
 		/// </summary>
-		IIdentityResponse ACHCheckpayment(ACHCheckPayment request);
+		ICustomResponse<bool> ACHCheckpayment(int invoiceId, ACHCheckPayment request);
 
 		/// <summary>
 		/// Apply an open customer balance

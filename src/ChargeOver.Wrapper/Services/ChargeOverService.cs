@@ -9,6 +9,10 @@ namespace ChargeOver.Wrapper.Services
 		{
 		}
 
+		public ChargeOverService()
+		{
+		}
+
 		/// <summary>
 		/// Get a list of pending requests
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-chargeoverjs

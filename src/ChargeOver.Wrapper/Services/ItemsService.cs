@@ -8,6 +8,10 @@ namespace ChargeOver.Wrapper.Services
 		{
 		}
 
+		public ItemsService()
+		{
+		}
+
 		/// <summary>
 		/// Create an item
 		/// details: https://developer.chargeover.com/apidocs/rest/#create-item

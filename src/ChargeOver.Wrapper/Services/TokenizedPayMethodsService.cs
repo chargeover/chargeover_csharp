@@ -8,6 +8,10 @@ namespace ChargeOver.Wrapper.Services
 		{
 		}
 
+		public TokenizedPayMethodsService()
+		{
+		}
+
 		/// <summary>
 		/// Store a pay method token
 		/// details: https://developer.chargeover.com/apidocs/rest/#create-tokenized
@@ -15,13 +19,6 @@ namespace ChargeOver.Wrapper.Services
 		public IIdentityResponse StorePayMethodToken(StorePayMethodToken request)
 		{
 			return Create("tokenized", request);
-			//var api = _provider.Create();
-
-			//var result = api.Raw("", "/tokenized ", null, request);
-
-			//var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			//return new IdentityResponse(resultObject);
 		}
 
 		/// <summary>

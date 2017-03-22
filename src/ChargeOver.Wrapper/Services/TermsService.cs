@@ -8,6 +8,10 @@ namespace ChargeOver.Wrapper.Services
 		{
 		}
 
+		public TermsService()
+		{
+		}
+
 		/// <summary>
 		/// List terms
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-terms

@@ -8,6 +8,10 @@ namespace ChargeOver.Wrapper.Services
 		{
 		}
 
+		public CountriesService()
+		{
+		}
+
 		/// <summary>
 		/// Retrieve country list
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-country

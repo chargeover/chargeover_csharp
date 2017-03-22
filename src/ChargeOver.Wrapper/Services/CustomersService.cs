@@ -9,6 +9,10 @@ namespace ChargeOver.Wrapper.Services
 		{
 		}
 
+		public CustomersService()
+		{
+		}
+
 		/// <summary>
 		/// Create a Customer
 		/// details: https://developer.chargeover.com/apidocs/rest/#create-a-customer
