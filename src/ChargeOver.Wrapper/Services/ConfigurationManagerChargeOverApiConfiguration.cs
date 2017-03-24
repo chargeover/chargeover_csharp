@@ -1,3 +1,4 @@
+using System;
 using System.Configuration;
 
 namespace ChargeOver.Wrapper.Services
@@ -9,10 +10,21 @@ namespace ChargeOver.Wrapper.Services
 	{
 		public ConfigurationManagerChargeOverApiConfiguration()
 		{
-			Endpoint = ConfigurationManager.AppSettings["ChargeOverAPIEndpoint"];
-			Username = ConfigurationManager.AppSettings["ChargeOverAPIUserName"];
-			Password = ConfigurationManager.AppSettings["ChargeOverAPIPassword"];
-			Auth = ConfigurationManager.AppSettings["ChargeOverAPIAuth"];
+			var chargeoverapiendpoint = "ChargeOverAPIEndpoint";
+			Endpoint = ConfigurationManager.AppSettings[chargeoverapiendpoint];
+			if (string.IsNullOrWhiteSpace(Endpoint))throw new Exception($"Please specify setting in app.config/web.config {chargeoverapiendpoint}.");
+
+			var chargeoverapiusername = "ChargeOverAPIUserName";
+			Username = ConfigurationManager.AppSettings[chargeoverapiusername];
+			if (string.IsNullOrWhiteSpace(Username)) throw new Exception($"Please specify setting in app.config/web.config {chargeoverapiusername}.");
+
+			var chargeoverapipassword = "ChargeOverAPIPassword";
+			Password = ConfigurationManager.AppSettings[chargeoverapipassword];
+			if (string.IsNullOrWhiteSpace(Password)) throw new Exception($"Please specify setting in app.config/web.config {chargeoverapipassword}.");
+
+			var chargeoverapiauth = "ChargeOverAPIAuth";
+			Auth = ConfigurationManager.AppSettings[chargeoverapiauth];
+			if (string.IsNullOrWhiteSpace(Auth)) throw new Exception($"Please specify setting in app.config/web.config {chargeoverapiauth}.");
 		}
 
 		public string Endpoint { get; }

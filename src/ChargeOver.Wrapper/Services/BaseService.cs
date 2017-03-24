@@ -38,7 +38,7 @@ namespace ChargeOver.Wrapper.Services
 
 			var result = api.Raw("delete", $"/{endpoint}/" + id, null);
 
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<ChargeOverResponse>(result.Item2);
+			var resultObject = JsonConvert.DeserializeObject<ChargeOverResponse>(result.Item2);
 
 			return new Models.Response(resultObject);
 		}
@@ -85,7 +85,7 @@ namespace ChargeOver.Wrapper.Services
 
 			var result = api.Raw("find", $"/{endpoint}?_dummy=1&limit={limit}&offset={offset}{queriesData}{ordersData}", null);
 
-			var resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject<ChargeOverResponse<T>>(result.Item2);
+			var resultObject = JsonConvert.DeserializeObject<ChargeOverResponse<T>>(result.Item2);
 
 			return new Response<T>(resultObject);
 		}

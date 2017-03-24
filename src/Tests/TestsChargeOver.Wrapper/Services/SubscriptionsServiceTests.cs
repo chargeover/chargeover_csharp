@@ -74,6 +74,7 @@ namespace TestsChargeOver.Wrapper.Services
 		public void should_call_UpgradeDowngradesubscription()
 		{
 			//arrange
+			var lineId = TakeLineItem();
 			var request = new UpgradeDowngradesubscription
 			{
 				LineItems = new[]
@@ -81,15 +82,15 @@ namespace TestsChargeOver.Wrapper.Services
 					new TrialInvoiceLineItem
 					{
 						Descrip = "A new description goes here",
-						ItemId = TakeLineItem(),
+						ItemId = lineId,
 						LineQuantity = 123,
-						LineItemId = TakeLineItem(),
+						LineItemId = lineId,
 						TrialDays = 10
 					}
 				}
 			};
 			//act
-			var actual = Sut.UpgradeDowngradesubscription(AddSubscription(), request);
+			var actual = Sut.UpgradeDowngradesubscription(AddSubscription(lineId), request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -141,7 +142,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.InvoiceSubscriptionNow();
+			var actual = Sut.InvoiceSubscriptionNow(AddSubscription());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -153,7 +154,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.SuspendSubscription();
+			var actual = Sut.SuspendSubscription(AddSubscription());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -165,7 +166,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.UnsuspendSubscription();
+			var actual = Sut.UnsuspendSubscription(AddSubscription());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -177,7 +178,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.CancelSubscription();
+			var actual = Sut.CancelSubscription(AddSubscription());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -213,12 +214,37 @@ namespace TestsChargeOver.Wrapper.Services
 			Assert.AreEqual("OK", actual.Status);
 		}
 
-		private int AddSubscription()
+		private int AddSubscription(int? lineId = null)
 		{
+			if (lineId == null)
+			{
+				lineId = TakeLineItem();
+			}
+
 			return Sut.CreateSubscription(new Subscription
 			{
-				CustomerId = 5,
-				HolduntilDatetime = DateTime.Parse("2013-10-01")
+				CustomerId = TakeCustomer(),
+				HolduntilDatetime = DateTime.Parse("2013-10-01"),
+				LineItems = new[]
+				{
+					new InvoiceLineItem
+					{
+						ItemId = lineId.Value,
+						Descrip = "desc"
+					}
+				}
+			}).Id;
+		}
+
+		private int TakeCustomer()
+		{
+			return new CustomersService(Provider).CreateCustomer(new Customer
+			{
+				Company = "Test Company Name",
+				BillAddr1 = "16 Dog Lane",
+				BillAddr2 = "Suite D",
+				BillCity = "Storrs",
+				BillState = "CT"
 			}).Id;
 		}
 

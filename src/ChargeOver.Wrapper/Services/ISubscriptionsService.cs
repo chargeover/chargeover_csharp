@@ -44,25 +44,25 @@ namespace ChargeOver.Wrapper.Services
 		/// Invoice a subscription now
 		/// details: https://developer.chargeover.com/apidocs/rest/#example-package-invoice
 		/// </summary>
-		IResponse InvoiceSubscriptionNow();
+		IIdentityResponse InvoiceSubscriptionNow(int id);
 
 		/// <summary>
 		/// Suspend a subscription (indefinitely)
 		/// details: https://developer.chargeover.com/apidocs/rest/#suspend-recurring-package-indefinitely
 		/// </summary>
-		IResponse SuspendSubscription();
+		ICustomResponse<bool> SuspendSubscription(int id);
 
 		/// <summary>
 		/// Unsuspend a subscription
 		/// details: https://developer.chargeover.com/apidocs/rest/#contract-unsuspend
 		/// </summary>
-		IResponse UnsuspendSubscription();
+		ICustomResponse<bool> UnsuspendSubscription(int id);
 
 		/// <summary>
 		/// Cancel a subscription
 		/// details: https://developer.chargeover.com/apidocs/rest/#cancel-package
 		/// </summary>
-		IResponse CancelSubscription();
+		ICustomResponse<bool> CancelSubscription(int id);
 
 		/// <summary>
 		/// Set the payment method

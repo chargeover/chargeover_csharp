@@ -77,60 +77,36 @@ namespace ChargeOver.Wrapper.Services
 		/// Invoice a subscription now
 		/// details: https://developer.chargeover.com/apidocs/rest/#example-package-invoice
 		/// </summary>
-		public IResponse InvoiceSubscriptionNow()
+		public IIdentityResponse InvoiceSubscriptionNow(int id)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("", "/package", null);
-
-			var resultObject = JsonConvert.DeserializeObject<ChargeOverResponse>(result.Item2);
-
-			return new Models.Response(resultObject);
+			return Create($"/package/{id}?action=invoice", string.Empty);
 		}
 
 		/// <summary>
 		/// Suspend a subscription (indefinitely)
 		/// details: https://developer.chargeover.com/apidocs/rest/#suspend-recurring-package-indefinitely
 		/// </summary>
-		public IResponse SuspendSubscription()
+		public ICustomResponse<bool> SuspendSubscription(int id)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("", "/package", null);
-
-			var resultObject = JsonConvert.DeserializeObject<ChargeOverResponse>(result.Item2);
-
-			return new Models.Response(resultObject);
+			return GetCustomBool($"/package/{id}?action=suspend", string.Empty);
 		}
 
 		/// <summary>
 		/// Unsuspend a subscription
 		/// details: https://developer.chargeover.com/apidocs/rest/#contract-unsuspend
 		/// </summary>
-		public IResponse UnsuspendSubscription()
+		public ICustomResponse<bool> UnsuspendSubscription(int id)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("", "/package", null);
-
-			var resultObject = JsonConvert.DeserializeObject<ChargeOverResponse>(result.Item2);
-
-			return new Models.Response(resultObject);
+			return GetCustomBool($"/package/{id}?action=unsuspend", string.Empty);
 		}
 
 		/// <summary>
 		/// Cancel a subscription
 		/// details: https://developer.chargeover.com/apidocs/rest/#cancel-package
 		/// </summary>
-		public IResponse CancelSubscription()
+		public ICustomResponse<bool> CancelSubscription(int id)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("", "/package", null);
-
-			var resultObject = JsonConvert.DeserializeObject<ChargeOverResponse>(result.Item2);
-
-			return new Models.Response(resultObject);
+			return GetCustomBool($"/package/{id}?action=cancel", string.Empty);
 		}
 
 		/// <summary>

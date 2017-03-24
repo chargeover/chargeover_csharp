@@ -218,19 +218,16 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
+		[Ignore("It is not possible create preconditions by code. Need manual preparation, details: http://help.chargeover.com/article/show/14187-how-can-i-change-how-a-payment-or-credit-is-applied")]
 		public void should_call_ApplyOpenCustomerBalance()
 		{
 			//arrange
-			var customer = TakeCustomerId();
-			var payment = TakePayment(customer);
-			var invoice = TakeInvoice(customer);
-
 			var request = new ApplyOpenCustomerBalance
 			{
 				UseCustomerBalance = true,
 			};
 			//act
-			var actual = Sut.ApplyOpenCustomerBalance(TakeInvoice(), request);
+			var actual = Sut.ApplyOpenCustomerBalance(10070, request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

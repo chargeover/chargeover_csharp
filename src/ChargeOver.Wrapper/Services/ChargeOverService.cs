@@ -45,7 +45,7 @@ namespace ChargeOver.Wrapper.Services
 		{
 			var api = Provider.Create();
 
-			var result = api.Raw("", "/_chargeoverjs ", null, request);
+			var result = api.Raw(PostRequest, "/_chargeoverjs ", null, request);
 
 			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
 
