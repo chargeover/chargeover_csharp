@@ -30,14 +30,6 @@ namespace TestsChargeOver.Wrapper.Services
 				TransactionDetail = "here are some details",
 				TransactionDatetime = DateTime.Parse("2013-06-20 18:48:17"),
 				Comment = "	newest, or 'best fit' invoices (based on amount/date).",
-				//AppliedTo = new[]
-				//{
-				//	new AppliedInvoide
-				//	{
-				//		InvoiceId = 10071,
-				//		Applied = 10.95F
-				//	}
-				//},
 				AutoApply = "best_fit"
 			};
 			//act
@@ -89,17 +81,16 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			var customerId = AddCustomer();
-			AddPayment(customerId);
+			int creditcardId = StoreCreditCard(customerId);
 			var request = new AttemptPayment
 			{
+				Amount = 10,
 				CustomerId = customerId,
-				Comment = "Optional: You can optionally specify a list of payment methods to attempt, otherwise the already stored credit cards/bank accounts for the customer will be used",
-				Amount = 15.95F,
-				AppliedTo = new[]
+				Paymentods = new[]
 				{
-					new AttemptInvoiceData
+					new Paymentod
 					{
-						InvoiceId = TakeInvoice(customerId)
+						CreditcardId = creditcardId
 					}
 				}
 			};
@@ -126,15 +117,7 @@ namespace TestsChargeOver.Wrapper.Services
 				TransactionType = "ref",
 				TransactionMethod = "Visa",
 				TransactionDetail = "",
-				TransactionDate = DateTime.Parse("2016-08-16"),
-				//AppliedTo = new[]
-				//{
-				//	new AppliedInvoide
-				//	{
-				//		InvoiceId = 10099,
-				//		Applied = -50
-				//	}
-				//}
+				TransactionDate = DateTime.Parse("2016-08-16")
 			};
 			//act
 			var actual = Sut.CreateRefund(request);
@@ -153,21 +136,10 @@ namespace TestsChargeOver.Wrapper.Services
 				Amount = 10
 			};
 			var customer = AddCustomer();
-			new CreditCardsService(Provider).StoreCreditCard(new StoreCreditCard
-			{
-				CustomerId = customer,
-				Number = "4111 1111 1111 1111",
-				ExpdateYear = (DateTime.UtcNow.Year + 1).ToString(),
-				ExpdateMonth = "11",
-				Name = "Keith Palmer",
-				Address = "72 E Blue Grass Road",
-				City = "Willington",
-				//state = "CT"
-				Postcode = "06279",
-				Country = "United States",
-			});
+			var cardId = StoreCreditCard(customer);
+			var payment = AttemptPayment(customer, cardId);
 			//act
-			var actual = Sut.RefundPayment(AddTransaction(customer), request);
+			var actual = Sut.RefundPayment(payment, request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -237,60 +209,37 @@ namespace TestsChargeOver.Wrapper.Services
 			}).Id;
 		}
 
-		private int TakeInvoice(int customer)
+		private int StoreCreditCard(int customerId)
 		{
-			return new InvoicesService(Provider).CreateInvoice(new Invoice
+			return new CreditCardsService(Provider).StoreCreditCard(new StoreCreditCard
 			{
-				CustomerId = customer,
-				BillAddr1 = "72 E Blue Grass Road",
-				BillCity = "Willington",
-				BillState = "Connecticut",
-				BillPostcode = "06279",
-				LineItems = new[]
+				CustomerId = customerId,
+				Number = "4111 1111 1111 1111",
+				ExpdateYear = (DateTime.UtcNow.Year + 1).ToString(),
+				ExpdateMonth = "11",
+				Name = "Keith Palmer",
+				Address = "72 E Blue Grass Road",
+				City = "Willington",
+				//state = "CT"
+				Postcode = "06279",
+				Country = "United States",
+			}).Id;
+		}
+
+		private int AttemptPayment(int customerId, int crediCardId)
+		{
+			return Sut.AttemptPayment(new AttemptPayment
+			{
+				Amount = 10,
+				CustomerId = customerId,
+				Paymentods = new[]
 				{
-					new InvoiceLineItem
+					new Paymentod
 					{
-						Descrip = "My description goes here",
-						ItemId = TakeItemId(),
-						LineQuantity = 12,
-						LineRate = 29.95F
+						CreditcardId = crediCardId
 					}
 				}
 			}).Id;
-		}
-
-		private int TakeItemId()
-		{
-			var id = new ItemsService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config)).CreateItem(new Item
-			{
-				Name = "My Test Item " + Guid.NewGuid(),
-				Type = "service",
-				Pricemodel = new ItemPricemodel
-				{
-					Base = 295.95F,
-					Paycycle = "mon",
-					Pricemodel = "fla"
-				}
-			}).Id;
-			return id;
-		}
-
-		private void AddPayment(int customer)
-		{
-			Sut.CreatePayment(new Payment
-			{
-				CustomerId = customer,
-				GatewayId = 1,
-				GatewayStatus = 1,
-				GatewayTransid = "abcd1234",
-				GatewayMsg = "test gateway message",
-				GatewayMethod = "check",
-				Amount = 15.95F,
-				TransactionType = "pay",
-				TransactionDetail = "here are some details",
-				TransactionDatetime = DateTime.Parse("2013-06-20 18:48:17"),
-				Comment = "	newest, or 'best fit' invoices (based on amount/date).",
-			});
 		}
 	}
 }

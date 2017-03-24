@@ -67,10 +67,13 @@
     <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Currency.cs" />
+    <Compile Include="Models\Paymentod.cs" />
+    <Compile Include="Models\SubscriptionLiteItem.cs" />
     <Compile Include="Models\Term.cs" />
     <Compile Include="Models\Log.cs" />
     <Compile Include="Models\NoteDetails.cs" />
     <Compile Include="Models\SubscriptionDetails.cs" />
+    <Compile Include="Models\Tierset.cs" />
     <Compile Include="Models\TransactionDetails.cs" />
     <Compile Include="Models\InvoiceDetails.cs" />
     <Compile Include="Models\IdentityChargeOverResponse.cs" />

@@ -46,84 +46,6 @@ namespace TestsChargeOver.Wrapper.Services
 			Assert.AreEqual("OK", actual.Status);
 		}
 
-		private int TakeCustomerId()
-		{
-			var id = new CustomersService(Provider).CreateCustomer(new Customer
-			{
-				Company = "Test Company Name",
-				BillAddr1 = "16 Dog Lane",
-				BillAddr2 = "Suite D",
-				BillCity = "Storrs",
-				BillState = "CT",
-			}).Id;
-
-			return id;
-		}
-
-		private int TakeItemId()
-		{
-			var id = new ItemsService(Provider).CreateItem(new Item
-			{
-				Name = "My Test Item " + Guid.NewGuid(),
-				Type = "service",
-				Pricemodel = new ItemPricemodel
-				{
-					Base = 295.95F,
-					Paycycle = "mon",
-					Pricemodel = "fla"
-				}
-			}).Id;
-			return id;
-		}
-
-		private int TakeInvoice(int? customer = null)
-		{
-			var id = TakeItemId();
-			if (!customer.HasValue)
-				customer = TakeCustomerId();
-
-			var request = new Invoice
-			{
-				CustomerId = customer,
-				BillAddr1 = "72 E Blue Grass Road",
-				BillCity = "Willington",
-				BillState = "Connecticut",
-				BillPostcode = "06279",
-				BillCountry = "US",
-				ShipCountry = "US",
-				LineItems = new[]
-				{
-					new InvoiceLineItem
-					{
-						Descrip = "My description goes here",
-						ItemId = id,
-						LineQuantity = 12,
-						LineRate = 29.95F
-					}
-				}
-			};
-
-			return Sut.CreateInvoice(request).Id;
-		}
-
-		private int TakePayment(int customerId)
-		{
-			return new TransactionsService(Provider).CreatePayment(new Payment
-			{
-				CustomerId = customerId,
-				GatewayId = 1,
-				GatewayStatus = 1,
-				GatewayTransid = "abcd1234",
-				GatewayMsg = "test gateway message",
-				GatewayMethod = "check",
-				Amount = 15.95F,
-				TransactionType = "pay",
-				TransactionDetail = "here are some details",
-				TransactionDatetime = DateTime.Parse("2013-06-20 18:48:17"),
-				Comment = "	newest, or 'best fit' invoices (based on amount/date).",
-			}).Id;
-		}
-
 		[Test]
 		public void should_call_UpdateInvoice()
 		{
@@ -218,16 +140,20 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		[Ignore("It is not possible create preconditions by code. Need manual preparation, details: http://help.chargeover.com/article/show/14187-how-can-i-change-how-a-payment-or-credit-is-applied")]
 		public void should_call_ApplyOpenCustomerBalance()
 		{
 			//arrange
+			var customerId = TakeCustomerId();
+			var cardId = StoreCard(customerId);
+			AttempPayment(customerId, cardId);
+			var invoiceId = TakeInvoice(customerId);
+
 			var request = new ApplyOpenCustomerBalance
 			{
 				UseCustomerBalance = true,
 			};
 			//act
-			var actual = Sut.ApplyOpenCustomerBalance(10070, request);
+			var actual = Sut.ApplyOpenCustomerBalance(invoiceId, request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -275,6 +201,117 @@ namespace TestsChargeOver.Wrapper.Services
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
+		}
+
+		private int TakeCustomerId()
+		{
+			var id = new CustomersService(Provider).CreateCustomer(new Customer
+			{
+				Company = "Test Company Name",
+				BillAddr1 = "16 Dog Lane",
+				BillAddr2 = "Suite D",
+				BillCity = "Storrs",
+				BillState = "CT",
+			}).Id;
+
+			return id;
+		}
+
+		private int TakeItemId()
+		{
+			var id = new ItemsService(Provider).CreateItem(new Item
+			{
+				Name = "My Test Item " + Guid.NewGuid(),
+				Type = "service",
+				Pricemodel = new ItemPricemodel
+				{
+					Base = 295.95F,
+					Paycycle = "mon",
+					Pricemodel = "fla"
+				}
+			}).Id;
+			return id;
+		}
+
+		private int StoreCard(int customerId)
+		{
+			return new CreditCardsService(Provider).StoreCreditCard(new StoreCreditCard
+			{
+				CustomerId = customerId,
+				Number = "4111 1111 1111 1111",
+				ExpdateYear = (DateTime.UtcNow.Year + 1).ToString(),
+				ExpdateMonth = "11",
+				Name = "Keith Palmer",
+				Address = "72 E Blue Grass Road",
+				City = "Willington",
+				//state = "CT"
+				Postcode = "06279",
+				Country = "United States",
+			}).Id;
+		}
+
+		private int TakeInvoice(int? customer = null)
+		{
+			var id = TakeItemId();
+			if (!customer.HasValue)
+				customer = TakeCustomerId();
+
+			var request = new Invoice
+			{
+				CustomerId = customer,
+				BillAddr1 = "72 E Blue Grass Road",
+				BillCity = "Willington",
+				BillState = "Connecticut",
+				BillPostcode = "06279",
+				BillCountry = "US",
+				ShipCountry = "US",
+				LineItems = new[]
+				{
+					new InvoiceLineItem
+					{
+						Descrip = "My description goes here",
+						ItemId = id,
+						LineQuantity = 12,
+						LineRate = 29.95F
+					}
+				}
+			};
+
+			return Sut.CreateInvoice(request).Id;
+		}
+
+		private int TakePayment(int customerId)
+		{
+			return new TransactionsService(Provider).CreatePayment(new Payment
+			{
+				CustomerId = customerId,
+				GatewayId = 1,
+				GatewayStatus = 1,
+				GatewayTransid = "abcd1234",
+				GatewayMsg = "test gateway message",
+				GatewayMethod = "check",
+				Amount = 15.95F,
+				TransactionType = "pay",
+				TransactionDetail = "here are some details",
+				TransactionDatetime = DateTime.Parse("2013-06-20 18:48:17"),
+				Comment = "	newest, or 'best fit' invoices (based on amount/date).",
+			}).Id;
+		}
+
+		private void AttempPayment(int customerId, int creditcardId)
+		{
+			new TransactionsService(Provider).AttemptPayment(new AttemptPayment
+			{
+				Amount = 10,
+				CustomerId = customerId,
+				Paymentods = new[]
+				{
+					new Paymentod
+					{
+						CreditcardId = creditcardId
+					}
+				}
+			});
 		}
 	}
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace ChargeOver.Wrapper.Models
@@ -299,7 +300,7 @@ namespace ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("line_items")]
-		public InvoiceLineItem[] LineItems { get; set; }
+		public SubscriptionLiteItem[] LineItems { get; set; }
 		/// <summary>
 		/// URL for viewing the subscription in the GUI
 		/// </summary>

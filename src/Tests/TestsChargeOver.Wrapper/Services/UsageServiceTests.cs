@@ -17,9 +17,13 @@ namespace TestsChargeOver.Wrapper.Services
 		public void should_call_StoringUsageData()
 		{
 			//arrange
+			var customerId = CreateCustomer();
+			var itemId = TakeItemId();
+			var lineItemId = CreateLineItemFromSubscription(customerId, itemId);
+
 			var request = new StoringUsageData
 			{
-				LineItemId = TakeItemId(),
+				LineItemId = lineItemId,
 				UsageValue = 265.2F,
 				From = DateTime.Parse("2013-10-16"),
 				To = DateTime.Parse("2013-10-16")
@@ -27,9 +31,41 @@ namespace TestsChargeOver.Wrapper.Services
 			//act
 			var actual = Sut.StoringUsageData(request);
 			//assert
-			Assert.AreEqual(200, actual.Code);
+			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
+		}
+
+		private int CreateCustomer()
+		{
+			return new CustomersService(Provider).CreateCustomer(new Customer
+			{
+				Company = "Test Company Name",
+				BillAddr1 = "16 Dog Lane",
+				BillAddr2 = "Suite D",
+				BillCity = "Storrs",
+				BillState = "CT"
+			}).Id;
+		}
+
+		private int CreateLineItemFromSubscription(int customerId, int itemId)
+		{
+			var subscriptionsService = new SubscriptionsService(Provider);
+			var subscriptionId = subscriptionsService.CreateSubscription(new Subscription
+			{
+				CustomerId = customerId,
+				HolduntilDatetime = DateTime.Parse("2013-10-01"),
+				LineItems = new[]
+				{
+					new InvoiceLineItem
+					{
+						Descrip = "desc",
+						ItemId = itemId
+					}
+				}
+			}).Id;
+
+			return subscriptionsService.GetSpecificSubscription(subscriptionId).Response.LineItems[0].LineItemId;
 		}
 
 		private int TakeItemId()

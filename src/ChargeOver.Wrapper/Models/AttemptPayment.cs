@@ -24,5 +24,10 @@ namespace  ChargeOver.Wrapper.Models
 		/// </summary>
 		[JsonProperty("amount")]
 		public float? Amount { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[JsonProperty("paymethods")]
+		public Paymentod[] Paymentods { get; set; }
 	}
 }
