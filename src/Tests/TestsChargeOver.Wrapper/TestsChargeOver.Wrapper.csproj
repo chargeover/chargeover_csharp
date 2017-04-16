@@ -80,10 +80,6 @@
       <Project>{03e09695-088d-4971-8888-eb16a8565eeb}</Project>
       <Name>ChargeOver.Wrapper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ChargeOverAPI\ChargeOver.csproj">
-      <Project>{7bea9eba-5207-4150-855b-f5d26aa5a359}</Project>
-      <Name>ChargeOver</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

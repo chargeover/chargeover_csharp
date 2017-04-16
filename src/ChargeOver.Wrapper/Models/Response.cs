@@ -6,13 +6,6 @@ namespace ChargeOver.Wrapper.Models
 	{
 		private readonly T[] _data;
 
-		public Response(ChargeOver.Response response)
-		{
-			Code = response.code;
-			Status = response.status;
-			Message = response.message;
-		}
-
 		public Response(ChargeOverResponse<T> response)
 		{
 			Code = response.Code;

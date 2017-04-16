@@ -19,7 +19,7 @@ namespace TestsChargeOver.Wrapper.Services
 			//arrange
 			var request = new Subscription
 			{
-				CustomerId = 5,
+				CustomerId = TakeCustomer(),
 				HolduntilDatetime = DateTime.Parse("2013-10-01")
 			};
 			//act

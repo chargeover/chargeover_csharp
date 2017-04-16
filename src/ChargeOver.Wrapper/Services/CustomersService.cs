@@ -1,5 +1,4 @@
 using ChargeOver.Wrapper.Models;
-using Newtonsoft.Json;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -17,7 +16,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Create a Customer
 		/// details: https://developer.chargeover.com/apidocs/rest/#create-a-customer
 		/// </summary>
-		public IIdentityResponse CreateCustomer(Models.Customer request)
+		public IIdentityResponse CreateCustomer(Customer request)
 		{
 			return Create("customer", request);
 		}

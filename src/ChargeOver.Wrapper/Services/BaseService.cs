@@ -30,7 +30,7 @@ namespace ChargeOver.Wrapper.Services
 
 		protected IResponse Delete(string endpoint, int id)
 		{
-			return new Models.Response(Request<object, ChargeOverResponse>(MethodType.DELETE, $"/{endpoint}/" + id, null));
+			return new Response(Request<object, ChargeOverResponse>(MethodType.DELETE, $"/{endpoint}/" + id, null));
 		}
 
 		protected IResponse<T> GetList<T>(string endpoint)
@@ -69,11 +69,6 @@ namespace ChargeOver.Wrapper.Services
 			}
 
 			return result;
-		}
-
-		protected string Request(MethodType method, string uri)
-		{
-			return Request<object, string>(method, uri, null);
 		}
 
 		protected TResponse Request<T, TResponse>(MethodType method, string uri, T request)

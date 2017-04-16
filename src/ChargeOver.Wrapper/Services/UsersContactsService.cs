@@ -1,5 +1,4 @@
 using ChargeOver.Wrapper.Models;
-using Newtonsoft.Json;
 
 namespace ChargeOver.Wrapper.Services
 {

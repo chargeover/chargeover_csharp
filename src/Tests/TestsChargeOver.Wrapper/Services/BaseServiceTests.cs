@@ -5,14 +5,12 @@ namespace TestsChargeOver.Wrapper.Services
 {
 	public abstract class BaseServiceTests
 	{
-		protected IChargeOverApiProvider Provider { get; private set; }
 		protected IChargeOverAPIConfiguration Config { get; private set; }
 
 		[SetUp]
 		public void SetUp()
 		{
 			Config = ChargeOverAPIConfiguration.Config;
-			Provider = new ChargeOverApiProvider(Config);
 
 			SetUp(Config);
 		}
