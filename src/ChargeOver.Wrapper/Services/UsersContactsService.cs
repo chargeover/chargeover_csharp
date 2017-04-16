@@ -5,7 +5,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class UsersContactsService : BaseService, IUsersContactsService
 	{
-		public UsersContactsService(IChargeOverApiProvider provider) : base(provider)
+		public UsersContactsService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 
@@ -55,13 +55,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public ICustomResponse<bool> SendPasswordReset(int userId)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw(PostRequest, $"/user/{userId}?action=password", null);
-
-			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<bool>>(result.Item2);
-
-			return new CustomResponse<bool>(resultObject);
+			return GetCustomBool<object>($"/user/{userId}?action=password", null);
 		}
 
 		/// <summary>
@@ -70,13 +64,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public ICustomResponse<bool> SetPassword(int userId, SetPassword request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw(PostRequest, $"/user/{userId}?action=password", null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<bool>>(result.Item2);
-
-			return new CustomResponse<bool>(resultObject);
+			return GetCustomBool($"/user/{userId}?action=password", request);
 		}
 
 		/// <summary>
@@ -85,13 +73,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public ICustomResponse<string> LogInUser(int id)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw(PostRequest, $"/user/{id}?action=login", null);
-
-			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<string>>(result.Item2);
-
-			return new CustomResponse<string>(resultObject);
+			return new CustomResponse<string>(Request<object, CustomChargeOverResponse<string>>(MethodType.POST, $"/user/{id}?action=login", null));
 		}
 
 		/// <summary>

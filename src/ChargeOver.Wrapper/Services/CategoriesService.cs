@@ -4,7 +4,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class CategoriesService : BaseService, ICategoriesService
 	{
-		public CategoriesService(IChargeOverApiProvider provider) : base(provider)
+		public CategoriesService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 

@@ -4,14 +4,11 @@ using NUnit.Framework;
 namespace TestsChargeOver.Wrapper.Services
 {
 	[TestFixture]
-	public sealed class SystemLogServiceTests
+	public sealed class SystemLogServiceTests : BaseServiceTests<SystemLogService>
 	{
-		private SystemLogService Sut{get;set;}
-
-		[SetUp]
-		public void SetUp()
+		protected override SystemLogService Initialize(IChargeOverAPIConfiguration config)
 		{
-			Sut = new SystemLogService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config));
+			return new SystemLogService(config);
 		}
 
 		[Test]

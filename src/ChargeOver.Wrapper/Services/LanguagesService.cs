@@ -4,7 +4,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class LanguagesService : BaseService, ILanguagesService
 	{
-		public LanguagesService(IChargeOverApiProvider provider) : base(provider)
+		public LanguagesService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 

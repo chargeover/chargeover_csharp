@@ -4,7 +4,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class TokenizedPayMethodsService : BaseService, ITokenizedPayMethodsService
 	{
-		public TokenizedPayMethodsService(IChargeOverApiProvider provider) : base(provider)
+		public TokenizedPayMethodsService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 

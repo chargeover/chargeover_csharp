@@ -4,14 +4,11 @@ using NUnit.Framework;
 namespace TestsChargeOver.Wrapper.Services
 {
 	[TestFixture]
-	public sealed class CampaignsServiceTests
+	public sealed class CampaignsServiceTests : BaseServiceTests<CampaignsService>
 	{
-		private CampaignsService Sut{get;set;}
-
-		[SetUp]
-		public void SetUp()
+		protected override CampaignsService Initialize(IChargeOverAPIConfiguration config)
 		{
-			Sut = new CampaignsService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config));
+			return new CampaignsService(config);
 		}
 
 		[Test]

@@ -4,7 +4,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class UsageService : BaseService, IUsageService
 	{
-		public UsageService(IChargeOverApiProvider provider) : base(provider)
+		public UsageService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 

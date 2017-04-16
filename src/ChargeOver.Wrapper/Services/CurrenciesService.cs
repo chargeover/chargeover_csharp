@@ -4,7 +4,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class CurrenciesService : BaseService, ICurrenciesService
 	{
-		public CurrenciesService(IChargeOverApiProvider provider) : base(provider)
+		public CurrenciesService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 

@@ -5,7 +5,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class InvoicesService : BaseService, IInvoicesService
 	{
-		public InvoicesService(IChargeOverApiProvider provider) : base(provider)
+		public InvoicesService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 
@@ -19,13 +19,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse CreateInvoice(Models.Invoice request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("create", "/invoice ", null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return Create("/invoice ", request);
 		}
 
 		/// <summary>
@@ -34,13 +28,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse UpdateInvoice(int invoiceId, UpdateInvoice request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("modify", $"/invoice/{invoiceId}", null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return new IdentityResponse(Request<UpdateInvoice, IdentityChargeOverResponse>(MethodType.PUT, $"/invoice/{invoiceId}", request));
 		}
 
 		/// <summary>
@@ -67,13 +55,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public ICustomResponse<bool> CreditCardPayment(int invoiceId, CreditCardPayment request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw(PostRequest, $"/invoice/{invoiceId}?action=pay", null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<bool>>(result.Item2);
-
-			return new CustomResponse<bool>(resultObject);
+			return new CustomResponse<bool>(Request<CreditCardPayment, CustomChargeOverResponse<bool>>(MethodType.POST, $"/invoice/{invoiceId}?action=pay", request));
 		}
 
 		/// <summary>
@@ -109,13 +91,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public ICustomResponse<bool> EmailInvoice(int invoiceId, EmailInvoice request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw(PostRequest, $"/invoice/{invoiceId}?action=email", null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<bool>>(result.Item2);
-
-			return new CustomResponse<bool>(resultObject);
+			return new CustomResponse<bool>(Request<EmailInvoice, CustomChargeOverResponse<bool>>(MethodType.POST, $"/invoice/{invoiceId}?action=email", request));
 		}
 
 		/// <summary>

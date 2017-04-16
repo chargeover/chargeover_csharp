@@ -5,7 +5,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class CustomersService : BaseService, ICustomersService
 	{
-		public CustomersService(IChargeOverApiProvider provider) : base(provider)
+		public CustomersService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 
@@ -28,13 +28,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse UpdateCustomer(int id, UpdateCustomer request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("modify", "/customer/" + id, null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return new IdentityResponse(Request<UpdateCustomer, IdentityChargeOverResponse>(MethodType.PUT, "/customer/" + id, request));
 		}
 
 		/// <summary>

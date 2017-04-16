@@ -5,7 +5,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class TransactionsService : BaseService, ITransactionsService
 	{
-		public TransactionsService(IChargeOverApiProvider provider) : base(provider)
+		public TransactionsService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 
@@ -82,13 +82,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public ICustomResponse<bool> VoidTransaction(int id)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw(PostRequest, $"/transaction/{id}/?action=void", null);
-
-			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<bool>>(result.Item2);
-
-			return new CustomResponse<bool>(resultObject);
+			return new CustomResponse<bool>(Request<object, CustomChargeOverResponse<bool>>(MethodType.POST, $"/transaction/{id}/?action=void", null));
 		}
 
 		/// <summary>
@@ -97,13 +91,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public ICustomResponse<bool> EmailReceipt(int id, EmailInvoice request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw(PostRequest, $"/transaction/{id}?action=email", null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<bool>>(result.Item2);
-
-			return new CustomResponse<bool>(resultObject);
+			return new CustomResponse<bool>(Request<EmailInvoice, CustomChargeOverResponse<bool>>(MethodType.POST, $"/transaction/{id}?action=email", request));
 		}
 	}
 }

@@ -5,14 +5,11 @@ using NUnit.Framework;
 namespace TestsChargeOver.Wrapper.Services
 {
 	[TestFixture]
-	public sealed class ChargeOverServiceTests
+	public sealed class ChargeOverServiceTests : BaseServiceTests<ChargeOverService>
 	{
-		private ChargeOverService Sut { get; set; }
-
-		[SetUp]
-		public void SetUp()
+		protected override ChargeOverService Initialize(IChargeOverAPIConfiguration config)
 		{
-			Sut = new ChargeOverService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config));
+			return new ChargeOverService(config);
 		}
 
 		[Test]

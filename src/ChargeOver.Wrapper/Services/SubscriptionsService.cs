@@ -1,11 +1,10 @@
 using ChargeOver.Wrapper.Models;
-using Newtonsoft.Json;
 
 namespace ChargeOver.Wrapper.Services
 {
 	public sealed class SubscriptionsService : BaseService, ISubscriptionsService
 	{
-		public SubscriptionsService(IChargeOverApiProvider provider) : base(provider)
+		public SubscriptionsService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 
@@ -28,13 +27,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse UpdateSubscription(int id, UpdateSubscription request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("modify", "/package/" + id, null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return new IdentityResponse(Request<UpdateSubscription, IdentityChargeOverResponse>(MethodType.PUT, "/package/" + id, request));
 		}
 
 		/// <summary>

@@ -6,14 +6,11 @@ using NUnit.Framework;
 namespace TestsChargeOver.Wrapper.Services
 {
 	[TestFixture]
-	public sealed class CreditCardsServiceTests
+	public sealed class CreditCardsServiceTests : BaseServiceTests<CreditCardsService>
 	{
-		private CreditCardsService Sut { get; set; }
-
-		[SetUp]
-		public void SetUp()
+		protected override CreditCardsService Initialize(IChargeOverAPIConfiguration config)
 		{
-			Sut = new CreditCardsService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config));
+			return new CreditCardsService(config);
 		}
 
 		[Test]

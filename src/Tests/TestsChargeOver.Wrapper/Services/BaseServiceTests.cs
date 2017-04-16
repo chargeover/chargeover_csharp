@@ -6,16 +6,18 @@ namespace TestsChargeOver.Wrapper.Services
 	public abstract class BaseServiceTests
 	{
 		protected IChargeOverApiProvider Provider { get; private set; }
+		protected IChargeOverAPIConfiguration Config { get; private set; }
 
 		[SetUp]
 		public void SetUp()
 		{
-			Provider = new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config);
+			Config = ChargeOverAPIConfiguration.Config;
+			Provider = new ChargeOverApiProvider(Config);
 
-			SetUp(Provider);
+			SetUp(Config);
 		}
 
-		protected virtual void SetUp(IChargeOverApiProvider provider) { }
+		protected virtual void SetUp(IChargeOverAPIConfiguration config) { }
 
 		#region sealed members
 
@@ -41,13 +43,13 @@ namespace TestsChargeOver.Wrapper.Services
 	{
 		protected T Sut { get; private set; }
 
-		protected override void SetUp(IChargeOverApiProvider provider)
+		protected override void SetUp(IChargeOverAPIConfiguration config)
 		{
-			base.SetUp(provider);
+			base.SetUp(config);
 
-			Sut = Initialize(provider);
+			Sut = Initialize(config);
 		}
 
-		protected abstract T Initialize(IChargeOverApiProvider provider);
+		protected abstract T Initialize(IChargeOverAPIConfiguration config);
 	}
 }

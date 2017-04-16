@@ -4,7 +4,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class ACHeCheckAccountsService : BaseService, IACHeCheckAccountsService
 	{
-		public ACHeCheckAccountsService(IChargeOverApiProvider provider) : base(provider)
+		public ACHeCheckAccountsService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 

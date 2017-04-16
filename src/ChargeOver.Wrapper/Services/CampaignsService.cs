@@ -4,7 +4,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class CampaignsService : BaseService, ICampaignsService
 	{
-		public CampaignsService(IChargeOverApiProvider provider) : base(provider)
+		public CampaignsService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 

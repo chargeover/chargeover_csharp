@@ -4,7 +4,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class NotesService : BaseService, INotesService
 	{
-		public NotesService(IChargeOverApiProvider provider) : base(provider)
+		public NotesService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 

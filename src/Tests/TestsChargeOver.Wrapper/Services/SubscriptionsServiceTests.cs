@@ -8,9 +8,9 @@ namespace TestsChargeOver.Wrapper.Services
 	[TestFixture]
 	public sealed class SubscriptionsServiceTests : BaseServiceTests<SubscriptionsService>
 	{
-		protected override SubscriptionsService Initialize(IChargeOverApiProvider provider)
+		protected override SubscriptionsService Initialize(IChargeOverAPIConfiguration config)
 		{
-			return new SubscriptionsService(provider);
+			return new SubscriptionsService(config);
 		}
 
 		[Test]
@@ -251,7 +251,7 @@ namespace TestsChargeOver.Wrapper.Services
 
 		private int TakeCustomer()
 		{
-			return new CustomersService(Provider).CreateCustomer(new Customer
+			return new CustomersService(Config).CreateCustomer(new Customer
 			{
 				Company = "Test Company Name",
 				BillAddr1 = "16 Dog Lane",
@@ -264,7 +264,7 @@ namespace TestsChargeOver.Wrapper.Services
 
 		private int TakeLineItem()
 		{
-			return new ItemsService(Provider).CreateItem(new Item
+			return new ItemsService(Config).CreateItem(new Item
 			{
 				Name = "My Test Item " + Guid.NewGuid(),
 				Type = "service",
@@ -284,7 +284,7 @@ namespace TestsChargeOver.Wrapper.Services
 				customerId = TakeCustomer();
 			}
 
-			return new CreditCardsService(Provider).StoreCreditCard(new StoreCreditCard
+			return new CreditCardsService(Config).StoreCreditCard(new StoreCreditCard
 			{
 				CustomerId = customerId,
 				Number = "4111 1111 1111 1111",

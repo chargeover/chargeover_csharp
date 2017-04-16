@@ -8,9 +8,9 @@ namespace TestsChargeOver.Wrapper.Services
 	[TestFixture]
 	public sealed class InvoicesServiceTests : BaseServiceTests<InvoicesService>
 	{
-		protected override InvoicesService Initialize(IChargeOverApiProvider provider)
+		protected override InvoicesService Initialize(IChargeOverAPIConfiguration config)
 		{
-			return new InvoicesService(provider);
+			return new InvoicesService(config);
 		}
 
 		[Test]
@@ -192,9 +192,7 @@ namespace TestsChargeOver.Wrapper.Services
 		public void should_call_PrintInvoice()
 		{
 			//arrange
-			var request = new PrintInvoice
-			{
-			};
+			var request = new PrintInvoice();
 			//act
 			var actual = Sut.PrintInvoice(TakeInvoice(), request);
 			//assert
@@ -205,7 +203,7 @@ namespace TestsChargeOver.Wrapper.Services
 
 		private int TakeCustomerId()
 		{
-			var id = new CustomersService(Provider).CreateCustomer(new Customer
+			var id = new CustomersService(Config).CreateCustomer(new Customer
 			{
 				Company = "Test Company Name",
 				BillAddr1 = "16 Dog Lane",
@@ -219,7 +217,7 @@ namespace TestsChargeOver.Wrapper.Services
 
 		private int TakeItemId()
 		{
-			var id = new ItemsService(Provider).CreateItem(new Item
+			var id = new ItemsService(Config).CreateItem(new Item
 			{
 				Name = "My Test Item " + Guid.NewGuid(),
 				Type = "service",
@@ -235,7 +233,7 @@ namespace TestsChargeOver.Wrapper.Services
 
 		private int StoreCard(int customerId)
 		{
-			return new CreditCardsService(Provider).StoreCreditCard(new StoreCreditCard
+			return new CreditCardsService(Config).StoreCreditCard(new StoreCreditCard
 			{
 				CustomerId = customerId,
 				Number = "4111 1111 1111 1111",
@@ -280,27 +278,9 @@ namespace TestsChargeOver.Wrapper.Services
 			return Sut.CreateInvoice(request).Id;
 		}
 
-		private int TakePayment(int customerId)
-		{
-			return new TransactionsService(Provider).CreatePayment(new Payment
-			{
-				CustomerId = customerId,
-				GatewayId = 1,
-				GatewayStatus = 1,
-				GatewayTransid = "abcd1234",
-				GatewayMsg = "test gateway message",
-				GatewayMethod = "check",
-				Amount = 15.95F,
-				TransactionType = "pay",
-				TransactionDetail = "here are some details",
-				TransactionDatetime = DateTime.Parse("2013-06-20 18:48:17"),
-				Comment = "	newest, or 'best fit' invoices (based on amount/date).",
-			}).Id;
-		}
-
 		private void AttempPayment(int customerId, int creditcardId)
 		{
-			new TransactionsService(Provider).AttemptPayment(new AttemptPayment
+			new TransactionsService(Config).AttemptPayment(new AttemptPayment
 			{
 				Amount = 10,
 				CustomerId = customerId,

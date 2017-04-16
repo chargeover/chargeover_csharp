@@ -1,18 +1,16 @@
 using System.Linq;
+using ChargeOver.Wrapper.Models;
 using ChargeOver.Wrapper.Services;
 using NUnit.Framework;
 
 namespace TestsChargeOver.Wrapper.Services
 {
 	[TestFixture]
-	public sealed class AdminWorkersServiceTests
+	public sealed class AdminWorkersServiceTests : BaseServiceTests<AdminWorkersService>
 	{
-		private AdminWorkersService Sut { get; set; }
-
-		[SetUp]
-		public void SetUp()
+		protected override AdminWorkersService Initialize(IChargeOverAPIConfiguration config)
 		{
-			Sut = new AdminWorkersService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config));
+			return new AdminWorkersService(config);
 		}
 
 		[Test]
@@ -43,12 +41,14 @@ namespace TestsChargeOver.Wrapper.Services
 		public void should_call_GetSpecificAdminWorker()
 		{
 			//arrange
+			var adminWorkers = Sut.GetListAdminWorkers().Response.First();
 			//act
-			var actual = Sut.GetSpecificAdminWorker(Sut.GetListAdminWorkers().Response.First().AdminId);
+			var actual = Sut.GetSpecificAdminWorker(adminWorkers.AdminId);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
+			Assert.AreEqual(adminWorkers.Email, actual.Response.Email);
 		}
 	}
 }

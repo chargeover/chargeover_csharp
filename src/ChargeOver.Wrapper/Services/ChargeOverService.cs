@@ -5,7 +5,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class ChargeOverService : BaseService, IChargeOverService
 	{
-		public ChargeOverService(IChargeOverApiProvider provider) : base(provider)
+		public ChargeOverService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 
@@ -28,13 +28,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse CommitChargeOver(CommitChargeOver request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw(PostRequest, "/_chargeoverjs ", null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return Create("/_chargeoverjs ", request);
 		}
 
 		/// <summary>
@@ -43,13 +37,7 @@ namespace ChargeOver.Wrapper.Services
 		/// </summary>
 		public IIdentityResponse RejectChargeOver(RejectChargeOver request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw(PostRequest, "/_chargeoverjs ", null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return Create("/_chargeoverjs ", request);
 		}
 	}
 }

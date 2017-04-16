@@ -1,5 +1,8 @@
 using System;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using ChargeOver.Wrapper.Models;
 using Newtonsoft.Json;
 
@@ -7,87 +10,52 @@ namespace ChargeOver.Wrapper.Services
 {
 	public abstract class BaseService
 	{
-		private readonly IChargeOverApiProvider _provider;
-		protected IChargeOverApiProvider Provider => _provider;
+		private readonly IChargeOverAPIConfiguration _config;
 
 		protected string PostRequest => "create";
 
-		protected BaseService(IChargeOverApiProvider provider)
+		protected BaseService(IChargeOverAPIConfiguration config)
 		{
-			if (provider == null) throw new ArgumentNullException(nameof(provider));
+			if (config == null) throw new ArgumentNullException(nameof(config));
 
-			_provider = provider;
+			_config = config;
 		}
 
-		protected BaseService() : this(new ChargeOverApiProvider()) { }
+		protected BaseService() : this(new ConfigurationManagerChargeOverApiConfiguration()) { }
 
 		protected IIdentityResponse Create<T>(string endpoint, T request)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw(PostRequest, $"/{endpoint} ", null, request);
-
-			var resultObject = JsonConvert.DeserializeObject<IdentityChargeOverResponse>(result.Item2);
-
-			return new IdentityResponse(resultObject);
+			return new IdentityResponse(Request<T, IdentityChargeOverResponse>(MethodType.POST, $"/{endpoint}", request));
 		}
 
 		protected IResponse Delete(string endpoint, int id)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("delete", $"/{endpoint}/" + id, null);
-
-			var resultObject = JsonConvert.DeserializeObject<ChargeOverResponse>(result.Item2);
-
-			return new Models.Response(resultObject);
+			return new Models.Response(Request<object, ChargeOverResponse>(MethodType.DELETE, $"/{endpoint}/" + id, null));
 		}
 
 		protected IResponse<T> GetList<T>(string endpoint)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("get", "/" + endpoint, null);
-
-			var resultObject = JsonConvert.DeserializeObject<ChargeOverResponse<T>>(result.Item2);
-
-			return new Response<T>(resultObject);
+			return new Response<T>(Request<object, ChargeOverResponse<T>>(MethodType.GET, "/" + endpoint, null));
 		}
 
 		protected ICustomResponse<T> GetCustom<T>(string endpint, int id)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw("get", $"/{endpint}/" + id, null);
-
-			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<T>>(result.Item2);
-
-			return new CustomResponse<T>(resultObject);
+			return new CustomResponse<T>(Request<object, CustomChargeOverResponse<T>>(MethodType.GET, $"/{endpint}/" + id, null));
 		}
 
 		protected ICustomResponse<bool> GetCustomBool<T>(string endpoint, T requeset)
 		{
-			var api = Provider.Create();
-
-			var result = api.Raw(PostRequest, endpoint, null, requeset);
-
-			var resultObject = JsonConvert.DeserializeObject<CustomChargeOverResponse<bool>>(result.Item2);
-
-			return new CustomResponse<bool>(resultObject);
+			return new CustomResponse<bool>(Request<T, CustomChargeOverResponse<bool>>(MethodType.POST, endpoint, requeset));
 		}
 
 		protected IResponse<T> Query<T>(string endpoint, string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
-			var api = _provider.Create();
-
 			var queriesData = Data(queries, "where");
 			var ordersData = Data(orders, "order");
 
-			var result = api.Raw("find", $"/{endpoint}?_dummy=1&limit={limit}&offset={offset}{queriesData}{ordersData}", null);
+			var result = Request<object, ChargeOverResponse<T>>(MethodType.GET, $"/{endpoint}?_dummy=1&limit={limit}&offset={offset}{queriesData}{ordersData}", null);
 
-			var resultObject = JsonConvert.DeserializeObject<ChargeOverResponse<T>>(result.Item2);
-
-			return new Response<T>(resultObject);
+			return new Response<T>(result);
 		}
 
 		private string Data(string[] arguments, string name)
@@ -101,6 +69,61 @@ namespace ChargeOver.Wrapper.Services
 			}
 
 			return result;
+		}
+
+		protected string Request(MethodType method, string uri)
+		{
+			return Request<object, string>(method, uri, null);
+		}
+
+		protected TResponse Request<T, TResponse>(MethodType method, string uri, T request)
+		{
+			string httpMethod = method.ToString(), data = string.Empty;
+
+			if (request != null)
+				data = JsonConvert.SerializeObject(request, new JsonSerializerSettings
+				{
+					NullValueHandling = NullValueHandling.Ignore
+				});
+
+			var webRequest = (HttpWebRequest)WebRequest.Create(_config.Endpoint + uri);
+
+			webRequest.KeepAlive = false;
+			webRequest.ProtocolVersion = HttpVersion.Version10;
+			webRequest.Method = httpMethod;
+
+			byte[] postBytes = Encoding.ASCII.GetBytes(data);
+
+			webRequest.ContentType = "application/json";
+			webRequest.ContentLength = postBytes.Length;
+			webRequest.Credentials = new NetworkCredential(_config.Username, _config.Password);
+
+			if (postBytes.Length > 0)
+			{
+				using (Stream requestStream = webRequest.GetRequestStream())
+				{
+					requestStream.Write(postBytes, 0, postBytes.Length);
+					requestStream.Close();
+				}
+			}
+
+			HttpWebResponse response;
+			try
+			{
+				response = (HttpWebResponse)webRequest.GetResponse();
+
+				string httpResponse = new StreamReader(response.GetResponseStream()).ReadToEnd();
+
+				var result = JsonConvert.DeserializeObject<TResponse>(httpResponse);
+
+				return result;
+			}
+			catch (WebException e)
+			{
+				var responseData = new StreamReader(e.Response.GetResponseStream()).ReadToEnd();
+
+				throw new Exception();
+			}
 		}
 
 		#region sealed members
@@ -121,5 +144,13 @@ namespace ChargeOver.Wrapper.Services
 		}
 
 		#endregion sealed members
+
+		protected enum MethodType
+		{
+			POST,
+			GET,
+			DELETE,
+			PUT
+		}
 	}
 }

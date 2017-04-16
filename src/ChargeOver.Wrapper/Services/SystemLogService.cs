@@ -4,7 +4,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class SystemLogService : BaseService, ISystemLogService
 	{
-		public SystemLogService(IChargeOverApiProvider provider) : base(provider)
+		public SystemLogService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 

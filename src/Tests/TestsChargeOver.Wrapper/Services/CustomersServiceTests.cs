@@ -6,14 +6,11 @@ using NUnit.Framework;
 namespace TestsChargeOver.Wrapper.Services
 {
 	[TestFixture]
-	public sealed class CustomersServiceTests
+	public sealed class CustomersServiceTests : BaseServiceTests<CustomersService>
 	{
-		private CustomersService Sut { get; set; }
-
-		[SetUp]
-		public void SetUp()
+		protected override CustomersService Initialize(IChargeOverAPIConfiguration config)
 		{
-			Sut = new CustomersService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config));
+			return new CustomersService(config);
 		}
 
 		[Test]
@@ -26,7 +23,7 @@ namespace TestsChargeOver.Wrapper.Services
 				BillAddr1 = "16 Dog Lane",
 				BillAddr2 = "Suite D",
 				BillCity = "Storrs",
-				BillState = "CT",
+				BillState = "CT"
 			};
 			//act
 			var actual = Sut.CreateCustomer(request);
@@ -58,19 +55,8 @@ namespace TestsChargeOver.Wrapper.Services
 			Assert.AreEqual(202, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
-		}
-
-		private int CreateCustomer()
-		{
-			var customerId = Sut.CreateCustomer(new Customer
-			{
-				Company = "Test Company Name",
-				BillAddr1 = "16 Dog Lane",
-				BillAddr2 = "Suite D",
-				BillCity = "Storrs",
-				BillState = "CT"
-			}).Id;
-			return customerId;
+			var customer = Sut.QueryForCustomers(new[] { "customer_id:EQUALS:" + customerId }).Response.First();
+			Assert.AreEqual(request.BillAddr1, customer.BillAddr1);
 		}
 
 		[Test]
@@ -109,6 +95,19 @@ namespace TestsChargeOver.Wrapper.Services
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
+		}
+
+		private int CreateCustomer()
+		{
+			var customerId = Sut.CreateCustomer(new Customer
+			{
+				Company = "Test Company Name",
+				BillAddr1 = "16 Dog Lane",
+				BillAddr2 = "Suite D",
+				BillCity = "Storrs",
+				BillState = "CT"
+			}).Id;
+			return customerId;
 		}
 	}
 }

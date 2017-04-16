@@ -4,14 +4,11 @@ using NUnit.Framework;
 namespace TestsChargeOver.Wrapper.Services
 {
 	[TestFixture]
-	public sealed class CategoriesServiceTests
+	public sealed class CategoriesServiceTests : BaseServiceTests<CategoriesService>
 	{
-		private CategoriesService Sut{get;set;}
-
-		[SetUp]
-		public void SetUp()
+		protected override CategoriesService Initialize(IChargeOverAPIConfiguration config)
 		{
-			Sut = new CategoriesService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config));
+			return new CategoriesService(config);
 		}
 
 		[Test]

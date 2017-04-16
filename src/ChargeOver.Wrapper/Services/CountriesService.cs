@@ -4,7 +4,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class CountriesService : BaseService, ICountriesService
 	{
-		public CountriesService(IChargeOverApiProvider provider) : base(provider)
+		public CountriesService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 

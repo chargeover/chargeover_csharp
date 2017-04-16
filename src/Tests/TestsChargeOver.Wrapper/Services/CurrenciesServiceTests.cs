@@ -4,14 +4,11 @@ using NUnit.Framework;
 namespace TestsChargeOver.Wrapper.Services
 {
 	[TestFixture]
-	public sealed class CurrenciesServiceTests
+	public sealed class CurrenciesServiceTests : BaseServiceTests<CurrenciesService>
 	{
-		private CurrenciesService Sut{get;set;}
-
-		[SetUp]
-		public void SetUp()
+		protected override CurrenciesService Initialize(IChargeOverAPIConfiguration config)
 		{
-			Sut = new CurrenciesService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config));
+			return new CurrenciesService(config);
 		}
 
 		[Test]

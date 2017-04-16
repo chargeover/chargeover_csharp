@@ -4,7 +4,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class AdminWorkersService : BaseService, IAdminWorkersService
 	{
-		public AdminWorkersService(IChargeOverApiProvider provider) : base(provider)
+		public AdminWorkersService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 

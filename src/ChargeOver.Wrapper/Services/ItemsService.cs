@@ -4,7 +4,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class ItemsService : BaseService, IItemsService
 	{
-		public ItemsService(IChargeOverApiProvider provider) : base(provider)
+		public ItemsService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 

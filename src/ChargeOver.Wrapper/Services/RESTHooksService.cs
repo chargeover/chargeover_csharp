@@ -4,7 +4,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class RESTHooksService : BaseService, IRESTHooksService
 	{
-		public RESTHooksService(IChargeOverApiProvider provider) : base(provider)
+		public RESTHooksService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 

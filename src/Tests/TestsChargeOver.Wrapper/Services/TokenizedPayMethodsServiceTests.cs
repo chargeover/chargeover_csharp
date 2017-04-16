@@ -5,14 +5,11 @@ using NUnit.Framework;
 namespace TestsChargeOver.Wrapper.Services
 {
 	[TestFixture]
-	public sealed class TokenizedPayMethodsServiceTests
+	public sealed class TokenizedPayMethodsServiceTests : BaseServiceTests<TokenizedPayMethodsService>
 	{
-		private TokenizedPayMethodsService Sut { get; set; }
-
-		[SetUp]
-		public void SetUp()
+		protected override TokenizedPayMethodsService Initialize(IChargeOverAPIConfiguration config)
 		{
-			Sut = new TokenizedPayMethodsService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config));
+			return new TokenizedPayMethodsService(config);
 		}
 
 		[Test]

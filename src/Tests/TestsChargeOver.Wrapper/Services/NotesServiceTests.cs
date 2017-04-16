@@ -7,16 +7,16 @@ namespace TestsChargeOver.Wrapper.Services
 	[TestFixture]
 	public sealed class NotesServiceTests : BaseServiceTests<NotesService>
 	{
-		protected override NotesService Initialize(IChargeOverApiProvider provider)
+		protected override NotesService Initialize(IChargeOverAPIConfiguration config)
 		{
-			return new NotesService(provider);
+			return new NotesService(config);
 		}
 
 		[Test]
 		public void should_call_CreateNote()
 		{
 			//arrange
-			var result = new CustomersService(new ChargeOverApiProvider(ChargeOverAPIConfiguration.Config)).CreateCustomer(new Customer
+			var result = new CustomersService(Config).CreateCustomer(new Customer
 			{
 				Company = "Test Company Name",
 				BillAddr1 = "16 Dog Lane",
@@ -53,7 +53,7 @@ namespace TestsChargeOver.Wrapper.Services
 
 		private int TakeCustomerId()
 		{
-			return new CustomersService(Provider).CreateCustomer(new Customer
+			return new CustomersService(Config).CreateCustomer(new Customer
 			{
 				Company = "Test Company Name",
 				BillAddr1 = "16 Dog Lane",

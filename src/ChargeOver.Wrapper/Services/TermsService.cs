@@ -4,7 +4,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class TermsService : BaseService, ITermsService
 	{
-		public TermsService(IChargeOverApiProvider provider) : base(provider)
+		public TermsService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 

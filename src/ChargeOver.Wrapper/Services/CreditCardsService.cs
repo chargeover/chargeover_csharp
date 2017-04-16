@@ -4,7 +4,7 @@ namespace ChargeOver.Wrapper.Services
 {
 	public sealed class CreditCardsService : BaseService, ICreditCardsService
 	{
-		public CreditCardsService(IChargeOverApiProvider provider) : base(provider)
+		public CreditCardsService(IChargeOverAPIConfiguration config) : base(config)
 		{
 		}
 
