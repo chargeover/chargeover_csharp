@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{03E09695-088D-4971-8888-EB16A8565EEB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ChargeOver.Wrapper</RootNamespace>
+    <AssemblyName>ChargeOver.Wrapper</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ICustomResponse.cs" />
+    <Compile Include="IIdentityResponse.cs" />
+    <Compile Include="Models\ACHCheckPayment.cs" />
+    <Compile Include="Models\AddContact.cs" />
+    <Compile Include="Models\AdminWorkers.cs" />
+    <Compile Include="Models\AppliedInvoide.cs" />
+    <Compile Include="Models\ApplyOpenCustomerBalance.cs" />
+    <Compile Include="Models\AttemptInvoiceData.cs" />
+    <Compile Include="Models\AttemptPayment.cs" />
+    <Compile Include="Models\Campaign.cs" />
+    <Compile Include="Models\ChangePricingLineItem.cs" />
+    <Compile Include="Models\ChangePricingOnSubscription.cs" />
+    <Compile Include="Models\ChangePricingTierset.cs" />
+    <Compile Include="Models\ChargeOverResponse.cs" />
+    <Compile Include="Models\ChangePricingTier.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\CustomChargeOverResponse.cs" />
+    <Compile Include="Models\CustomResponse.cs" />
+    <Compile Include="Models\ContactDetails.cs" />
+    <Compile Include="Models\Brand.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Currency.cs" />
+    <Compile Include="Models\Paymentod.cs" />
+    <Compile Include="Models\SubscriptionLiteItem.cs" />
+    <Compile Include="Models\Term.cs" />
+    <Compile Include="Models\Log.cs" />
+    <Compile Include="Models\NoteDetails.cs" />
+    <Compile Include="Models\SubscriptionDetails.cs" />
+    <Compile Include="Models\Tierset.cs" />
+    <Compile Include="Models\TransactionDetails.cs" />
+    <Compile Include="Models\InvoiceDetails.cs" />
+    <Compile Include="Models\IdentityChargeOverResponse.cs" />
+    <Compile Include="Models\ChargeOverResponseDetails.cs" />
+    <Compile Include="Models\CommitChargeOver.cs" />
+    <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\CreditCardDetails.cs" />
+    <Compile Include="Models\CreditCardPayment.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerResult.cs" />
+    <Compile Include="Models\EmailInvoice.cs" />
+    <Compile Include="Models\InvoiceLineItem.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\ItemPricemodel.cs" />
+    <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\Note.cs" />
+    <Compile Include="Models\Payment.cs" />
+    <Compile Include="Models\PendingRequestDetail.cs" />
+    <Compile Include="Models\PrintInvoice.cs" />
+    <Compile Include="Models\ItemDetails.cs" />
+    <Compile Include="Models\Refund.cs" />
+    <Compile Include="Models\RefundPayment.cs" />
+    <Compile Include="Models\RejectChargeOver.cs" />
+    <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\SetPassword.cs" />
+    <Compile Include="Models\SetThePaymentMethod.cs" />
+    <Compile Include="Models\StoreACHAccount.cs" />
+    <Compile Include="Models\StoreCreditCard.cs" />
+    <Compile Include="Models\StorePayMethodToken.cs" />
+    <Compile Include="Models\StoringUsageData.cs" />
+    <Compile Include="Models\Subscribing.cs" />
+    <Compile Include="Models\Subscription.cs" />
+    <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\TrialInvoiceLineItem.cs" />
+    <Compile Include="Models\UpdateCustomer.cs" />
+    <Compile Include="Models\UpdateInvoice.cs" />
+    <Compile Include="Models\UpdateSubscription.cs" />
+    <Compile Include="Models\UpgradeDowngradesubscription.cs" />
+    <Compile Include="ResponseExtensions.cs" />
+    <Compile Include="Services\ACHeCheckAccountsService.cs" />
+    <Compile Include="Services\AdminWorkersService.cs" />
+    <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\BrandsService.cs" />
+    <Compile Include="Services\CampaignsService.cs" />
+    <Compile Include="Services\CategoriesService.cs" />
+    <Compile Include="Services\ChargeOverApiConfiguration.cs" />
+    <Compile Include="Services\ChargeOverService.cs" />
+    <Compile Include="Services\ConfigurationManagerChargeOverApiConfiguration.cs" />
+    <Compile Include="Services\CountriesService.cs" />
+    <Compile Include="Services\CreditCardsService.cs" />
+    <Compile Include="Services\CurrenciesService.cs" />
+    <Compile Include="Services\CustomersService.cs" />
+    <Compile Include="Services\IACHeCheckAccountsService.cs" />
+    <Compile Include="Services\IAdminWorkersService.cs" />
+    <Compile Include="Services\IBrandsService.cs" />
+    <Compile Include="Services\ICampaignsService.cs" />
+    <Compile Include="Services\ICategoriesService.cs" />
+    <Compile Include="Services\IChargeOverAPIConfiguration.cs" />
+    <Compile Include="IResponse.cs" />
+    <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\IdentityResponse.cs" />
+    <Compile Include="Services\IChargeOverService.cs" />
+    <Compile Include="Services\ICountriesService.cs" />
+    <Compile Include="Services\ICreditCardsService.cs" />
+    <Compile Include="Services\ICurrenciesService.cs" />
+    <Compile Include="Services\ICustomersService.cs" />
+    <Compile Include="Services\IInvoicesService.cs" />
+    <Compile Include="Services\IItemsService.cs" />
+    <Compile Include="Services\ILanguagesService.cs" />
+    <Compile Include="Services\INotesService.cs" />
+    <Compile Include="Services\InvoicesService.cs" />
+    <Compile Include="Services\IRestHooksService.cs" />
+    <Compile Include="Services\ISubscriptionsService.cs" />
+    <Compile Include="Services\ISystemLogService.cs" />
+    <Compile Include="Services\ItemsService.cs" />
+    <Compile Include="Services\ITermsService.cs" />
+    <Compile Include="Services\ITokenizedPayMethodsService.cs" />
+    <Compile Include="Services\ITransactionsService.cs" />
+    <Compile Include="Services\IUsageService.cs" />
+    <Compile Include="Services\IUsersContactsService.cs" />
+    <Compile Include="Services\LanguagesService.cs" />
+    <Compile Include="Services\NotesService.cs" />
+    <Compile Include="Services\RESTHooksService.cs" />
+    <Compile Include="Services\SubscriptionsService.cs" />
+    <Compile Include="Services\SystemLogService.cs" />
+    <Compile Include="Services\TermsService.cs" />
+    <Compile Include="Services\TokenizedPayMethodsService.cs" />
+    <Compile Include="Services\TransactionsService.cs" />
+    <Compile Include="Services\UsageService.cs" />
+    <Compile Include="Services\UsersContactsService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
