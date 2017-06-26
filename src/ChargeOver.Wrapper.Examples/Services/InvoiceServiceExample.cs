@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using ChargeOver.Wrapper.Models;
 using ChargeOver.Wrapper.Services;
 
@@ -18,6 +19,25 @@ namespace ChargeOver.Wrapper.Examples.Services
 		}
 
 		public void Run()
+		{
+			var examples = new Action[] { CreateInvoice, QueryInvoiceByInvoiceId };
+
+			foreach (var example in examples)
+			{
+				example();
+			}
+		}
+
+		private void CreateInvoice()
+		{
+			var result = CreateNewInvoice();
+
+			if (!result.IsSuccess()) throw new Exception("Create invoice failed.");
+
+			Console.WriteLine("Invoice created with id: " + result.Id);
+		}
+
+		private IIdentityResponse CreateNewInvoice()
 		{
 			var id = TakeItemId();
 			var customer = TakeCustomerId();
@@ -41,10 +61,14 @@ namespace ChargeOver.Wrapper.Examples.Services
 				}
 			};
 			var result = _service.CreateInvoice(request);
+			return result;
+		}
 
-			if (!result.IsSuccess()) throw new Exception("Create invoice failed.");
+		private void QueryInvoiceByInvoiceId()
+		{
+			var result = _service.QueryForInvoices(new[] { "invoice_id:EQUALS:" + CreateNewInvoice().Id });
 
-			Console.WriteLine("Invoice created with id: " + result.Id);
+			Console.WriteLine($"Invoices found by id: {result.Response.Count()}");
 		}
 
 		private int TakeCustomerId()

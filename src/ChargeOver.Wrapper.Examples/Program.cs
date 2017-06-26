@@ -11,7 +11,10 @@ namespace ChargeOver.Wrapper.Examples
 			{
 				new CustomersServiceExample(),
 				new InvoiceServiceExample(),
-				new SubscriptionServiceExample()
+				new SubscriptionServiceExample(),
+				new TransactionsServiceExample(),
+				new CreditCardServiceExample(),
+				new ACHeCheckAccountsServiceExample()
 			}.ToList();
 
 			examples.ForEach(e => e.Run());
