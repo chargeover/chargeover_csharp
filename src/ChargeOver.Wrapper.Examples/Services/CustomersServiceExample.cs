@@ -49,8 +49,7 @@ namespace ChargeOver.Wrapper.Examples.Services
 
 		private void QueryCustomerByName()
 		{
-			//TODO:unknown filter
-			var result = _service.QueryForCustomers(new[] { "superuser_name:EQUALS:Name" });
+			var result = _service.QueryForCustomers(new[] { "company:EQUALS:Name" });
 
 			Console.WriteLine($"Customers found 'by name': {result.Response.Count()}");
 		}
