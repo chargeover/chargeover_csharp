@@ -45,9 +45,12 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ACHeCheckAccountsServiceExample.cs" />
+    <Compile Include="Services\CreditCardServiceExample.cs" />
     <Compile Include="Services\CustomersServiceExample.cs" />
     <Compile Include="Services\InvoiceServiceExample.cs" />
     <Compile Include="Services\IServiceExample.cs" />
+    <Compile Include="Services\TransactionsServiceExample.cs" />
     <Compile Include="Services\SubscriptionServiceExample.cs" />
   </ItemGroup>
   <ItemGroup>
