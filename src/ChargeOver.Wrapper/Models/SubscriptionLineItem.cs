@@ -45,5 +45,7 @@ namespace ChargeOver.Wrapper.Models
 		public int LineItemId { get; set; }
 		[JsonProperty("tierset")]
 		public Tierset Tierset { get; set; }
+		[JsonProperty("line_quantity")]
+		public int LineQuantity { get; set; }
 	}
 }

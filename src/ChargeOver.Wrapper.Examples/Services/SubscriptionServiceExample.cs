@@ -45,6 +45,7 @@ namespace ChargeOver.Wrapper.Examples.Services
 
 			var line1 = new SubscriptionLineItem
 			{
+				LineQuantity = 5, 
 				ItemId = 1,
 				Tierset = new Tierset
 				{
