@@ -1,19 +1,87 @@
-﻿<Properties StartupConfiguration="{6EC90A59-FA49-43C7-837D-B5DB9F5E6210}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="src/ChargeOverAPI/ChargeOver/Object/LineItem.cs">
+﻿<Properties StartupConfiguration="{0CE183C5-CA80-4696-AE28-785455DB47DE}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src/ChargeOver.Wrapper/Models/UpgradeDowngradesubscription.cs">
     <Files>
-      <File FileName="src/ChargeOver.Examples/RunExamples.cs" Line="22" Column="20" />
-      <File FileName="src/ChargeOver.Examples/ExampleCustomers.cs" Line="1" Column="1" />
-      <File FileName="src/ChargeOverAPI/ChargeOverAPI.cs" Line="248" Column="5" />
-      <File FileName="src/ChargeOverAPI/ChargeOver/Object/Customer.cs" Line="45" Column="16" />
-      <File FileName="src/ChargeOverAPI/ChargeOver/Object/Invoice.cs" Line="16" Column="14" />
-      <File FileName="src/ChargeOverAPI/ChargeOver/Object/Package.cs" Line="54" Column="14" />
-      <File FileName="src/ChargeOverAPI/ChargeOver/Object/Transaction.cs" Line="10" Column="14" />
-      <File FileName="src/ChargeOverAPI/ChargeOver/Object/User.cs" Line="1" Column="1" />
-      <File FileName="src/ChargeOverAPI/ChargeOver/Object/Item.cs" Line="10" Column="14" />
-      <File FileName="src/ChargeOverAPI/ChargeOver/Object/LineItem.cs" Line="17" Column="43" />
+      <File FileName="src/ChargeOver.Wrapper/Models/SubscriptionLineItem.cs" Line="17" Column="28" />
+      <File FileName="src/ChargeOver.Wrapper.Examples/Services/SubscriptionServiceExample.cs" Line="62" Column="8" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Subscription.cs" Line="82" Column="28" />
+      <File FileName="src/ChargeOver.Wrapper/Services/BaseService.cs" Line="107" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Services/TransactionsService.cs" Line="51" Column="3" />
+      <File FileName="src/ChargeOver.Wrapper.Examples/Services/TransactionsServiceExample.cs" Line="34" Column="6" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Tierset.cs" Line="12" Column="35" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Tier.cs" Line="11" Column="27" />
+      <File FileName="src/ChargeOver.Wrapper.Examples/Services/CreditCardServiceExample.cs" Line="26" Column="25" />
+      <File FileName="src/ChargeOver.Wrapper.Examples/Services/ACHeCheckAccountsServiceExample.cs" Line="28" Column="50" />
+      <File FileName="src/ChargeOver.Wrapper/Models/StoreCreditCard.cs" Line="53" Column="16" />
+      <File FileName="src/ChargeOver.Wrapper/Models/StoreACHAccount.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper.Examples/Services/CustomersServiceExample.cs" Line="42" Column="4" />
+      <File FileName="src/ChargeOver.Wrapper.Examples/Services/InvoiceServiceExample.cs" Line="61" Column="6" />
+      <File FileName="src/ChargeOver.Wrapper.Examples/Services/IServiceExample.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/AttemptPayment.cs" Line="15" Column="31" />
+      <File FileName="src/ChargeOver.Wrapper/Models/PayMethod.cs" Line="8" Column="40" />
+      <File FileName="src/ChargeOver.Wrapper/Models/CreditCardDetails.cs" Line="64" Column="34" />
+      <File FileName="src/ChargeOver.Wrapper/Services/ICustomersService.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Customer.cs" Line="11" Column="40" />
+      <File FileName="src/ChargeOver.Wrapper/Models/AdminWorkers.cs" Line="65" Column="17" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Invoice.cs" Line="12" Column="21" />
+      <File FileName="src/ChargeOver.Wrapper/Models/InvoiceDetails.cs" Line="17" Column="21" />
+      <File FileName="src/ChargeOver.Wrapper/Models/SetThePaymentMethod.cs" Line="11" Column="21" />
+      <File FileName="src/ChargeOver.Wrapper/Models/SetPassword.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/StoringUsageData.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/StorePayMethodToken.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Subscribing.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/InvoiceLineItem.cs" Line="10" Column="28" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Item.cs" Line="33" Column="25" />
+      <File FileName="src/ChargeOver.Wrapper/Models/ItemPricemodel.cs" Line="14" Column="35" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Language.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Log.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Note.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/NoteDetails.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Payment.cs" Line="77" Column="46" />
+      <File FileName="src/ChargeOver.Wrapper/Models/AppliedInvoice.cs" Line="10" Column="37" />
+      <File FileName="src/ChargeOver.Wrapper/Models/AddContact.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/ApplyOpenCustomerBalance.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/AttemptInvoiceData.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Brand.cs" Line="41" Column="46" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Campaign.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Category.cs" Line="11" Column="15" />
+      <File FileName="src/ChargeOver.Wrapper/Models/ChangePricingLineItem.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/ChangePricingOnSubscription.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/ChangePricingTier.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/ChangePricingTierset.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/ChargeOverResponse.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/ChargeOverResponseDetails.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/CommitChargeOver.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Contact.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/ContactDetails.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Country.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/CreditCardPayment.cs" Line="32" Column="16" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Currency.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/CustomChargeOverResponse.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/CustomerResult.cs" Line="287" Column="30" />
+      <File FileName="src/ChargeOver.Wrapper/Models/CustomResponse.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/EmailInvoice.cs" Line="30" Column="34" />
+      <File FileName="src/ChargeOver.Wrapper/Models/IdentityChargeOverResponse.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/IdentityResponse.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/ItemDetails.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/PendingRequestDetail.cs" Line="25" Column="36" />
+      <File FileName="src/ChargeOver.Wrapper/Models/PrintInvoice.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Refund.cs" Line="78" Column="16" />
+      <File FileName="src/ChargeOver.Wrapper/Models/RefundPayment.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/RejectChargeOver.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Response.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/SubscriptionDetails.cs" Line="35" Column="31" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Term.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Transaction.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/TransactionDetails.cs" Line="1" Column="1" />
+      <File FileName="src/ChargeOver.Wrapper/Models/TrialInvoiceLineItem.cs" Line="10" Column="28" />
+      <File FileName="src/ChargeOver.Wrapper/Models/UpdateCustomer.cs" Line="187" Column="23" />
+      <File FileName="src/ChargeOver.Wrapper/Models/UpdateInvoice.cs" Line="97" Column="28" />
+      <File FileName="src/ChargeOver.Wrapper/Models/UpdateSubscription.cs" Line="97" Column="42" />
+      <File FileName="src/ChargeOver.Wrapper/Models/UpgradeDowngradesubscription.cs" Line="11" Column="15" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.ChargeOver.Wrapper.Examples PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -2,13 +2,16 @@ using Newtonsoft.Json;
 
 namespace ChargeOver.Wrapper.Models
 {
-	public sealed class ItemPricemodel
+	public sealed class ItemPriceModel
 	{
 		[JsonProperty("base")]
 		public float Base { get; set; }
 		[JsonProperty("paycycle")]
-		public string Paycycle { get; set; }
+		public string PayCycle { get; set; }
 		[JsonProperty("pricemodel")]
-		public string Pricemodel { get; set; }
+		public string PriceModel { get; set; }
+		[JsonProperty("setup")]
+		public float Setup { get; set; }
+
 	}
 }

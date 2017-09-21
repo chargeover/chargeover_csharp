@@ -29,12 +29,12 @@ namespace ChargeOver.Wrapper.Models
 		/// Payment method for the package, one of: cre, inv, ach
 		/// </summary>
 		[JsonProperty("paymethod")]
-		public string Paymethod { get; set; }
+		public string PayMethod { get; set; }
 		/// <summary>
 		/// Credit card ID # (if the package is paid by credit card)
 		/// </summary>
 		[JsonProperty("creditcard_id")]
-		public int? CreditcardId { get; set; }
+		public int? CreditCardId { get; set; }
 		/// <summary>
 		/// ACH ID # (if the package is paid by ACH)
 		/// </summary>
@@ -79,7 +79,7 @@ namespace ChargeOver.Wrapper.Models
 		/// Billing address postal code
 		/// </summary>
 		[JsonProperty("bill_postcode")]
-		public string BillPostcode { get; set; }
+		public string BillPostalCode { get; set; }
 		/// <summary>
 		/// Billing address country
 		/// </summary>
@@ -119,7 +119,7 @@ namespace ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("ship_postcode")]
-		public string ShipPostcode { get; set; }
+		public string ShipPostalCode { get; set; }
 		/// <summary>
 		/// 
 		/// </summary>
@@ -134,7 +134,7 @@ namespace ChargeOver.Wrapper.Models
 		/// Date/time invoicing for this package is being held until
 		/// </summary>
 		[JsonProperty("holduntil_datetime")]
-		public DateTime? HolduntilDatetime { get; set; }
+		public DateTime? HoldUntilDatetime { get; set; }
 		/// <summary>
 		/// Terms ID #
 		/// </summary>
@@ -144,7 +144,7 @@ namespace ChargeOver.Wrapper.Models
 		/// Payment cycle
 		/// </summary>
 		[JsonProperty("paycycle")]
-		public string Paycycle { get; set; }
+		public string PayCycle { get; set; }
 		/// <summary>
 		/// Custom field value #1
 		/// </summary>
@@ -174,6 +174,6 @@ namespace ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("line_items")]
-		public InvoiceLineItem[] LineItems { get; set; }
+		public SubscriptionLineItem[] LineItems { get; set; }
 	}
 }

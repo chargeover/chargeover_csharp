@@ -103,22 +103,14 @@ namespace ChargeOver.Wrapper.Services
 			}
 
 			HttpWebResponse response;
-			try
-			{
-				response = (HttpWebResponse)webRequest.GetResponse();
 
-				string httpResponse = new StreamReader(response.GetResponseStream()).ReadToEnd();
+			response = (HttpWebResponse)webRequest.GetResponse();
 
-				var result = JsonConvert.DeserializeObject<TResponse>(httpResponse);
+			string httpResponse = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
-				return result;
-			}
-			catch (WebException e)
-			{
-				var responseData = new StreamReader(e.Response.GetResponseStream()).ReadToEnd();
+			var result = JsonConvert.DeserializeObject<TResponse>(httpResponse);
 
-				throw new Exception();
-			}
+			return result;
 		}
 
 		#region sealed members

@@ -54,17 +54,12 @@ namespace  ChargeOver.Wrapper.Models
 		/// Billing address postal code
 		/// </summary>
 		[JsonProperty("bill_postcode")]
-		public string BillPostcode { get; set; }
+		public string BillPostalCode { get; set; }
 		/// <summary>
 		/// Billing address country
 		/// </summary>
 		[JsonProperty("bill_country")]
 		public string BillCountry { get; set; }
-		/// <summary>
-		/// 
-		/// </summary>
-		[JsonProperty("bill_notes")]
-		public string BillNotes { get; set; }
 		/// <summary>
 		/// 
 		/// </summary>
@@ -94,17 +89,12 @@ namespace  ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("ship_postcode")]
-		public string ShipPostcode { get; set; }
+		public string ShipPostalCode { get; set; }
 		/// <summary>
 		/// 
 		/// </summary>
 		[JsonProperty("ship_country")]
 		public string ShipCountry { get; set; }
-		/// <summary>
-		/// 
-		/// </summary>
-		[JsonProperty("ship_notes")]
-		public string ShipNotes { get; set; }
 		/// <summary>
 		/// Terms ID #
 		/// </summary>

@@ -48,12 +48,12 @@ namespace ChargeOver.Wrapper.Examples.Services
 				BillAddr1 = "72 E Blue Grass Road",
 				BillCity = "Willington",
 				BillState = "Connecticut",
-				BillPostcode = "06279",
+				BillPostalCode = "06279",
 				LineItems = new[]
 				{
 					new InvoiceLineItem
 					{
-						Descrip = "My description goes here",
+						Description = "My description goes here",
 						ItemId = id,
 						LineQuantity = 12,
 						LineRate = 29.95F
@@ -91,11 +91,11 @@ namespace ChargeOver.Wrapper.Examples.Services
 			{
 				Name = "My Test Item " + Guid.NewGuid(),
 				Type = "service",
-				Pricemodel = new ItemPricemodel
+				PriceModel = new ItemPriceModel
 				{
 					Base = 295.95F,
-					Paycycle = "mon",
-					Pricemodel = "fla"
+					PayCycle = "mon",
+					PriceModel = "fla"
 				}
 			}).Id;
 

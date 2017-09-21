@@ -23,6 +23,6 @@ namespace  ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("chargeoverjs_id")]
-		public int? ChargeoverjsId { get; set; }
+		public int? ChargeOverJsId { get; set; }
 	}
 }

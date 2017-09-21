@@ -12,11 +12,6 @@ namespace  ChargeOver.Wrapper.Models
 		/// <summary>
 		/// 
 		/// </summary>
-		[JsonProperty("_comment")]
-		public string Comment { get; set; }
-		/// <summary>
-		/// 
-		/// </summary>
 		[JsonProperty("applied_to")]
 		public AttemptInvoiceData[] AppliedTo { get; set; }
 		/// <summary>
@@ -28,6 +23,6 @@ namespace  ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("paymethods")]
-		public Paymentod[] Paymentods { get; set; }
+		public PayMethod[] PayMethods { get; set; }
 	}
 }

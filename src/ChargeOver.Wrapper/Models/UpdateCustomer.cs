@@ -49,7 +49,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// Customer type ID #
 		/// </summary>
 		[JsonProperty("custtype_id")]
-		public int? CusttypeId { get; set; }
+		public int? CustomerTypeId { get; set; }
 		/// <summary>
 		/// Flag to disable charging of taxes
 		/// </summary>
@@ -89,7 +89,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// Billing address postal code
 		/// </summary>
 		[JsonProperty("bill_postcode")]
-		public string BillPostcode { get; set; }
+		public string BillPostalCode { get; set; }
 		/// <summary>
 		/// Billing address country
 		/// </summary>
@@ -124,7 +124,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// Shipping address postal code
 		/// </summary>
 		[JsonProperty("ship_postcode")]
-		public string ShipPostcode { get; set; }
+		public string ShipPostalCode { get; set; }
 		/// <summary>
 		/// Shipping address country
 		/// </summary>
@@ -174,16 +174,16 @@ namespace  ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("superuser_name")]
-		public string SuperuserName { get; set; }
+		public string SuperUserName { get; set; }
 		/// <summary>
 		/// 
 		/// </summary>
 		[JsonProperty("superuser_email")]
-		public string SuperuserEmail { get; set; }
+		public string SuperUserEmail { get; set; }
 		/// <summary>
 		/// 
 		/// </summary>
 		[JsonProperty("superuser_phone")]
-		public string SuperuserPhone { get; set; }
+		public string SuperUserPhone { get; set; }
 	}
 }

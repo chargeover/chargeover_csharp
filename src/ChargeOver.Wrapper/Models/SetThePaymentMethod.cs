@@ -8,12 +8,12 @@ namespace  ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("paymethod")]
-		public string Paymethod { get; set; }
+		public string PayMethod { get; set; }
 		/// <summary>
 		/// 
 		/// </summary>
 		[JsonProperty("creditcard_id")]
-		public int CreditcardId { get; set; }
+		public int CreditCardId { get; set; }
 		/// <summary>
 		/// 
 		/// </summary>

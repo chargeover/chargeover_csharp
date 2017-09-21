@@ -7,13 +7,13 @@ namespace ChargeOver.Wrapper.Models
 		[JsonProperty("tierset_id")]
 		public int TiersetId { get; set; }
 		[JsonProperty("setup")]
-		public int Setup { get; set; }
+		public double Setup { get; set; }
 		[JsonProperty("base")]
 		public double Base { get; set; }
 		[JsonProperty("paycycle")]
-		public string Paycycle { get; set; }
+		public string PayCycle { get; set; }
 		[JsonProperty("pricemodel")]
-		public string Pricemodel { get; set; }
+		public string PriceModel { get; set; }
 		[JsonProperty("write_datetime")]
 		public string WriteDatetime { get; set; }
 		[JsonProperty("mod_datetime")]
@@ -24,5 +24,7 @@ namespace ChargeOver.Wrapper.Models
 		public string BaseFormatted { get; set; }
 		[JsonProperty("pricemodel_desc")]
 		public string PricemodelDesc { get; set; }
+		[JsonProperty("tiers")]
+		public Tier[] Tiers { get; set; }
 	}
 }

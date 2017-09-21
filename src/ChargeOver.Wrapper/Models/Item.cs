@@ -63,6 +63,6 @@ namespace ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("pricemodel")]
-		public ItemPricemodel Pricemodel { get; set; }
+		public ItemPriceModel PriceModel { get; set; }
 	}
 }

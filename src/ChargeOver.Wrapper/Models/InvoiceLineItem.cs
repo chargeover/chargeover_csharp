@@ -7,7 +7,7 @@ namespace ChargeOver.Wrapper.Models
 		[JsonProperty("item_id")]
 		public int ItemId { get; set; }
 		[JsonProperty("descrip")]
-		public string Descrip { get; set; }
+		public string Description { get; set; }
 		[JsonProperty("line_rate")]
 		public float LineRate { get; set; }
 		[JsonProperty("line_quantity")]

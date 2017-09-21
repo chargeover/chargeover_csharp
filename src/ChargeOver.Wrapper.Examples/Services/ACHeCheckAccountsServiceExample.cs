@@ -25,7 +25,7 @@ namespace ChargeOver.Wrapper.Examples.Services
 
 			var result = _service.StoreACHAccount(request);
 
-			if (!result.IsSuccess()) throw new Exception("Store ACHe failed.");
+			if (!result.IsSuccess()) throw new Exception("Store ACH failed.");
 
 			Console.WriteLine("ACHe with id: " + result.Id);
 		}

@@ -40,8 +40,41 @@ namespace ChargeOver.Wrapper.Examples.Services
 			var subscription = new Subscription
 			{
 				CustomerId = TakeCustomerId(),
-				HolduntilDatetime = DateTime.Parse("2013-10-01")
+				HoldUntilDatetime = DateTime.Parse("2018-10-01")
 			};
+
+			var line1 = new SubscriptionLineItem
+			{
+				ItemId = 1,
+				Tierset = new Tierset
+				{
+					Base = 25.95, 
+					PriceModel = "vol", 
+					Setup = 100.0,
+					Tiers = new[] {
+						new Tier
+						{
+							UnitFrom = 1, 
+							UnitTo = 10, 
+							Amount = 2.95
+						},
+						new Tier
+						{
+							UnitFrom = 11,
+							UnitTo = 20,
+							Amount = 1.95
+						}
+					}
+				}
+			};
+
+			var line2 = new SubscriptionLineItem
+			{
+				ItemId = 2
+			};
+
+			subscription.LineItems = new[] { line1, line2 };
+
 			var result = _service.CreateSubscription(subscription);
 			return result;
 		}

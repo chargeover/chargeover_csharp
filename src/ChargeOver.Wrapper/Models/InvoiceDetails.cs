@@ -14,7 +14,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// Invoice reference number
 		/// </summary>
 		[JsonProperty("refnumber")]
-		public string Refnumber { get; set; }
+		public string RefNumber { get; set; }
 		/// <summary>
 		/// External key value
 		/// </summary>
@@ -119,7 +119,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// Billing address postal code
 		/// </summary>
 		[JsonProperty("bill_postcode")]
-		public string BillPostcode { get; set; }
+		public string BillPostalCode { get; set; }
 		/// <summary>
 		/// Billing address country
 		/// </summary>
@@ -164,7 +164,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("ship_postcode")]
-		public string ShipPostcode { get; set; }
+		public string ShipPostalCode { get; set; }
 		/// <summary>
 		/// 
 		/// </summary>
@@ -209,12 +209,12 @@ namespace  ChargeOver.Wrapper.Models
 		/// URL to view the invoice
 		/// </summary>
 		[JsonProperty("url_permalink")]
-		public string UrlPermalink { get; set; }
+		public string UrlPermaLink { get; set; }
 		/// <summary>
 		/// URL to download the invoice PDF
 		/// </summary>
 		[JsonProperty("url_pdflink")]
-		public string UrlPdflink { get; set; }
+		public string UrlPdfLink { get; set; }
 		/// <summary>
 		/// URL to pay for the invoice
 		/// </summary>

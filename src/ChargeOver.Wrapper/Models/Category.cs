@@ -8,7 +8,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// Item category ID #
 		/// </summary>
 		[JsonProperty("item_category_id")]
-		public int? ItemCategoryId { get; set; }
+		public int? CategoryId { get; set; }
 		/// <summary>
 		/// Category name
 		/// </summary>

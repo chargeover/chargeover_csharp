@@ -33,6 +33,6 @@ namespace  ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("template_opts")]
-		public string TemplateOpts { get; set; }
+		public string TemplateOptions { get; set; }
 	}
 }

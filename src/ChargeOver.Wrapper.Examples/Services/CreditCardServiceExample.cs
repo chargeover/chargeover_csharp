@@ -19,13 +19,13 @@ namespace ChargeOver.Wrapper.Examples.Services
 			{
 				CustomerId = 1,
 				Number = "4111 1111 1111 1111",
-				ExpdateYear = (DateTime.UtcNow.Year + 1).ToString(),
-				ExpdateMonth = "11",
+				ExpirationDateYear = (DateTime.UtcNow.Year + 1).ToString(),
+				ExpirationDateMonth = "11",
 				Name = "Keith Palmer",
 				Address = "72 E Blue Grass Road",
 				City = "Willington",
-				//state = "CT"
-				Postcode = "06279",
+				State = "CT",
+				PostalCode = "06279",
 				Country = "United States",
 			};
 

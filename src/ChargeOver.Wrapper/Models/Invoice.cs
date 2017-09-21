@@ -9,7 +9,7 @@ namespace ChargeOver.Wrapper.Models
 		/// Invoice reference number
 		/// </summary>
 		[JsonProperty("refnumber")]
-		public string Refnumber { get; set; }
+		public string RefNumber { get; set; }
 		/// <summary>
 		/// External key value
 		/// </summary>
@@ -69,7 +69,7 @@ namespace ChargeOver.Wrapper.Models
 		/// Billing address postal code
 		/// </summary>
 		[JsonProperty("bill_postcode")]
-		public string BillPostcode { get; set; }
+		public string BillPostalCode { get; set; }
 		/// <summary>
 		/// Billing address country
 		/// </summary>
@@ -109,7 +109,7 @@ namespace ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("ship_postcode")]
-		public string ShipPostcode { get; set; }
+		public string ShipPostalCode { get; set; }
 		/// <summary>
 		/// 
 		/// </summary>

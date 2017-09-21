@@ -25,20 +25,29 @@ namespace ChargeOver.Wrapper.Examples.Services
 			{
 				Amount = 10,
 				CustomerId = customerId,
-				Paymentods = new[]
+				PayMethods = new[]
 				{
-					new Paymentod
+					new PayMethod
 					{
-						CreditcardId = creditcardId
+						CreditCardId = creditcardId
 					}
 				}
 			};
 
-			var result = _transactionsService.AttemptPayment(request);
+			try
+			{
+				var result = _transactionsService.AttemptPayment(request);
 
-			if (!result.IsSuccess()) throw new Exception("Attempt payment failed.");
+				if (!result.IsSuccess()) throw new Exception("Attempt payment failed.");
 
-			Console.WriteLine("Payment attempt with id: " + result.Id);
+				Console.WriteLine("Payment attempt with id: " + result.Id);
+			}
+			catch (Exception)
+			{
+				
+			}
+
+
 		}
 
 		private int AddCustomer()
@@ -59,13 +68,13 @@ namespace ChargeOver.Wrapper.Examples.Services
 			{
 				CustomerId = customerId,
 				Number = "4111 1111 1111 1111",
-				ExpdateYear = (DateTime.UtcNow.Year + 1).ToString(),
-				ExpdateMonth = "11",
+				ExpirationDateYear = (DateTime.UtcNow.Year + 1).ToString(),
+				ExpirationDateMonth = "11",
 				Name = "Keith Palmer",
 				Address = "72 E Blue Grass Road",
 				City = "Willington",
-				//state = "CT"
-				Postcode = "06279",
+				State = "CT",
+				PostalCode = "06279",
 				Country = "United States",
 			}).Id;
 		}

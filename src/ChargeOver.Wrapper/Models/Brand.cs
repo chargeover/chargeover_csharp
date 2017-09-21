@@ -38,7 +38,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// Postal code
 		/// </summary>
 		[JsonProperty("brand_postcode")]
-		public string BrandPostcode { get; set; }
+		public string BrandPostalCode { get; set; }
 		/// <summary>
 		/// Country
 		/// </summary>

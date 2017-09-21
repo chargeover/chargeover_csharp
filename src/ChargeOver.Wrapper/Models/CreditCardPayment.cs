@@ -13,12 +13,12 @@ namespace  ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("expdate_year")]
-		public string ExpdateYear { get; set; }
+		public string ExpirationDateYear { get; set; }
 		/// <summary>
 		/// 
 		/// </summary>
 		[JsonProperty("expdate_month")]
-		public string ExpdateMonth { get; set; }
+		public string ExpirationDateMonth { get; set; }
 		/// <summary>
 		/// 
 		/// </summary>
@@ -43,7 +43,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("postcode")]
-		public string Postcode { get; set; }
+		public string PostalCode { get; set; }
 		/// <summary>
 		/// 
 		/// </summary>

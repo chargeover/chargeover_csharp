@@ -29,17 +29,17 @@ namespace  ChargeOver.Wrapper.Models
 		/// Expiration date
 		/// </summary>
 		[JsonProperty("expdate")]
-		public string Expdate { get; set; }
+		public string ExpirationDate { get; set; }
 		/// <summary>
 		/// Expiration year (only required if you do not provide expdate)
 		/// </summary>
 		[JsonProperty("expdate_year")]
-		public string ExpdateYear { get; set; }
+		public string ExpirationDateYear { get; set; }
 		/// <summary>
 		/// Expiration month (only required if you do not provide expdate)
 		/// </summary>
 		[JsonProperty("expdate_month")]
-		public string ExpdateMonth { get; set; }
+		public string ExpirationDateMonth { get; set; }
 		/// <summary>
 		/// Billing street address
 		/// </summary>
@@ -51,10 +51,15 @@ namespace  ChargeOver.Wrapper.Models
 		[JsonProperty("city")]
 		public string City { get; set; }
 		/// <summary>
+		/// Billing state
+		/// </summary>
+		[JsonProperty("state")]
+		public string State { get; set; }
+		/// <summary>
 		/// Billing postal code
 		/// </summary>
 		[JsonProperty("postcode")]
-		public string Postcode { get; set; }
+		public string PostalCode { get; set; }
 		/// <summary>
 		/// Billing country
 		/// </summary>

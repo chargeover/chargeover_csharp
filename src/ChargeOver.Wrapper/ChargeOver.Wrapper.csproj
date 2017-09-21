@@ -50,7 +50,7 @@
     <Compile Include="Models\ACHCheckPayment.cs" />
     <Compile Include="Models\AddContact.cs" />
     <Compile Include="Models\AdminWorkers.cs" />
-    <Compile Include="Models\AppliedInvoide.cs" />
+    <Compile Include="Models\AppliedInvoice.cs" />
     <Compile Include="Models\ApplyOpenCustomerBalance.cs" />
     <Compile Include="Models\AttemptInvoiceData.cs" />
     <Compile Include="Models\AttemptPayment.cs" />
@@ -67,8 +67,8 @@
     <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Currency.cs" />
-    <Compile Include="Models\Paymentod.cs" />
-    <Compile Include="Models\SubscriptionLiteItem.cs" />
+    <Compile Include="Models\PayMethod.cs" />
+    <Compile Include="Models\SubscriptionLineItem.cs" />
     <Compile Include="Models\Term.cs" />
     <Compile Include="Models\Log.cs" />
     <Compile Include="Models\NoteDetails.cs" />
@@ -87,7 +87,7 @@
     <Compile Include="Models\EmailInvoice.cs" />
     <Compile Include="Models\InvoiceLineItem.cs" />
     <Compile Include="Models\Item.cs" />
-    <Compile Include="Models\ItemPricemodel.cs" />
+    <Compile Include="Models\ItemPriceModel.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\Payment.cs" />
@@ -165,6 +165,7 @@
     <Compile Include="Services\TransactionsService.cs" />
     <Compile Include="Services\UsageService.cs" />
     <Compile Include="Services\UsersContactsService.cs" />
+    <Compile Include="Models\Tier.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

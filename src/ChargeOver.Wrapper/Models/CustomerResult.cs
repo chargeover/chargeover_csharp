@@ -19,17 +19,12 @@ namespace  ChargeOver.Wrapper.Models
 		/// Main contact ID #
 		/// </summary>
 		[JsonProperty("superuser_id")]
-		public int? SuperuserId { get; set; }
+		public int? SuperUserId { get; set; }
 		/// <summary>
 		/// External key value
 		/// </summary>
 		[JsonProperty("external_key")]
 		public string ExternalKey { get; set; }
-		/// <summary>
-		/// Deprecated
-		/// </summary>
-		[JsonProperty("display_as")]
-		public string DisplayAs { get; set; }
 		/// <summary>
 		/// Company/customer name
 		/// </summary>
@@ -79,7 +74,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// Customer type ID #
 		/// </summary>
 		[JsonProperty("custtype_id")]
-		public int? CusttypeId { get; set; }
+		public int? CustomerTypeId { get; set; }
 		/// <summary>
 		/// Flag to disable charging of taxes
 		/// </summary>
@@ -94,37 +89,37 @@ namespace  ChargeOver.Wrapper.Models
 		/// Main contact username
 		/// </summary>
 		[JsonProperty("superuser_username")]
-		public string SuperuserUsername { get; set; }
+		public string SuperUserUsername { get; set; }
 		/// <summary>
 		/// Main contact e-mail address
 		/// </summary>
 		[JsonProperty("superuser_email")]
-		public string SuperuserEmail { get; set; }
+		public string SuperUserEmail { get; set; }
 		/// <summary>
 		/// Main contact name
 		/// </summary>
 		[JsonProperty("superuser_name")]
-		public string SuperuserName { get; set; }
+		public string SuperUserName { get; set; }
 		/// <summary>
 		/// Main contact first name
 		/// </summary>
 		[JsonProperty("superuser_first_name")]
-		public string SuperuserFirstName { get; set; }
+		public string SuperUserFirstName { get; set; }
 		/// <summary>
 		/// Main contact last name
 		/// </summary>
 		[JsonProperty("superuser_last_name")]
-		public string SuperuserLastName { get; set; }
+		public string SuperUserLastName { get; set; }
 		/// <summary>
 		/// Main contact phone number
 		/// </summary>
 		[JsonProperty("superuser_phone")]
-		public string SuperuserPhone { get; set; }
+		public string SuperUserPhone { get; set; }
 		/// <summary>
 		/// Main contact token
 		/// </summary>
 		[JsonProperty("superuser_token")]
-		public string SuperuserToken { get; set; }
+		public string SuperUserToken { get; set; }
 		/// <summary>
 		/// Billing address line 1
 		/// </summary>
@@ -154,7 +149,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// Billing address postal code
 		/// </summary>
 		[JsonProperty("bill_postcode")]
-		public string BillPostcode { get; set; }
+		public string BillPostalCode { get; set; }
 		/// <summary>
 		/// Billing address country
 		/// </summary>
@@ -194,7 +189,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// Shipping address postal code
 		/// </summary>
 		[JsonProperty("ship_postcode")]
-		public string ShipPostcode { get; set; }
+		public string ShipPostalCode { get; set; }
 		/// <summary>
 		/// Shipping address country
 		/// </summary>
@@ -289,7 +284,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// URL the customer can visit to update their payment method
 		/// </summary>
 		[JsonProperty("url_paymethodlink")]
-		public string UrlPaymethodlink { get; set; }
+		public string UrlPaymethodLink { get; set; }
 		/// <summary>
 		/// URL for viewing the customer in the GUI
 		/// </summary>

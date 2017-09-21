@@ -36,8 +36,8 @@ namespace ChargeOver.Wrapper.Examples.Services
 				BillAddr1 = "16 Dog Lane",
 				BillAddr2 = "Suite D",
 				BillCity = "Storrs",
-				SuperuserName = "Name",
-				SuperuserEmail = "mail@mail.com"
+				SuperUserName = "Name",
+				SuperUserEmail = "mail@mail.com"
 			};
 
 			var result = _service.CreateCustomer(customer);

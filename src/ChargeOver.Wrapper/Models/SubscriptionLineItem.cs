@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace ChargeOver.Wrapper.Models
 {
-	public sealed class SubscriptionLiteItem
+	public sealed class SubscriptionLineItem
 	{
 		[JsonProperty("item_id")]
 		public int ItemId { get; set; }
@@ -14,10 +14,8 @@ namespace ChargeOver.Wrapper.Models
 		[JsonProperty("nickname")]
 		public string Nickname { get; set; }
 		[JsonProperty("descrip")]
-		public string Descrip { get; set; }
+		public string Description { get; set; }
 		[JsonProperty("trial_days")]
-		public string TrialDays { get; set; }
-		[JsonProperty("trial_units")]
 		public string TrialUnits { get; set; }
 		[JsonProperty("custom_1")]
 		public string Custom1 { get; set; }
