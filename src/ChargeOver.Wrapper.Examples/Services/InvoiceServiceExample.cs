@@ -66,7 +66,7 @@ namespace ChargeOver.Wrapper.Examples.Services
 
 		private void QueryInvoiceByInvoiceId()
 		{
-			var result = _service.QueryForInvoices(new[] { "invoice_id:EQUALS:" + CreateNewInvoice().Id });
+			var result = _service.QueryInvoices(new[] { "invoice_id:EQUALS:" + CreateNewInvoice().Id });
 
 			Console.WriteLine($"Invoices found by id: {result.Response.Count()}");
 		}

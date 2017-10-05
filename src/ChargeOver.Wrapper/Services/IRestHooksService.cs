@@ -8,12 +8,12 @@ namespace ChargeOver.Wrapper.Services
 		/// Subscribing
 		/// details: https://developer.chargeover.com/apidocs/rest/#subscribe-resthook
 		/// </summary>
-		IIdentityResponse Subscribing(Subscribing request);
+		IIdentityResponse Subscribe(Subscribing request);
 
 		/// <summary>
 		/// Unsubscribing
 		/// details: https://developer.chargeover.com/apidocs/rest/#unsubscribe-resthook
 		/// </summary>
-		IResponse Unsubscribing(int id);
+		IResponse Unsubscribe(int id);
 	}
 }

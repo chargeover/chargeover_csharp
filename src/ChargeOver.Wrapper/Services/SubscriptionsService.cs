@@ -34,7 +34,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a specific subscription
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-subscription
 		/// </summary>
-		public ICustomResponse<SubscriptionDetails> GetSpecificSubscription(int id)
+		public ICustomResponse<SubscriptionDetails> GetSubscription(int id)
 		{
 			return GetCustom<SubscriptionDetails>("package", id);
 		}
@@ -43,7 +43,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Querying for subscriptions
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-subscription
 		/// </summary>
-		public IResponse<Subscription> QueryingForSubscriptions(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
+		public IResponse<Subscription> QuerySubscriptions(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
 			return Query<Subscription>("package", queries, orders, offset, limit);
 		}
@@ -52,7 +52,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Upgrade/downgrade a subscription
 		/// details: https://developer.chargeover.com/apidocs/rest/#subscription-upgrade-downgrade
 		/// </summary>
-		public ICustomResponse<bool> UpgradeDowngradesubscription(int id, UpgradeDowngradesubscription request)
+		public ICustomResponse<bool> UpgradeDowngradeSubscription(int id, UpgradeDowngradesubscription request)
 		{
 			return GetCustomBool($"/package/{id}?action=upgrade", request);
 		}
@@ -106,7 +106,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Set the payment method
 		/// details: https://developer.chargeover.com/apidocs/rest/#example-package-set-paymethod
 		/// </summary>
-		public ICustomResponse<bool> SetThePaymentMethod(int id, SetThePaymentMethod request)
+		public ICustomResponse<bool> SetPaymentMethod(int id, SetThePaymentMethod request)
 		{
 			return GetCustomBool($"/package/{id}?action=paymethod", request);
 		}

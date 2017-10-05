@@ -35,7 +35,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a specific invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-for-invoices
 		/// </summary>
-		public ICustomResponse<InvoiceDetails> GetSpecificInvoice(int id)
+		public ICustomResponse<InvoiceDetails> GetInvoice(int id)
 		{
 			return GetCustom<InvoiceDetails>("invoice", id);
 		}
@@ -44,7 +44,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Query for invoices
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-for-invoices
 		/// </summary>
-		public IResponse<InvoiceDetails> QueryForInvoices(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
+		public IResponse<InvoiceDetails> QueryInvoices(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
 			return Query<InvoiceDetails>("invoice", queries, orders, offset, limit);
 		}

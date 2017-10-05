@@ -49,14 +49,14 @@ namespace ChargeOver.Wrapper.Examples.Services
 
 		private void QueryCustomerByName()
 		{
-			var result = _service.QueryForCustomers(new[] { "company:EQUALS:Name" });
+			var result = _service.QueryCustomers(new[] { "company:EQUALS:Name" });
 
 			Console.WriteLine($"Customers found 'by name': {result.Response.Count()}");
 		}
 
 		private void QueryCustomerByEmail()
 		{
-			var result = _service.QueryForCustomers(new[] { "superuser_email:EQUALS:mail@mail.com" });
+			var result = _service.QueryCustomers(new[] { "superuser_email:EQUALS:mail@mail.com" });
 
 			Console.WriteLine($"Customers found 'by email': {result.Response.Count()}");
 		}

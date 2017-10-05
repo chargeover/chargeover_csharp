@@ -83,7 +83,7 @@ namespace ChargeOver.Wrapper.Examples.Services
 		private void GetSubscriptionByPackageId()
 		{
 			var subscription = CreateNewSubscription();
-			var result = _service.QueryingForSubscriptions(new[] { "package_id:EQUALS:" + subscription.Id });
+			var result = _service.QuerySubscriptions(new[] { "package_id:EQUALS:" + subscription.Id });
 
 			Console.WriteLine($"Subscriptions found 'by id': {result.Response.Count()}");
 		}

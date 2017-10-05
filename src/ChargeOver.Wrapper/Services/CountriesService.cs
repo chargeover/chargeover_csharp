@@ -16,7 +16,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Retrieve country list
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-country
 		/// </summary>
-		public IResponse<Country> RetrieveCountryList()
+		public IResponse<Country> ListCountries()
 		{
 			return GetList<Country>("country");
 		}

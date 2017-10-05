@@ -25,16 +25,28 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a specific contact
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-users
 		/// </summary>
-		public ICustomResponse<ContactDetails> GetSpecificContact(int id)
+		public ICustomResponse<ContactDetails> GetContact(int id)
 		{
 			return GetCustom<ContactDetails>("user", id);
+		}
+
+		/// <summary>
+		/// Update a contact 
+		/// details: 
+		/// </summary>
+		/// <returns>The contact.</returns>
+		/// <param name="id">Identifier.</param>
+		/// <param name="request">Request.</param>
+		public IIdentityResponse UpdateContact(int id, Contact request)
+		{
+			return new IdentityResponse(Request<Contact, IdentityChargeOverResponse>(MethodType.PUT, "/user/" + id, request));
 		}
 
 		/// <summary>
 		/// Get a list of contacts
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-users
 		/// </summary>
-		public IResponse<Contact> GetListContacts()
+		public IResponse<Contact> ListContacts()
 		{
 			return GetList<Contact>("user");
 		}
@@ -70,7 +82,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Log in a user
 		/// details: https://developer.chargeover.com/apidocs/rest/#login-a-user
 		/// </summary>
-		public ICustomResponse<string> LogInUser(int id)
+		public ICustomResponse<string> LogIn(int id)
 		{
 			return new CustomResponse<string>(Request<object, CustomChargeOverResponse<string>>(MethodType.POST, $"/user/{id}?action=login", null));
 		}

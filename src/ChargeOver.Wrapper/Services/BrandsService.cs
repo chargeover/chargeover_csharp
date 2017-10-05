@@ -16,7 +16,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Retrieve brand list
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-brand
 		/// </summary>
-		public IResponse<Brand> RetrieveBrandList()
+		public IResponse<Brand> ListBrands()
 		{
 			return GetList<Brand>("brand");
 		}

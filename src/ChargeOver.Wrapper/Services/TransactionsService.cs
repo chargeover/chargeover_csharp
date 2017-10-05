@@ -26,7 +26,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a specific transaction
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-transaction
 		/// </summary>
-		public ICustomResponse<TransactionDetails> GetSpecificTransaction(int id)
+		public ICustomResponse<TransactionDetails> GetTransaction(int id)
 		{
 			return GetCustom<TransactionDetails>("transaction", id);
 		}
@@ -44,7 +44,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Query for transactions
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-for-transactions
 		/// </summary>
-		public IResponse<Transaction> QueryForTransactions(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
+		public IResponse<Transaction> QueryTransactions(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
 			return Query<Transaction>("transaction", queries, orders, offset, limit);
 		}

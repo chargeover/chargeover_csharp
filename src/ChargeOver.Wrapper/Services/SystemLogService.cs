@@ -16,7 +16,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Retrieve the system log
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-syslog
 		/// </summary>
-		public IResponse<Log> RetrieveTheSystemLog()
+		public IResponse<Log> ListSystemLogs()
 		{
 			return GetList<Log>("_log_system");
 		}

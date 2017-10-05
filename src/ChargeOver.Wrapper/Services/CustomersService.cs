@@ -34,7 +34,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a list of Customers
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-customers
 		/// </summary>
-		public IResponse<CustomerResult> GetListCustomers()
+		public IResponse<CustomerResult> ListCustomers()
 		{
 			return GetList<CustomerResult>("customer");
 		}
@@ -43,7 +43,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Query for Customers
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-for-customers
 		/// </summary>
-		public IResponse<CustomerResult> QueryForCustomers(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
+		public IResponse<CustomerResult> QueryCustomers(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
 			return Query<CustomerResult>("customer", queries, orders, offset, limit);
 		}

@@ -14,13 +14,13 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a specific contact
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-users
 		/// </summary>
-		ICustomResponse<ContactDetails> GetSpecificContact(int id);
+		ICustomResponse<ContactDetails> GetContact(int id);
 
 		/// <summary>
 		/// Get a list of contacts
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-users
 		/// </summary>
-		IResponse<Contact> GetListContacts();
+		IResponse<Contact> ListContacts();
 
 		/// <summary>
 		/// Query for contacts
@@ -44,7 +44,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Log in a user
 		/// details: https://developer.chargeover.com/apidocs/rest/#login-a-user
 		/// </summary>
-		ICustomResponse<string> LogInUser(int id);
+		ICustomResponse<string> LogIn(int id);
 
 		/// <summary>
 		/// Delete a contact

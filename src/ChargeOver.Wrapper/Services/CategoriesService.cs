@@ -16,7 +16,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Query for categories
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-category
 		/// </summary>
-		public IResponse QueryForCategories(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
+		public IResponse QueryCategories(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
 			return Query<Category>("item_category", queries, orders, offset, limit);
 		}

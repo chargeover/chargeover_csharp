@@ -20,13 +20,13 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a specific invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-for-invoices
 		/// </summary>
-		ICustomResponse<InvoiceDetails> GetSpecificInvoice(int id);
+		ICustomResponse<InvoiceDetails> GetInvoice(int id);
 
 		/// <summary>
 		/// Query for invoices
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-for-invoices
 		/// </summary>
-		IResponse<InvoiceDetails> QueryForInvoices(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10);
+		IResponse<InvoiceDetails> QueryInvoices(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10);
 
 		/// <summary>
 		/// Credit card payment (specify card details)

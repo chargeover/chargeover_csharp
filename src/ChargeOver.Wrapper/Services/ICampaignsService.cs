@@ -8,6 +8,6 @@ namespace ChargeOver.Wrapper.Services
 		/// Retrieve campaign list
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-campaign
 		/// </summary>
-		IResponse<Campaign> RetrieveCampaignList();
+		IResponse<Campaign> ListCampaigns();
 	}
 }

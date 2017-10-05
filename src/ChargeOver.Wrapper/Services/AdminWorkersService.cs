@@ -16,7 +16,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a list of admin workers
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-admins
 		/// </summary>
-		public IResponse<AdminWorkers> GetListAdminWorkers()
+		public IResponse<AdminWorkers> ListAdminWorkers()
 		{
 			return GetList<AdminWorkers>("admin");
 		}
@@ -25,7 +25,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Query for admin workers
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-admins
 		/// </summary>
-		public IResponse<AdminWorkers> QueryForAdminWorkers(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
+		public IResponse<AdminWorkers> QueryAdminWorkers(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
 			return Query<AdminWorkers>("admin", queries, orders, offset, limit);
 		}
@@ -34,7 +34,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a specific admin worker
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-admin
 		/// </summary>
-		public ICustomResponse<AdminWorkers> GetSpecificAdminWorker(int id)
+		public ICustomResponse<AdminWorkers> GetAdminWorker(int id)
 		{
 			return GetCustom<AdminWorkers>("admin", id);
 		}

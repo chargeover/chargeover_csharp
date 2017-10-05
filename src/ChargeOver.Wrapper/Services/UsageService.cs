@@ -16,7 +16,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Storing Usage Data
 		/// details: https://developer.chargeover.com/apidocs/rest/#create-usage
 		/// </summary>
-		public IIdentityResponse StoringUsageData(StoringUsageData request)
+		public IIdentityResponse StoreUsageData(StoringUsageData request)
 		{
 			return Create("usage", request);
 		}

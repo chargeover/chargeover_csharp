@@ -16,7 +16,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Subscribing
 		/// details: https://developer.chargeover.com/apidocs/rest/#subscribe-resthook
 		/// </summary>
-		public IIdentityResponse Subscribing(Subscribing request)
+		public IIdentityResponse Subscribe(Subscribing request)
 		{
 			return Create("/_resthook", request);
 		}
@@ -25,7 +25,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Unsubscribing
 		/// details: https://developer.chargeover.com/apidocs/rest/#unsubscribe-resthook
 		/// </summary>
-		public IResponse Unsubscribing(int id)
+		public IResponse Unsubscribe(int id)
 		{
 			return Delete("_resthook", id);
 		}

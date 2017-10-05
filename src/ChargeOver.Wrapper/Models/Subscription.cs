@@ -6,6 +6,10 @@ namespace ChargeOver.Wrapper.Models
 	public sealed class Subscription
 	{
 		/// <summary>
+		/// Package ID #
+		/// </summary>
+		[JsonProperty("package_id")]
+		public int? PackageId { get; set; }/// <summary>
 		/// Customer ID #
 		/// </summary>
 		[JsonProperty("customer_id")]

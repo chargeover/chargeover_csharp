@@ -14,6 +14,6 @@ namespace ChargeOver.Wrapper.Services
 		/// Querying for items
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-item
 		/// </summary>
-		IResponse<ItemDetails> QueryingForItems(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10);
+		IResponse<ItemDetails> QueryItems(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10);
 	}
 }

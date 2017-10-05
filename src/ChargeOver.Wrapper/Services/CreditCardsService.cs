@@ -25,7 +25,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Querying for credit cards
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-card
 		/// </summary>
-		public IResponse<CreditCardDetails> QueryingForCreditCards(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
+		public IResponse<CreditCardDetails> QueryCreditCards(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
 			return Query<CreditCardDetails>("creditcard", queries, orders, offset, limit);
 		}

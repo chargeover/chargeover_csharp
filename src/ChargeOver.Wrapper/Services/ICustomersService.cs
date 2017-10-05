@@ -20,13 +20,13 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a list of Customers
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-customers
 		/// </summary>
-		IResponse<CustomerResult> GetListCustomers();
+		IResponse<CustomerResult> ListCustomers();
 
 		/// <summary>
 		/// Query for Customers
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-for-customers
 		/// </summary>
-		IResponse<CustomerResult> QueryForCustomers(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10);
+		IResponse<CustomerResult> QueryCustomers(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10);
 
 		/// <summary>
 		/// Delete a Customer

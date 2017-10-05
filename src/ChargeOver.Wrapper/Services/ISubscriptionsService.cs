@@ -20,19 +20,19 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a specific subscription
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-subscription
 		/// </summary>
-		ICustomResponse<SubscriptionDetails> GetSpecificSubscription(int id);
+		ICustomResponse<SubscriptionDetails> GetSubscription(int id);
 
 		/// <summary>
 		/// Querying for subscriptions
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-subscription
 		/// </summary>
-		IResponse<Subscription> QueryingForSubscriptions(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10);
+		IResponse<Subscription> QuerySubscriptions(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10);
 
 		/// <summary>
 		/// Upgrade/downgrade a subscription
 		/// details: https://developer.chargeover.com/apidocs/rest/#subscription-upgrade-downgrade
 		/// </summary>
-		ICustomResponse<bool> UpgradeDowngradesubscription(int id, UpgradeDowngradesubscription request);
+		ICustomResponse<bool> UpgradeDowngradeSubscription(int id, UpgradeDowngradesubscription request);
 
 		/// <summary>
 		/// Change pricing on a subscription
@@ -68,7 +68,7 @@ namespace ChargeOver.Wrapper.Services
 		/// Set the payment method
 		/// details: https://developer.chargeover.com/apidocs/rest/#example-package-set-paymethod
 		/// </summary>
-		ICustomResponse<bool> SetThePaymentMethod(int id, SetThePaymentMethod request);
+		ICustomResponse<bool> SetPaymentMethod(int id, SetThePaymentMethod request);
 
 		/// <summary>
 		/// Send a welcome e-mail

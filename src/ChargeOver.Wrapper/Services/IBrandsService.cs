@@ -8,6 +8,6 @@ namespace ChargeOver.Wrapper.Services
 		/// Retrieve brand list
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-brand
 		/// </summary>
-		IResponse<Brand> RetrieveBrandList();
+		IResponse<Brand> ListBrands();
 	}
 }
