@@ -12,5 +12,11 @@ namespace ChargeOver.Wrapper.Models
 		public float LineItemId { get; set; }
 		[JsonProperty("line_quantity")]
 		public int LineQuantity { get; set; }
+		[JsonProperty("subscribe_prorate")]
+        	public bool Prorate{get;set;}
+        	[JsonProperty("external_key")]
+        	public string ExternalKey { get; set; }
+        	[JsonProperty("subscribe_prorate_cycle")]
+        	public string ProrateCycle { get; set; }
 	}
 }
