@@ -10,5 +10,7 @@ namespace ChargeOver.Wrapper.Models
 		public double UnitTo { get; set; }
 		[JsonProperty("amount")]
 		public double Amount { get; set; }
+		[JsonProperty("tier_id")]
+        	public int Id { get; set; }
 	}
 }
