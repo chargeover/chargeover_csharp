@@ -21,13 +21,13 @@ namespace TestsChargeOver.Wrapper.Services
 			{
 				CustomerId = 1,
 				Number = "4111 1111 1111 1111",
-				ExpdateYear = (DateTime.UtcNow.Year + 1).ToString(),
-				ExpdateMonth = "11",
+				ExpirationDateYear = (DateTime.UtcNow.Year + 1).ToString(),
+				ExpirationDateMonth = "11",
 				Name = "Keith Palmer",
 				Address = "72 E Blue Grass Road",
 				City = "Willington",
 				//state = "CT"
-				Postcode = "06279",
+				PostalCode = "06279",
 				Country = "United States",
 			};
 			//act
@@ -43,7 +43,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryingForCreditCards();
+			var actual = Sut.QueryCreditCards();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -68,13 +68,13 @@ namespace TestsChargeOver.Wrapper.Services
 			{
 				CustomerId = 1,
 				Number = "4111 1111 1111 1111",
-				ExpdateYear = (DateTime.UtcNow.Year + 1).ToString(),
-				ExpdateMonth = "11",
+				ExpirationDateYear = (DateTime.UtcNow.Year + 1).ToString(),
+				ExpirationDateMonth = "11",
 				Name = "Keith Palmer",
 				Address = "72 E Blue Grass Road",
 				City = "Willington",
 				//state = "CT"
-				Postcode = "06279",
+				PostalCode = "06279",
 				Country = "United States",
 			};
 			//act

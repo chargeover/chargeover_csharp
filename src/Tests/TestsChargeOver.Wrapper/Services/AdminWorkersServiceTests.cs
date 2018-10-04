@@ -18,7 +18,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.GetListAdminWorkers();
+			var actual = Sut.ListAdminWorkers();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -30,7 +30,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryForAdminWorkers();
+			var actual = Sut.QueryAdminWorkers();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -41,9 +41,9 @@ namespace TestsChargeOver.Wrapper.Services
 		public void should_call_GetSpecificAdminWorker()
 		{
 			//arrange
-			var adminWorkers = Sut.GetListAdminWorkers().Response.First();
+			var adminWorkers = Sut.ListAdminWorkers().Response.First();
 			//act
-			var actual = Sut.GetSpecificAdminWorker(adminWorkers.AdminId);
+			var actual = Sut.GetAdminWorker(adminWorkers.AdminId);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

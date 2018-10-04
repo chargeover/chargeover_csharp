@@ -40,7 +40,7 @@ namespace TestsChargeOver.Wrapper.Services
 			//arrange
 			var id = AddContact();
 			//act
-			var actual = Sut.GetSpecificContact(id);
+			var actual = Sut.GetContact(id);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -52,7 +52,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.GetListContacts();
+			var actual = Sut.ListContacts();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -107,7 +107,7 @@ namespace TestsChargeOver.Wrapper.Services
 			//arrange
 			var id = AddContact();
 			//act
-			var actual = Sut.LogInUser(id);
+			var actual = Sut.LogIn(id);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

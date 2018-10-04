@@ -22,7 +22,7 @@ namespace TestsChargeOver.Wrapper.Services
 				Event = "customer.insert",
 			};
 			//act
-			var actual = Sut.Subscribing(request);
+			var actual = Sut.Subscribe(request);
 			//assert
 			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -34,7 +34,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.Unsubscribing(AddSubscription());
+			var actual = Sut.Unsubscribe(AddSubscription());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -49,7 +49,7 @@ namespace TestsChargeOver.Wrapper.Services
 				Event = "customer.insert",
 			};
 
-			return Sut.Subscribing(request).Id;
+			return Sut.Subscribe(request).Id;
 		}
 	}
 }

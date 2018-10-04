@@ -29,7 +29,8 @@ namespace TestsChargeOver.Wrapper.Services
 				TransactionType = "pay",
 				TransactionDetail = "here are some details",
 				TransactionDatetime = DateTime.Parse("2013-06-20 18:48:17"),
-				Comment = "	newest, or 'best fit' invoices (based on amount/date).",
+
+				// newest, or 'best fit' invoices (based on amount/date).
 				AutoApply = "best_fit"
 			};
 			//act
@@ -45,7 +46,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.GetSpecificTransaction(AddTransaction());
+			var actual = Sut.GetTransaction(AddTransaction());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -69,7 +70,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryForTransactions(limit: 5);
+			var actual = Sut.QueryTransactions(limit: 5);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -86,11 +87,11 @@ namespace TestsChargeOver.Wrapper.Services
 			{
 				Amount = 10,
 				CustomerId = customerId,
-				Paymentods = new[]
+				PayMethods = new[]
 				{
-					new Paymentod
+					new PayMethod
 					{
-						CreditcardId = creditcardId
+						CreditCardId = creditcardId
 					}
 				}
 			};
@@ -192,7 +193,8 @@ namespace TestsChargeOver.Wrapper.Services
 				TransactionType = "pay",
 				TransactionDetail = "here are some details",
 				TransactionDatetime = DateTime.Parse("2013-06-20 18:48:17"),
-				Comment = "	newest, or 'best fit' invoices (based on amount/date).",
+
+				// newest, or 'best fit' invoices (based on amount/date).
 				AutoApply = "best_fit"
 			}).Id;
 		}
@@ -215,13 +217,13 @@ namespace TestsChargeOver.Wrapper.Services
 			{
 				CustomerId = customerId,
 				Number = "4111 1111 1111 1111",
-				ExpdateYear = (DateTime.UtcNow.Year + 1).ToString(),
-				ExpdateMonth = "11",
+				ExpirationDateYear = (DateTime.UtcNow.Year + 1).ToString(),
+				ExpirationDateMonth = "11",
 				Name = "Keith Palmer",
 				Address = "72 E Blue Grass Road",
 				City = "Willington",
 				//state = "CT"
-				Postcode = "06279",
+				PostalCode = "06279",
 				Country = "United States",
 			}).Id;
 		}
@@ -232,11 +234,11 @@ namespace TestsChargeOver.Wrapper.Services
 			{
 				Amount = 10,
 				CustomerId = customerId,
-				Paymentods = new[]
+				PayMethods = new[]
 				{
-					new Paymentod
+					new PayMethod
 					{
-						CreditcardId = crediCardId
+						CreditCardId = crediCardId
 					}
 				}
 			}).Id;

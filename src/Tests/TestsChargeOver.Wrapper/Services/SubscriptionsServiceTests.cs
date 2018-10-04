@@ -20,7 +20,7 @@ namespace TestsChargeOver.Wrapper.Services
 			var request = new Subscription
 			{
 				CustomerId = TakeCustomer(),
-				HolduntilDatetime = DateTime.Parse("2013-10-01")
+				HoldUntilDatetime = DateTime.Parse("2013-10-01")
 			};
 			//act
 			var actual = Sut.CreateSubscription(request);
@@ -51,7 +51,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.GetSpecificSubscription(AddSubscription());
+			var actual = Sut.GetSubscription(AddSubscription());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -63,7 +63,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryingForSubscriptions();
+			var actual = Sut.QuerySubscriptions();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -84,16 +84,15 @@ namespace TestsChargeOver.Wrapper.Services
 				{
 					new TrialInvoiceLineItem
 					{
-						Descrip = "A new description goes here",
+						Description = "A new description goes here",
 						ItemId = lineId,
 						LineQuantity = 123,
-						LineItemId = subscription.Item2,
-						TrialDays = 10
+						LineItemId = subscription.Item2
 					}
 				}
 			};
 			//act
-			var actual = Sut.UpgradeDowngradesubscription(subscription.Item1, request);
+			var actual = Sut.UpgradeDowngradeSubscription(subscription.Item1, request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -198,12 +197,12 @@ namespace TestsChargeOver.Wrapper.Services
 			var customerId = TakeCustomer();
 			var request = new SetThePaymentMethod
 			{
-				Paymethod = "crd",
-				CreditcardId = TakeCreditCard(customerId),
+				PayMethod = "crd",
+				CreditCardId = TakeCreditCard(customerId),
 			};
 			//act
 			var addSubscription = AddSubscription(customerId: customerId);
-			var actual = Sut.SetThePaymentMethod(addSubscription, request);
+			var actual = Sut.SetPaymentMethod(addSubscription, request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -237,13 +236,13 @@ namespace TestsChargeOver.Wrapper.Services
 			return Sut.CreateSubscription(new Subscription
 			{
 				CustomerId = customerId,
-				HolduntilDatetime = DateTime.Parse("2013-10-01"),
-				LineItems = new[]
+				HoldUntilDatetime = DateTime.Parse("2013-10-01"),
+				LineItems = new SubscriptionLineItem[]
 				{
-					new InvoiceLineItem
+					new SubscriptionLineItem
 					{
 						ItemId = lineId.Value,
-						Descrip = "desc"
+						Description = "desc"
 					}
 				}
 			}).Id;
@@ -258,7 +257,7 @@ namespace TestsChargeOver.Wrapper.Services
 				BillAddr2 = "Suite D",
 				BillCity = "Storrs",
 				BillState = "CT",
-				SuperuserEmail = "mail@mail.com"
+				SuperUserEmail = "mail@mail.com"
 			}).Id;
 		}
 
@@ -268,11 +267,11 @@ namespace TestsChargeOver.Wrapper.Services
 			{
 				Name = "My Test Item " + Guid.NewGuid(),
 				Type = "service",
-				Pricemodel = new ItemPricemodel
+				PriceModel = new ItemPriceModel
 				{
 					Base = 295.95F,
-					Paycycle = "mon",
-					Pricemodel = "fla"
+					PayCycle = "mon",
+					PriceModel = "fla"
 				}
 			}).Id;
 		}
@@ -288,12 +287,12 @@ namespace TestsChargeOver.Wrapper.Services
 			{
 				CustomerId = customerId,
 				Number = "4111 1111 1111 1111",
-				ExpdateYear = (DateTime.UtcNow.Year + 1).ToString(),
-				ExpdateMonth = "11",
+				ExpirationDateYear = (DateTime.UtcNow.Year + 1).ToString(),
+				ExpirationDateMonth = "11",
 				Name = "Keith Palmer",
 				Address = "72 E Blue Grass Road",
 				City = "Willington",
-				Postcode = "06279",
+				PostalCode = "06279",
 				Country = "United States",
 			}).Id;
 		}
@@ -303,18 +302,18 @@ namespace TestsChargeOver.Wrapper.Services
 			var subscriptionId = Sut.CreateSubscription(new Subscription
 			{
 				CustomerId = customerId,
-				HolduntilDatetime = DateTime.Parse("2013-10-01"),
-				LineItems = new[]
+				HoldUntilDatetime = DateTime.Parse("2013-10-01"),
+				LineItems = new SubscriptionLineItem[]
 				{
-					new InvoiceLineItem
+					new SubscriptionLineItem
 					{
-						Descrip = "desc",
+						Description = "desc",
 						ItemId = itemId
 					}
 				}
 			}).Id;
 
-			var subscriptionDetails = Sut.GetSpecificSubscription(subscriptionId).Response;
+			var subscriptionDetails = Sut.GetSubscription(subscriptionId).Response;
 
 			return new Tuple<int, int>(subscriptionDetails.PackageId.Value, subscriptionDetails.LineItems[0].LineItemId);
 		}

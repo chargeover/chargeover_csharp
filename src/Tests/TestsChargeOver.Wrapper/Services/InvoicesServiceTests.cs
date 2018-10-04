@@ -26,12 +26,12 @@ namespace TestsChargeOver.Wrapper.Services
 				BillAddr1 = "72 E Blue Grass Road",
 				BillCity = "Willington",
 				BillState = "Connecticut",
-				BillPostcode = "06279",
+				BillPostalCode = "06279",
 				LineItems = new[]
 				{
 					new InvoiceLineItem
 					{
-						Descrip = "My description goes here",
+						Description = "My description goes here",
 						ItemId = id,
 						LineQuantity = 12,
 						LineRate = 29.95F
@@ -57,7 +57,7 @@ namespace TestsChargeOver.Wrapper.Services
 				{
 					new InvoiceLineItem
 					{
-						Descrip = "Add this new line item to the invoice.",
+						Description = "Add this new line item to the invoice.",
 						ItemId = TakeItemId(),
 						LineQuantity = 3,
 						LineRate = 29.95F
@@ -77,7 +77,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.GetSpecificInvoice(TakeInvoice());
+			var actual = Sut.GetInvoice(TakeInvoice());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -89,7 +89,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryForInvoices();
+			var actual = Sut.QueryInvoices();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -103,13 +103,13 @@ namespace TestsChargeOver.Wrapper.Services
 			var request = new CreditCardPayment
 			{
 				Number = "4111 1111 1111 1111",
-				ExpdateYear = "2017",
-				ExpdateMonth = "08",
+				ExpirationDateYear = "2017",
+				ExpirationDateMonth = "08",
 				Name = "Keith Palmer",
 				Address = "72 E Blue Grass Road",
 				City = "Willington",
 				State = "CT",
-				Postcode = "06279",
+				PostalCode = "06279",
 				Country = "United States",
 			};
 			//act
@@ -221,11 +221,11 @@ namespace TestsChargeOver.Wrapper.Services
 			{
 				Name = "My Test Item " + Guid.NewGuid(),
 				Type = "service",
-				Pricemodel = new ItemPricemodel
+				PriceModel = new ItemPriceModel
 				{
 					Base = 295.95F,
-					Paycycle = "mon",
-					Pricemodel = "fla"
+					PayCycle = "mon",
+					PriceModel = "fla"
 				}
 			}).Id;
 			return id;
@@ -237,13 +237,13 @@ namespace TestsChargeOver.Wrapper.Services
 			{
 				CustomerId = customerId,
 				Number = "4111 1111 1111 1111",
-				ExpdateYear = (DateTime.UtcNow.Year + 1).ToString(),
-				ExpdateMonth = "11",
+				ExpirationDateYear = (DateTime.UtcNow.Year + 1).ToString(),
+				ExpirationDateMonth = "11",
 				Name = "Keith Palmer",
 				Address = "72 E Blue Grass Road",
 				City = "Willington",
 				//state = "CT"
-				Postcode = "06279",
+				PostalCode = "06279",
 				Country = "United States",
 			}).Id;
 		}
@@ -260,14 +260,14 @@ namespace TestsChargeOver.Wrapper.Services
 				BillAddr1 = "72 E Blue Grass Road",
 				BillCity = "Willington",
 				BillState = "Connecticut",
-				BillPostcode = "06279",
+				BillPostalCode = "06279",
 				BillCountry = "US",
 				ShipCountry = "US",
 				LineItems = new[]
 				{
 					new InvoiceLineItem
 					{
-						Descrip = "My description goes here",
+						Description = "My description goes here",
 						ItemId = id,
 						LineQuantity = 12,
 						LineRate = 29.95F
@@ -284,11 +284,11 @@ namespace TestsChargeOver.Wrapper.Services
 			{
 				Amount = 10,
 				CustomerId = customerId,
-				Paymentods = new[]
+				PayMethods = new[]
 				{
-					new Paymentod
+					new PayMethod
 					{
-						CreditcardId = creditcardId
+						CreditCardId = creditcardId
 					}
 				}
 			});

@@ -21,11 +21,11 @@ namespace TestsChargeOver.Wrapper.Services
 			{
 				Name = "My Test Item " + Guid.NewGuid(),
 				Type = "service",
-				Pricemodel = new ItemPricemodel
+				PriceModel = new ItemPriceModel
 				{
 					Base = 295.95F,
-					Paycycle = "mon",
-					Pricemodel = "fla"
+					PayCycle = "mon",
+					PriceModel = "fla"
 				}
 			};
 			//act
@@ -41,7 +41,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryingForItems();
+			var actual = Sut.QueryItems();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

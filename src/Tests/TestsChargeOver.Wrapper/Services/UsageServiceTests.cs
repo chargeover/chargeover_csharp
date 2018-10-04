@@ -29,7 +29,7 @@ namespace TestsChargeOver.Wrapper.Services
 				To = DateTime.Parse("2013-10-16")
 			};
 			//act
-			var actual = Sut.StoringUsageData(request);
+			var actual = Sut.StoreUsageData(request);
 			//assert
 			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -54,18 +54,18 @@ namespace TestsChargeOver.Wrapper.Services
 			var subscriptionId = subscriptionsService.CreateSubscription(new Subscription
 			{
 				CustomerId = customerId,
-				HolduntilDatetime = DateTime.Parse("2013-10-01"),
-				LineItems = new[]
+				HoldUntilDatetime = DateTime.Parse("2013-10-01"),
+				LineItems = new SubscriptionLineItem[]
 				{
-					new InvoiceLineItem
+					new SubscriptionLineItem
 					{
-						Descrip = "desc",
+						Description = "desc",
 						ItemId = itemId
 					}
 				}
 			}).Id;
 
-			return subscriptionsService.GetSpecificSubscription(subscriptionId).Response.LineItems[0].LineItemId;
+			return subscriptionsService.GetSubscription(subscriptionId).Response.LineItems[0].LineItemId;
 		}
 
 		private int TakeItemId()
@@ -74,11 +74,11 @@ namespace TestsChargeOver.Wrapper.Services
 			{
 				Name = "My Test Item " + Guid.NewGuid(),
 				Type = "service",
-				Pricemodel = new ItemPricemodel
+				PriceModel = new ItemPriceModel
 				{
 					Base = 295.95F,
-					Paycycle = "mon",
-					Pricemodel = "fla"
+					PayCycle = "mon",
+					PriceModel = "fla"
 				}
 			}).Id;
 		}

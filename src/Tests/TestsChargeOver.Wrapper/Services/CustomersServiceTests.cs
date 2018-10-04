@@ -46,7 +46,7 @@ namespace TestsChargeOver.Wrapper.Services
 				BillAddr2 = "Suite 10",
 				BillCity = "Minneapolis",
 				BillState = "MN",
-				BillPostcode = "55416",
+				BillPostalCode = "55416",
 				BillCountry = "USA"
 			};
 			//act
@@ -55,7 +55,7 @@ namespace TestsChargeOver.Wrapper.Services
 			Assert.AreEqual(202, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
-			var customer = Sut.QueryForCustomers(new[] { "customer_id:EQUALS:" + customerId }).Response.First();
+			var customer = Sut.QueryCustomers(new[] { "customer_id:EQUALS:" + customerId }).Response.First();
 			Assert.AreEqual(request.BillAddr1, customer.BillAddr1);
 		}
 
@@ -64,7 +64,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.GetListCustomers();
+			var actual = Sut.ListCustomers();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -76,7 +76,7 @@ namespace TestsChargeOver.Wrapper.Services
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryForCustomers(orders: new[] { "company:DESC" }, limit: 5);
+			var actual = Sut.QueryCustomers(orders: new[] { "company:DESC" }, limit: 5);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

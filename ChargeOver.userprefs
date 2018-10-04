@@ -1,55 +1,25 @@
 ﻿<Properties StartupConfiguration="{0CE183C5-CA80-4696-AE28-785455DB47DE}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="src/ChargeOver.Wrapper/Models/Subscription.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src/Tests/TestsChargeOver.Wrapper/Services/UsersContactsServiceTests.cs">
     <Files>
-      <File FileName="src/ChargeOver.Wrapper/Services/UsersContactsService.cs" Line="85" Column="39" />
-      <File FileName="src/ChargeOver.Wrapper/Services/IUsersContactsService.cs" Line="47" Column="32" />
-      <File FileName="src/ChargeOver.Wrapper/Services/TransactionsService.cs" Line="47" Column="38" />
-      <File FileName="src/ChargeOver.Wrapper/Services/ITransactionsService.cs" Line="38" Column="22" />
-      <File FileName="src/ChargeOver.Wrapper/Services/TokenizedPayMethodsService.cs" Line="19" Column="33" />
-      <File FileName="src/ChargeOver.Wrapper/Services/TermsService.cs" Line="25" Column="1" />
-      <File FileName="src/ChargeOver.Wrapper/Services/SystemLogService.cs" Line="19" Column="39" />
-      <File FileName="src/ChargeOver.Wrapper/Services/ISystemLogService.cs" Line="11" Column="32" />
-      <File FileName="src/ChargeOver.Wrapper/Services/SubscriptionsService.cs" Line="46" Column="39" />
-      <File FileName="src/ChargeOver.Wrapper/Services/RESTHooksService.cs" Line="28" Column="31" />
-      <File FileName="src/ChargeOver.Wrapper/Services/NotesService.cs" Line="1" Column="1" />
-      <File FileName="src/ChargeOver.Wrapper/Services/LanguagesService.cs" Line="1" Column="1" />
-      <File FileName="src/ChargeOver.Wrapper/Services/ACHeCheckAccountsService.cs" Line="15" Column="14" />
-      <File FileName="src/ChargeOver.Wrapper/Services/AdminWorkersService.cs" Line="37" Column="43" />
-      <File FileName="src/ChargeOver.Wrapper/Services/BaseService.cs" Line="114" Column="4" />
-      <File FileName="src/ChargeOver.Wrapper/Services/BrandsService.cs" Line="9" Column="4" />
-      <File FileName="src/ChargeOver.Wrapper/Services/CampaignsService.cs" Line="19" Column="43" />
-      <File FileName="src/ChargeOver.Wrapper/Services/CategoriesService.cs" Line="19" Column="25" />
-      <File FileName="src/ChargeOver.Wrapper/Services/CountriesService.cs" Line="19" Column="33" />
-      <File FileName="src/ChargeOver.Wrapper/Services/CreditCardsService.cs" Line="28" Column="44" />
-      <File FileName="src/ChargeOver.Wrapper/Services/CurrenciesService.cs" Line="1" Column="1" />
-      <File FileName="src/ChargeOver.Wrapper/Services/CustomersService.cs" Line="46" Column="41" />
-      <File FileName="src/ChargeOver.Wrapper/Services/IACHeCheckAccountsService.cs" Line="1" Column="1" />
-      <File FileName="src/ChargeOver.Wrapper/Services/IAdminWorkersService.cs" Line="23" Column="36" />
-      <File FileName="src/ChargeOver.Wrapper/Services/IBrandsService.cs" Line="11" Column="30" />
-      <File FileName="src/ChargeOver.Wrapper/Services/ICampaignsService.cs" Line="11" Column="36" />
-      <File FileName="src/ChargeOver.Wrapper/Services/ICategoriesService.cs" Line="9" Column="18" />
-      <File FileName="src/ChargeOver.Wrapper/Services/IChargeOverService.cs" Line="1" Column="1" />
-      <File FileName="src/ChargeOver.Wrapper/Services/ICountriesService.cs" Line="11" Column="35" />
-      <File FileName="src/ChargeOver.Wrapper/Services/ICreditCardsService.cs" Line="17" Column="37" />
-      <File FileName="src/ChargeOver.Wrapper/Services/ICurrenciesService.cs" Line="1" Column="1" />
-      <File FileName="src/ChargeOver.Wrapper/Services/ICustomersService.cs" Line="29" Column="34" />
-      <File FileName="src/ChargeOver.Wrapper/Services/IInvoicesService.cs" Line="29" Column="34" />
-      <File FileName="src/ChargeOver.Wrapper/Services/IItemsService.cs" Line="17" Column="31" />
-      <File FileName="src/ChargeOver.Wrapper/Services/ILanguagesService.cs" Line="1" Column="1" />
-      <File FileName="src/ChargeOver.Wrapper/Services/INotesService.cs" Line="1" Column="1" />
-      <File FileName="src/ChargeOver.Wrapper/Services/InvoicesService.cs" Line="47" Column="41" />
-      <File FileName="src/ChargeOver.Wrapper/Services/IRestHooksService.cs" Line="17" Column="24" />
-      <File FileName="src/ChargeOver.Wrapper/Services/ISubscriptionsService.cs" Line="71" Column="28" />
-      <File FileName="src/ChargeOver.Wrapper/Services/ItemsService.cs" Line="28" Column="38" />
-      <File FileName="src/ChargeOver.Wrapper/Services/ITermsService.cs" Line="1" Column="1" />
-      <File FileName="src/ChargeOver.Wrapper/Services/ITokenizedPayMethodsService.cs" Line="1" Column="1" />
-      <File FileName="src/ChargeOver.Wrapper/Services/IUsageService.cs" Line="11" Column="26" />
-      <File FileName="src/ChargeOver.Wrapper/Services/UsageService.cs" Line="19" Column="33" />
-      <File FileName="src/ChargeOver.Wrapper.Examples/Services/CustomersServiceExample.cs" Line="59" Column="31" />
-      <File FileName="src/ChargeOver.Wrapper.Examples/Services/InvoiceServiceExample.cs" Line="69" Column="31" />
-      <File FileName="src/ChargeOver.Wrapper.Examples/Services/SubscriptionServiceExample.cs" Line="86" Column="31" />
-      <File FileName="src/ChargeOver.Wrapper/Services/ConfigurationManagerChargeOverApiConfiguration.cs" Line="30" Column="34" />
-      <File FileName="src/ChargeOver.Wrapper/Models/Subscription.cs" Line="9" Column="14" />
+      <File FileName="src/ChargeOver.Wrapper.Examples/Services/TransactionsServiceExample.cs" Line="14" Column="4" />
+      <File FileName="src/ChargeOver.Wrapper.Examples/App.config" Line="4" Column="77" />
+      <File FileName="src/ChargeOver.Wrapper/Services/BaseService.cs" Line="107" Column="1" />
+      <File FileName="src/Tests/TestsChargeOver.Wrapper/Services/CreditCardsServiceTests.cs" Line="29" Column="5" />
+      <File FileName="src/Tests/TestsChargeOver.Wrapper/Services/CurrenciesServiceTests.cs" Line="1" Column="1" />
+      <File FileName="src/Tests/TestsChargeOver.Wrapper/Services/CustomersServiceTests.cs" Line="77" Column="13" />
+      <File FileName="src/Tests/TestsChargeOver.Wrapper/Services/InvoicesServiceTests.cs" Line="286" Column="29" />
+      <File FileName="src/Tests/TestsChargeOver.Wrapper/Services/ItemsServiceTests.cs" Line="25" Column="6" />
+      <File FileName="src/Tests/TestsChargeOver.Wrapper/Services/LanguagesServiceTests.cs" Line="1" Column="1" />
+      <File FileName="src/Tests/TestsChargeOver.Wrapper/Services/NotesServiceTests.cs" Line="1" Column="1" />
+      <File FileName="src/Tests/TestsChargeOver.Wrapper/Services/RESTHooksServiceTests.cs" Line="46" Column="5" />
+      <File FileName="src/Tests/TestsChargeOver.Wrapper/Services/SubscriptionsServiceTests.cs" Line="21" Column="5" />
+      <File FileName="src/Tests/TestsChargeOver.Wrapper/Services/SystemLogServiceTests.cs" Line="19" Column="35" />
+      <File FileName="src/Tests/TestsChargeOver.Wrapper/Services/TermsServiceTests.cs" Line="1" Column="1" />
+      <File FileName="src/Tests/TestsChargeOver.Wrapper/Services/TokenizedPayMethodsServiceTests.cs" Line="1" Column="1" />
+      <File FileName="src/Tests/TestsChargeOver.Wrapper/Services/TransactionsServiceTests.cs" Line="33" Column="62" />
+      <File FileName="src/Tests/TestsChargeOver.Wrapper/Services/UsageServiceTests.cs" Line="63" Column="21" />
+      <File FileName="src/ChargeOver.Wrapper/Models/Subscription.cs" Line="12" Column="32" />
+      <File FileName="src/Tests/TestsChargeOver.Wrapper/Services/UsersContactsServiceTests.cs" Line="49" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
