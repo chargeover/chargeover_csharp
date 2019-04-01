@@ -34,5 +34,10 @@ namespace  ChargeOver.Wrapper.Models
 		/// </summary>
 		[JsonProperty("template_opts")]
 		public string TemplateOptions { get; set; }
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("message_id")]
+        public string MessageId { get; set; }
+    }
 }
