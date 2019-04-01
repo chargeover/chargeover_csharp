@@ -166,6 +166,7 @@
     <Compile Include="Services\UsageService.cs" />
     <Compile Include="Services\UsersContactsService.cs" />
     <Compile Include="Models\Tier.cs" />
+    <Compile Include="Models\TransactionAppliedTo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

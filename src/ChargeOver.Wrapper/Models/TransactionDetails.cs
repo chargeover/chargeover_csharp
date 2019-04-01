@@ -155,5 +155,10 @@ namespace  ChargeOver.Wrapper.Models
 		/// </summary>
 		[JsonProperty("url_self")]
 		public string UrlSelf { get; set; }
-	}
+        /// <summary>
+        /// A list of invoices this payment is applied to
+        /// </summary>
+        [JsonProperty("applied_to")]
+        public TransactionAppliedTo[] AppliedTo { get; set; }
+    }
 }

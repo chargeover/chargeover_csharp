@@ -9,12 +9,12 @@ namespace ChargeOver.Wrapper.Examples
 		{
 			var examples = new IServiceExample[]
 			{
-				new CustomersServiceExample(),
+				// CustomersServiceExample(),
 				new InvoiceServiceExample(),
-				new SubscriptionServiceExample(),
+				//new SubscriptionServiceExample(),
 				new TransactionsServiceExample(),
-				new CreditCardServiceExample(),
-				new ACHeCheckAccountsServiceExample()
+			    //new CreditCardServiceExample(),
+				//new ACHeCheckAccountsServiceExample()
 			}.ToList();
 
 			examples.ForEach(e => e.Run());

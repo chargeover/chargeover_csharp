@@ -38,9 +38,9 @@ namespace ChargeOver.Wrapper.Services
 			return new Response<T>(Request<object, ChargeOverResponse<T>>(MethodType.GET, "/" + endpoint, null));
 		}
 
-		protected ICustomResponse<T> GetCustom<T>(string endpint, int id)
+		protected ICustomResponse<T> GetCustom<T>(string endpoint, int id)
 		{
-			return new CustomResponse<T>(Request<object, CustomChargeOverResponse<T>>(MethodType.GET, $"/{endpint}/" + id, null));
+			return new CustomResponse<T>(Request<object, CustomChargeOverResponse<T>>(MethodType.GET, $"/{endpoint}/" + id, null));
 		}
 
 		protected ICustomResponse<bool> GetCustomBool<T>(string endpoint, T requeset)
@@ -91,9 +91,15 @@ namespace ChargeOver.Wrapper.Services
 
 			webRequest.ContentType = "application/json";
 			webRequest.ContentLength = postBytes.Length;
-			webRequest.Credentials = new NetworkCredential(_config.Username, _config.Password);
+            //webRequest.Credentials = new NetworkCredential(_config.Username, _config.Password);
 
-			if (postBytes.Length > 0)
+            string credentialsFormatted = string.Format("{0}:{1}", _config.Username, _config.Password);
+            byte[] credentialBytes = Encoding.ASCII.GetBytes(credentialsFormatted);
+            string basicCredentials = Convert.ToBase64String(credentialBytes);
+
+            webRequest.Headers["Authorization"] = "Basic " + basicCredentials;
+
+            if (postBytes.Length > 0)
 			{
 				using (Stream requestStream = webRequest.GetRequestStream())
 				{

@@ -13,7 +13,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// 
 		/// </summary>
 		[JsonProperty("applied_to")]
-		public AttemptInvoiceData[] AppliedTo { get; set; }
+		public TransactionAppliedTo[] AppliedTo { get; set; }
 		/// <summary>
 		/// 
 		/// </summary>
@@ -24,5 +24,5 @@ namespace  ChargeOver.Wrapper.Models
 		/// </summary>
 		[JsonProperty("paymethods")]
 		public PayMethod[] PayMethods { get; set; }
-	}
+}
 }
