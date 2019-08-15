@@ -40,7 +40,8 @@ namespace ChargeOver.Wrapper.Examples.Services
 			var subscription = new Subscription
 			{
 				CustomerId = TakeCustomerId(),
-				HoldUntilDatetime = DateTime.Parse("2018-10-01")
+				HoldUntilDatetime = DateTime.Parse("2018-10-01"),
+				Coupon = 'The coupon code'
 			};
 
 			var line1 = new SubscriptionLineItem
