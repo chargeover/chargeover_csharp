@@ -13,7 +13,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_StoreACHAccount()
+		public async void should_call_StoreACHAccount()
 		{
 			//arrange
 			var request = new StoreACHAccount
@@ -24,7 +24,7 @@ namespace TestsChargeOver.Wrapper.Services
 				Routing = "072403004",
 			};
 			//act
-			var actual = Sut.StoreACHAccount(request);
+			var actual = await Sut.StoreACHAccount(request);
 			//assert
 			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -32,11 +32,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_DeleteACHAccount()
+		public async void should_call_DeleteACHAccount()
 		{
 			//arrange
 			//act
-			var actual = Sut.DeleteACHAccount(AddACHAccount());
+			var actual = await Sut.DeleteACHAccount(AddACHAccount());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

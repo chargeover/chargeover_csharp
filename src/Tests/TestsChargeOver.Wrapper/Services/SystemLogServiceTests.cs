@@ -12,11 +12,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_RetrieveTheSystemLog()
+		public async void should_call_RetrieveTheSystemLog()
 		{
 			//arrange
 			//act
-			var actual = Sut.ListSystemLogs();
+			var actual = await Sut.ListSystemLogs();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

@@ -1,4 +1,5 @@
 using ChargeOver.Wrapper.Models;
+using System.Threading.Tasks;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -8,6 +9,6 @@ namespace ChargeOver.Wrapper.Services
 		/// List terms
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-terms
 		/// </summary>
-		IResponse<Term> ListTerms();
+		Task<IResponse<Term>> ListTerms();
 	}
 }

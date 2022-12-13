@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using ChargeOver.Wrapper.Models;
 using ChargeOver.Wrapper.Services;
 using NUnit.Framework;
@@ -14,7 +15,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_CreateSubscription()
+		public async void should_call_CreateSubscription()
 		{
 			//arrange
 			var request = new Subscription
@@ -23,7 +24,7 @@ namespace TestsChargeOver.Wrapper.Services
 				HoldUntilDatetime = DateTime.Parse("2013-10-01")
 			};
 			//act
-			var actual = Sut.CreateSubscription(request);
+			var actual = await Sut.CreateSubscription(request);
 			//assert
 			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -31,7 +32,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_UpdateSubscription()
+		public async void should_call_UpdateSubscription()
 		{
 			//arrange
 			var request = new UpdateSubscription
@@ -39,7 +40,7 @@ namespace TestsChargeOver.Wrapper.Services
 				Nickname = "My new nickname",
 			};
 			//act
-			var actual = Sut.UpdateSubscription(AddSubscription(), request);
+			var actual = await Sut.UpdateSubscription(AddSubscription(), request);
 			//assert
 			Assert.AreEqual(202, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -47,11 +48,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_GetSpecificSubscription()
+		public async void should_call_GetSpecificSubscription()
 		{
 			//arrange
 			//act
-			var actual = Sut.GetSubscription(AddSubscription());
+			var actual = await Sut.GetSubscription(AddSubscription());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -59,11 +60,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_QueryingForSubscriptions()
+		public async void should_call_QueryingForSubscriptions()
 		{
 			//arrange
 			//act
-			var actual = Sut.QuerySubscriptions();
+			var actual = await Sut.QuerySubscriptions();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -71,12 +72,12 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_UpgradeDowngradesubscription()
+		public async void should_call_UpgradeDowngradesubscription()
 		{
 			//arrange
 			var customer = TakeCustomer();
 			var lineId = TakeLineItem();
-			var subscription = CreateLineItemFromSubscription(customer, lineId);
+			var subscription = await CreateLineItemFromSubscription(customer, lineId);
 
 			var request = new UpgradeDowngradesubscription
 			{
@@ -92,7 +93,7 @@ namespace TestsChargeOver.Wrapper.Services
 				}
 			};
 			//act
-			var actual = Sut.UpgradeDowngradeSubscription(subscription.Item1, request);
+			var actual = await Sut.UpgradeDowngradeSubscription(subscription.Item1, request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -100,11 +101,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_ChangePricingOnSubscription()
+		public async void should_call_ChangePricingOnSubscription()
 		{
 			//arrange
 			var itemId = TakeLineItem();
-			var data = CreateLineItemFromSubscription(TakeCustomer(), itemId);
+			var data = await CreateLineItemFromSubscription(TakeCustomer(), itemId);
 
 			var request = new ChangePricingOnSubscription
 			{
@@ -135,7 +136,7 @@ namespace TestsChargeOver.Wrapper.Services
 				}
 			};
 			//act
-			var actual = Sut.ChangePricingOnSubscription(data.Item1, request);
+			var actual = await Sut.ChangePricingOnSubscription(data.Item1, request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -143,11 +144,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_InvoiceSubscriptionNow()
+		public async void should_call_InvoiceSubscriptionNow()
 		{
 			//arrange
 			//act
-			var actual = Sut.InvoiceSubscriptionNow(AddSubscription());
+			var actual = await Sut.InvoiceSubscriptionNow(AddSubscription());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -155,11 +156,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_SuspendSubscription()
+		public async void should_call_SuspendSubscription()
 		{
 			//arrange
 			//act
-			var actual = Sut.SuspendSubscription(AddSubscription());
+			var actual = await Sut.SuspendSubscription(AddSubscription());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -167,11 +168,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_UnsuspendSubscription()
+		public async void should_call_UnsuspendSubscription()
 		{
 			//arrange
 			//act
-			var actual = Sut.UnsuspendSubscription(AddSubscription());
+			var actual = await Sut.UnsuspendSubscription(AddSubscription());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -179,11 +180,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_CancelSubscription()
+		public async void should_call_CancelSubscription()
 		{
 			//arrange
 			//act
-			var actual = Sut.CancelSubscription(AddSubscription());
+			var actual = await Sut.CancelSubscription(AddSubscription());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -191,7 +192,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_SetThePaymentMethod()
+		public async void should_call_SetThePaymentMethod()
 		{
 			//arrange
 			var customerId = TakeCustomer();
@@ -202,7 +203,7 @@ namespace TestsChargeOver.Wrapper.Services
 			};
 			//act
 			var addSubscription = AddSubscription(customerId: customerId);
-			var actual = Sut.SetPaymentMethod(addSubscription, request);
+			var actual = await Sut.SetPaymentMethod(addSubscription, request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -210,11 +211,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_SendWelcomeEmail()
+		public async void should_call_SendWelcomeEmail()
 		{
 			//arrange
 			//act
-			var actual = Sut.SendWelcomeEmail(AddSubscription());
+			var actual = await Sut.SendWelcomeEmail(AddSubscription());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -297,9 +298,9 @@ namespace TestsChargeOver.Wrapper.Services
 			}).Id;
 		}
 
-		private Tuple<int, int> CreateLineItemFromSubscription(int customerId, int itemId)
+		private async Task<Tuple<int, int>> CreateLineItemFromSubscription(int customerId, int itemId)
 		{
-			var subscriptionId = Sut.CreateSubscription(new Subscription
+			var subscriptionId = (await Sut.CreateSubscription(new Subscription
 			{
 				CustomerId = customerId,
 				HoldUntilDatetime = DateTime.Parse("2013-10-01"),
@@ -311,9 +312,9 @@ namespace TestsChargeOver.Wrapper.Services
 						ItemId = itemId
 					}
 				}
-			}).Id;
+			})).Id;
 
-			var subscriptionDetails = Sut.GetSubscription(subscriptionId).Response;
+			var subscriptionDetails = (await Sut.GetSubscription(subscriptionId)).Response;
 
 			return new Tuple<int, int>(subscriptionDetails.PackageId.Value, subscriptionDetails.LineItems[0].LineItemId);
 		}

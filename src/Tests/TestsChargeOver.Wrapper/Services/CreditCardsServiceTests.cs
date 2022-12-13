@@ -14,7 +14,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_StoreCreditCard()
+		public async void should_call_StoreCreditCard()
 		{
 			//arrange
 			var request = new StoreCreditCard
@@ -31,7 +31,7 @@ namespace TestsChargeOver.Wrapper.Services
 				Country = "United States",
 			};
 			//act
-			var actual = Sut.StoreCreditCard(request);
+			var actual = await Sut.StoreCreditCard(request);
 			//assert
 			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -39,11 +39,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_QueryingForCreditCards()
+		public async void should_call_QueryingForCreditCards()
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryCreditCards();
+			var actual = await Sut.QueryCreditCards();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -51,11 +51,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_DeleteCreditCard()
+		public async void should_call_DeleteCreditCard()
 		{
 			//arrange
 			//act
-			var actual = Sut.DeleteCreditCard(AddCard());
+			var actual = await Sut.DeleteCreditCard(AddCard());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

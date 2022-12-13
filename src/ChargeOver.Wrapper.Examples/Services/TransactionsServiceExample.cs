@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using ChargeOver.Wrapper.Models;
 using ChargeOver.Wrapper.Services;
 
@@ -24,7 +25,7 @@ namespace ChargeOver.Wrapper.Examples.Services
             _itemsService = new ItemsService();
         }
 
-        public void Run()
+        public async void Run()
         {
             this._customerId = AddCustomer();
 
@@ -36,9 +37,9 @@ namespace ChargeOver.Wrapper.Examples.Services
             }
         }
 
-        public void GetTransactionByTransactionId()
+        public async void GetTransactionByTransactionId()
         {
-            var result = _transactionsService.GetTransaction(this.AttemptPayment());
+            var result = await _transactionsService.GetTransaction(await this.AttemptPayment());
 
             Console.WriteLine("Transaction ID we just got is: " + result.Response.TransactionId + " and is applied to " + result.Response.AppliedTo.Length + " invoices");
 
@@ -50,9 +51,9 @@ namespace ChargeOver.Wrapper.Examples.Services
 
         }
 
-        public void QueryTransactionByTransactionId()
+        public async void QueryTransactionByTransactionId()
         {
-            var result = _transactionsService.QueryTransactions(new[] { "transaction_id:EQUALS:" + AttemptPayment() });
+            var result = await _transactionsService.QueryTransactions(new[] { "transaction_id:EQUALS:" + AttemptPayment() });
 
             Console.WriteLine("Transactions found by id: " + result.Response.Count());
         }
@@ -64,7 +65,7 @@ namespace ChargeOver.Wrapper.Examples.Services
             Console.WriteLine("Transaction ID for payment is: " + payment_id);
         }
 
-        public int AttemptPayment()
+        public async Task<int> AttemptPayment()
         {
             var customerId = this._customerId;
             int creditcardId = StoreCreditCard(customerId);
@@ -92,7 +93,7 @@ namespace ChargeOver.Wrapper.Examples.Services
 
             try
             {
-                var result = _transactionsService.AttemptPayment(request);
+                var result = await _transactionsService.AttemptPayment(request);
 
                 if (!result.IsSuccess()) throw new Exception("Attempt payment failed.");
 

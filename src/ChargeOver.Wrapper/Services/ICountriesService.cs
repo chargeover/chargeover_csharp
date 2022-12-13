@@ -1,5 +1,6 @@
 using ChargeOver.Wrapper.Models;
 
+using System.Threading.Tasks;
 namespace ChargeOver.Wrapper.Services
 {
 	public interface ICountriesService
@@ -8,6 +9,6 @@ namespace ChargeOver.Wrapper.Services
 		/// Retrieve country list
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-country
 		/// </summary>
-		IResponse<Country> ListCountries();
+		Task<IResponse<Country>> ListCountries();
 	}
 }

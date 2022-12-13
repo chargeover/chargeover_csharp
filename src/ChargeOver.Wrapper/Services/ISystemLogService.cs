@@ -1,4 +1,5 @@
 using ChargeOver.Wrapper.Models;
+using System.Threading.Tasks;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -8,6 +9,6 @@ namespace ChargeOver.Wrapper.Services
 		/// Retrieve the system log
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-syslog
 		/// </summary>
-		IResponse<Log> ListSystemLogs();
+		Task<IResponse<Log>> ListSystemLogs();
 	}
 }

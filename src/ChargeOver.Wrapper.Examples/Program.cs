@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using ChargeOver.Wrapper.Examples.Services;
 
 namespace ChargeOver.Wrapper.Examples
@@ -9,15 +10,17 @@ namespace ChargeOver.Wrapper.Examples
 		{
 			var examples = new IServiceExample[]
 			{
-				// CustomersServiceExample(),
+				new CustomersServiceExample(),
 				new InvoiceServiceExample(),
-				//new SubscriptionServiceExample(),
+				new SubscriptionServiceExample(),
 				new TransactionsServiceExample(),
-			    //new CreditCardServiceExample(),
-				//new ACHeCheckAccountsServiceExample()
+				new CreditCardServiceExample(),
+				new ACHeCheckAccountsServiceExample()
 			}.ToList();
 
 			examples.ForEach(e => e.Run());
+
+            Console.ReadLine();
 		}
 	}
 }

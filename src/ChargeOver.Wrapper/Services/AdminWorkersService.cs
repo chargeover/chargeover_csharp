@@ -1,4 +1,5 @@
 using ChargeOver.Wrapper.Models;
+using System.Threading.Tasks;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -16,27 +17,27 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a list of admin workers
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-admins
 		/// </summary>
-		public IResponse<AdminWorkers> ListAdminWorkers()
+		public async Task<IResponse<AdminWorkers>> ListAdminWorkers()
 		{
-			return GetList<AdminWorkers>("admin");
+			return await GetList<AdminWorkers>("admin");
 		}
 
 		/// <summary>
 		/// Query for admin workers
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-admins
 		/// </summary>
-		public IResponse<AdminWorkers> QueryAdminWorkers(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
+		public async Task<IResponse<AdminWorkers>> QueryAdminWorkers(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
-			return Query<AdminWorkers>("admin", queries, orders, offset, limit);
+			return await Query<AdminWorkers>("admin", queries, orders, offset, limit);
 		}
 
 		/// <summary>
 		/// Get a specific admin worker
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-admin
 		/// </summary>
-		public ICustomResponse<AdminWorkers> GetAdminWorker(int id)
+		public async Task<ICustomResponse<AdminWorkers>> GetAdminWorker(int id)
 		{
-			return GetCustom<AdminWorkers>("admin", id);
+			return await GetCustom<AdminWorkers>("admin", id);
 		}
 	}
 }

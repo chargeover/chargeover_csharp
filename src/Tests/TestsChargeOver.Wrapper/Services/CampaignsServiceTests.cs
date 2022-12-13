@@ -12,11 +12,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_RetrieveCampaignList()
+		public async void should_call_RetrieveCampaignList()
 		{
 			//arrange
 			//act
-			var actual = Sut.ListCampaigns();
+			var actual = await Sut.ListCampaigns();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

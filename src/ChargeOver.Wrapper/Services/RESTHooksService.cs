@@ -1,4 +1,5 @@
 using ChargeOver.Wrapper.Models;
+using System.Threading.Tasks;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -16,18 +17,18 @@ namespace ChargeOver.Wrapper.Services
 		/// Subscribing
 		/// details: https://developer.chargeover.com/apidocs/rest/#subscribe-resthook
 		/// </summary>
-		public IIdentityResponse Subscribe(Subscribing request)
+		public async Task<IIdentityResponse> Subscribe(Subscribing request)
 		{
-			return Create("/_resthook", request);
+			return await Create("/_resthook", request);
 		}
 
 		/// <summary>
 		/// Unsubscribing
 		/// details: https://developer.chargeover.com/apidocs/rest/#unsubscribe-resthook
 		/// </summary>
-		public IResponse Unsubscribe(int id)
+		public async Task<IResponse>Unsubscribe(int id)
 		{
-			return Delete("_resthook", id);
+			return await Delete("_resthook", id);
 		}
 	}
 }

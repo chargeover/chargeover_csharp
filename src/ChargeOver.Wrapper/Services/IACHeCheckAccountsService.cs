@@ -1,4 +1,5 @@
 using ChargeOver.Wrapper.Models;
+using System.Threading.Tasks;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -8,12 +9,12 @@ namespace ChargeOver.Wrapper.Services
 		/// Store an ACH account
 		/// details: https://developer.chargeover.com/apidocs/rest/#create-ach
 		/// </summary>
-		IIdentityResponse StoreACHAccount(StoreACHAccount request);
+		Task<IIdentityResponse> StoreACHAccount(StoreACHAccount request);
 
-		/// <summary>
-		/// Delete an ACH account
-		/// details: https://developer.chargeover.com/apidocs/rest/#delete-an-ach
-		/// </summary>
-		IResponse DeleteACHAccount(int id);
+        /// <summary>
+        /// Delete an ACH account
+        /// details: https://developer.chargeover.com/apidocs/rest/#delete-an-ach
+        /// </summary>
+        Task<IResponse> DeleteACHAccount(int id);
 	}
 }

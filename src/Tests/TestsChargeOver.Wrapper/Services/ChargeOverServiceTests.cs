@@ -13,11 +13,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_GetListPendingRequests()
+		public async void should_call_GetListPendingRequests()
 		{
 			//arrange
 			//act
-			var actual = Sut.GetListPendingRequests();
+			var actual = await Sut.GetListPendingRequests();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -26,7 +26,7 @@ namespace TestsChargeOver.Wrapper.Services
 
 		[Test]
 		[Ignore("we NOT be able to automate unit tests for that")]
-		public void should_call_CommitChargeOver()
+		public async void should_call_CommitChargeOver()
 		{
 			//arrange
 			var request = new CommitChargeOver
@@ -34,7 +34,7 @@ namespace TestsChargeOver.Wrapper.Services
 				Commit = "6KHW4JiguocfQEO2yhmq58ZsVNGlIPb0",
 			};
 			//act
-			var actual = Sut.CommitChargeOver(request);
+			var actual = await Sut.CommitChargeOver(request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -43,7 +43,7 @@ namespace TestsChargeOver.Wrapper.Services
 
 		[Test]
 		[Ignore("we NOT be able to automate unit tests for that")]
-		public void should_call_RejectChargeOver()
+		public async void should_call_RejectChargeOver()
 		{
 			//arrange
 			var request = new RejectChargeOver
@@ -51,7 +51,7 @@ namespace TestsChargeOver.Wrapper.Services
 				Reject = "6m4npbichesodlur",
 			};
 			//act
-			var actual = Sut.RejectChargeOver(request);
+			var actual = await Sut.RejectChargeOver(request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

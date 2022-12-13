@@ -14,7 +14,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_CreateItem()
+		public async void should_call_CreateItem()
 		{
 			//arrange
 			var request = new Item
@@ -29,7 +29,7 @@ namespace TestsChargeOver.Wrapper.Services
 				}
 			};
 			//act
-			var actual = Sut.CreateItem(request);
+			var actual = await Sut.CreateItem(request);
 			//assert
 			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -37,11 +37,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_QueryingForItems()
+		public async void should_call_QueryingForItems()
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryItems();
+			var actual = await Sut.QueryItems();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

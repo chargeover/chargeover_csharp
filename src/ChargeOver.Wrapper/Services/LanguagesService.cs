@@ -1,4 +1,5 @@
 using ChargeOver.Wrapper.Models;
+using System.Threading.Tasks;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -16,9 +17,9 @@ namespace ChargeOver.Wrapper.Services
 		/// List languages
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-language
 		/// </summary>
-		public IResponse<Language> ListLanguages()
+		public async Task<IResponse<Language>> ListLanguages()
 		{
-			return GetList<Language>("/language");
+			return await GetList<Language>("/language");
 		}
 	}
 }

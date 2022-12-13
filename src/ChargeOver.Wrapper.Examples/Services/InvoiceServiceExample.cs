@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using ChargeOver.Wrapper.Models;
 using ChargeOver.Wrapper.Services;
 
@@ -18,7 +19,7 @@ namespace ChargeOver.Wrapper.Examples.Services
 			_customersService = new CustomersService();
 		}
 
-		public void Run()
+		public async void Run()
 		{
 			var examples = new Action[] { CreateInvoice, QueryInvoiceByInvoiceId };
 
@@ -28,16 +29,16 @@ namespace ChargeOver.Wrapper.Examples.Services
 			}
 		}
 
-		private void CreateInvoice()
+		private async void CreateInvoice()
 		{
-			var result = CreateNewInvoice();
+			var result = await CreateNewInvoice();
 
 			if (!result.IsSuccess()) throw new Exception("Create invoice failed.");
 
 			Console.WriteLine("Invoice created with id: " + result.Id);
 		}
 
-		private IIdentityResponse CreateNewInvoice()
+		private async Task<IIdentityResponse> CreateNewInvoice()
 		{
 			var id = TakeItemId();
 			var customer = TakeCustomerId();
@@ -60,13 +61,13 @@ namespace ChargeOver.Wrapper.Examples.Services
 					}
 				}
 			};
-			var result = _service.CreateInvoice(request);
+			var result = await _service.CreateInvoice(request);
 			return result;
 		}
 
-		private void QueryInvoiceByInvoiceId()
+		private async void QueryInvoiceByInvoiceId()
 		{
-			var result = _service.QueryInvoices(new[] { "invoice_id:EQUALS:" + CreateNewInvoice().Id });
+			var result = await _service.QueryInvoices(new[] { "invoice_id:EQUALS:" + CreateNewInvoice().Id });
 
 			Console.WriteLine($"Invoices found by id: {result.Response.Count()}");
 		}

@@ -13,7 +13,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_Subscribing()
+		public async void should_call_Subscribing()
 		{
 			//arrange
 			var request = new Subscribing
@@ -22,7 +22,7 @@ namespace TestsChargeOver.Wrapper.Services
 				Event = "customer.insert",
 			};
 			//act
-			var actual = Sut.Subscribe(request);
+			var actual = await Sut.Subscribe(request);
 			//assert
 			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -30,11 +30,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_Unsubscribing()
+		public async void should_call_Unsubscribing()
 		{
 			//arrange
 			//act
-			var actual = Sut.Unsubscribe(AddSubscription());
+			var actual = await Sut.Unsubscribe(AddSubscription());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

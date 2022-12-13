@@ -13,7 +13,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_StorePayMethodToken()
+		public async void should_call_StorePayMethodToken()
 		{
 			//arrange
 			var request = new StorePayMethodToken
@@ -23,7 +23,7 @@ namespace TestsChargeOver.Wrapper.Services
 				Type = "customer",
 			};
 			//act
-			var actual = Sut.StorePayMethodToken(request);
+			var actual = await Sut.StorePayMethodToken(request);
 			//assert
 			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -31,11 +31,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_DeleteTokenizedPayMethod()
+		public async void should_call_DeleteTokenizedPayMethod()
 		{
 			//arrange
 			//act
-			var actual = Sut.DeleteTokenizedPayMethod(AddPayMethod());
+			var actual = await Sut.DeleteTokenizedPayMethod(AddPayMethod());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

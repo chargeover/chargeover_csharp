@@ -1,4 +1,4 @@
-ChargeOver C# API and Examples
+ChargeOver C# API and Examples (.NET 6)
 ==============================
 
 This is a C# .NET library for the [ChargeOver recurring billing platform](http://www.chargeover.com/). ChargeOver is a billing platform geared towards easy, automated, recurring invoicing. 

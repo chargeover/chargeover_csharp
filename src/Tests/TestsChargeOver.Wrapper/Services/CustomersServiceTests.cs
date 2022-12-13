@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using ChargeOver.Wrapper.Models;
 using ChargeOver.Wrapper.Services;
 using NUnit.Framework;
@@ -14,7 +15,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_CreateCustomer()
+		public async void should_call_CreateCustomer()
 		{
 			//arrange
 			var request = new Customer
@@ -26,7 +27,7 @@ namespace TestsChargeOver.Wrapper.Services
 				BillState = "CT"
 			};
 			//act
-			var actual = Sut.CreateCustomer(request);
+			var actual = await Sut.CreateCustomer(request);
 			//assert
 			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -34,10 +35,10 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_UpdateCustomer()
+		public async void should_call_UpdateCustomer()
 		{
 			//arrange
-			var customerId = CreateCustomer();
+			var customerId = await CreateCustomer();
 
 			var request = new UpdateCustomer
 			{
@@ -50,21 +51,21 @@ namespace TestsChargeOver.Wrapper.Services
 				BillCountry = "USA"
 			};
 			//act
-			var actual = Sut.UpdateCustomer(customerId, request);
+			var actual = await Sut.UpdateCustomer(customerId, request);
 			//assert
 			Assert.AreEqual(202, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
-			var customer = Sut.QueryCustomers(new[] { "customer_id:EQUALS:" + customerId }).Response.First();
+			var customer = (await Sut.QueryCustomers(new[] { "customer_id:EQUALS:" + customerId })).Response.First();
 			Assert.AreEqual(request.BillAddr1, customer.BillAddr1);
 		}
 
 		[Test]
-		public void should_call_GetListCustomers()
+		public async void should_call_GetListCustomers()
 		{
 			//arrange
 			//act
-			var actual = Sut.ListCustomers();
+			var actual = await Sut.ListCustomers();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -72,11 +73,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_QueryForCustomers()
+		public async void should_call_QueryForCustomers()
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryCustomers(orders: new[] { "company:DESC" }, limit: 5);
+			var actual = await Sut.QueryCustomers(orders: new[] { "company:DESC" }, limit: 5);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -85,28 +86,28 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_DeleteCustomer()
+		public async void should_call_DeleteCustomer()
 		{
 			//arrange
-			var customerId = CreateCustomer();
+			var customerId = await CreateCustomer();
 			//act
-			var actual = Sut.DeleteCustomer(customerId);
+			var actual = await Sut.DeleteCustomer(customerId);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
 			Assert.AreEqual("OK", actual.Status);
 		}
 
-		private int CreateCustomer()
+		private async Task<int> CreateCustomer()
 		{
-			var customerId = Sut.CreateCustomer(new Customer
+			var customerId = (await Sut.CreateCustomer(new Customer
 			{
 				Company = "Test Company Name",
 				BillAddr1 = "16 Dog Lane",
 				BillAddr2 = "Suite D",
 				BillCity = "Storrs",
 				BillState = "CT"
-			}).Id;
+			})).Id;
 			return customerId;
 		}
 	}

@@ -1,4 +1,5 @@
 using ChargeOver.Wrapper.Models;
+using System.Threading.Tasks;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -16,9 +17,9 @@ namespace ChargeOver.Wrapper.Services
 		/// Retrieve campaign list
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-campaign
 		/// </summary>
-		public IResponse<Campaign> ListCampaigns()
+		public async Task<IResponse<Campaign>> ListCampaigns()
 		{
-			return GetList<Campaign>("campaign");
+			return await GetList<Campaign>("campaign");
 		}
 	}
 }

@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace  ChargeOver.Wrapper.Models
 {
@@ -98,7 +99,7 @@ namespace  ChargeOver.Wrapper.Models
 		/// Main contact phone number
 		/// </summary>
 		[JsonProperty("superuser_phone")]
-		public string SuperuserPhone { get; set; }
+		public string SuperUserPhone { get; set; }
 		/// <summary>
 		/// Billing address line 1
 		/// </summary>
@@ -214,5 +215,10 @@ namespace  ChargeOver.Wrapper.Models
 		/// </summary>
 		[JsonProperty("dunning_delivery")]
 		public string DunningDelivery { get; set; }
-	}
+        /// <summary>
+		/// A list of tags	
+		/// </summary>
+		[JsonProperty("tags")]
+        public HashSet<string> Tags { get; set; }
+    }
 }

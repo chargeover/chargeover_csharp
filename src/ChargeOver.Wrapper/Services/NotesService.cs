@@ -1,4 +1,5 @@
 using ChargeOver.Wrapper.Models;
+using System.Threading.Tasks;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -16,18 +17,18 @@ namespace ChargeOver.Wrapper.Services
 		/// Create a note
 		/// details: https://developer.chargeover.com/apidocs/rest/#create_note
 		/// </summary>
-		public IIdentityResponse CreateNote(Note request)
+		public async Task<IIdentityResponse> CreateNote(Note request)
 		{
-			return Create("note", request);
+			return await Create("note", request);
 		}
 
 		/// <summary>
 		/// Query notes for an object
 		/// details: https://developer.chargeover.com/apidocs/rest/#query_note
 		/// </summary>
-		public IResponse<NoteDetails> QueryNotesForObject(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
+		public async Task<IResponse<NoteDetails>> QueryNotesForObject(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
-			return Query<NoteDetails>("note", queries, orders, offset, limit);
+			return await Query<NoteDetails>("note", queries, orders, offset, limit);
 		}
 	}
 }

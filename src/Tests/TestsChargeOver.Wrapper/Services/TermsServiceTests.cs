@@ -12,11 +12,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_ListTerms()
+		public async void should_call_ListTerms()
 		{
 			//arrange
 			//act
-			var actual = Sut.ListTerms();
+			var actual = await Sut.ListTerms();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

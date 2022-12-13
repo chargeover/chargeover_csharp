@@ -2,7 +2,11 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text;
+using System.Threading.Tasks;
 using ChargeOver.Wrapper.Models;
 using Newtonsoft.Json;
 
@@ -23,37 +27,37 @@ namespace ChargeOver.Wrapper.Services
 
 		protected BaseService() : this(new ConfigurationManagerChargeOverApiConfiguration()) { }
 
-		protected IIdentityResponse Create<T>(string endpoint, T request)
+		protected async Task<IIdentityResponse> Create<T>(string endpoint, T request)
 		{
-			return new IdentityResponse(Request<T, IdentityChargeOverResponse>(MethodType.POST, $"/{endpoint}", request));
+			return new IdentityResponse(await Request<T, IdentityChargeOverResponse>(MethodType.POST, $"/{endpoint}", request));
 		}
 
-		protected IResponse Delete(string endpoint, int id)
+		protected async Task<IResponse> Delete(string endpoint, int id)
 		{
-			return new Response(Request<object, ChargeOverResponse>(MethodType.DELETE, $"/{endpoint}/" + id, null));
+			return new Response(await Request<object, ChargeOverResponse>(MethodType.DELETE, $"/{endpoint}/" + id, null));
 		}
 
-		protected IResponse<T> GetList<T>(string endpoint)
+		protected async Task<IResponse<T>> GetList<T>(string endpoint)
 		{
-			return new Response<T>(Request<object, ChargeOverResponse<T>>(MethodType.GET, "/" + endpoint, null));
+			return new Response<T>(await Request<object, ChargeOverResponse<T>>(MethodType.GET, "/" + endpoint, null));
 		}
 
-		protected ICustomResponse<T> GetCustom<T>(string endpoint, int id)
+		protected async Task<ICustomResponse<T>> GetCustom<T>(string endpoint, int id)
 		{
-			return new CustomResponse<T>(Request<object, CustomChargeOverResponse<T>>(MethodType.GET, $"/{endpoint}/" + id, null));
+			return new CustomResponse<T>(await Request<object, CustomChargeOverResponse<T>>(MethodType.GET, $"/{endpoint}/" + id, null));
 		}
 
-		protected ICustomResponse<bool> GetCustomBool<T>(string endpoint, T requeset)
+		protected async Task<ICustomResponse<bool>> GetCustomBool<T>(string endpoint, T requeset)
 		{
-			return new CustomResponse<bool>(Request<T, CustomChargeOverResponse<bool>>(MethodType.POST, endpoint, requeset));
+			return new CustomResponse<bool>(await Request<T, CustomChargeOverResponse<bool>>(MethodType.POST, endpoint, requeset));
 		}
 
-		protected IResponse<T> Query<T>(string endpoint, string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
+		protected async Task<IResponse<T>> Query<T>(string endpoint, string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
 			var queriesData = Data(queries, "where");
 			var ordersData = Data(orders, "order");
 
-			var result = Request<object, ChargeOverResponse<T>>(MethodType.GET, $"/{endpoint}?_dummy=1&limit={limit}&offset={offset}{queriesData}{ordersData}", null);
+			var result = await Request<object, ChargeOverResponse<T>>(MethodType.GET, $"/{endpoint}?_dummy=1&limit={limit}&offset={offset}{queriesData}{ordersData}", null);
 
 			return new Response<T>(result);
 		}
@@ -71,57 +75,49 @@ namespace ChargeOver.Wrapper.Services
 			return result;
 		}
 
-		protected TResponse Request<T, TResponse>(MethodType method, string uri, T request)
+		protected async Task<TResponse> Request<T, TResponse>(MethodType method, string uri, T request)
 		{
-			string httpMethod = method.ToString(), data = string.Empty;
+            string httpMethod = method.ToString(), data = string.Empty;
 
-			if (request != null)
-				data = JsonConvert.SerializeObject(request, new JsonSerializerSettings
-				{
-					NullValueHandling = NullValueHandling.Ignore
-				});
+            if (request != null)
+                data = JsonConvert.SerializeObject(request, new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore
+                });
 
-			var webRequest = (HttpWebRequest)WebRequest.Create(_config.Endpoint + uri);
-
-			webRequest.KeepAlive = false;
-			webRequest.ProtocolVersion = HttpVersion.Version10;
-			webRequest.Method = httpMethod;
-
-			byte[] postBytes = Encoding.ASCII.GetBytes(data);
-
-			webRequest.ContentType = "application/json";
-			webRequest.ContentLength = postBytes.Length;
-            //webRequest.Credentials = new NetworkCredential(_config.Username, _config.Password);
+            var httpClient = new HttpClient();
+            var requestMessage = new HttpRequestMessage
+            {
+                RequestUri = new Uri(_config.Endpoint + uri),
+                Method = new HttpMethod(httpMethod),
+                Content = new StringContent(data, Encoding.UTF8, "application/json")
+            };
 
             string credentialsFormatted = string.Format("{0}:{1}", _config.Username, _config.Password);
             byte[] credentialBytes = Encoding.ASCII.GetBytes(credentialsFormatted);
             string basicCredentials = Convert.ToBase64String(credentialBytes);
+            requestMessage.Headers.Add("Authorization", "Basic " + basicCredentials);
+            var result = JsonConvert.DeserializeObject<TResponse>("{}");
 
-            webRequest.Headers["Authorization"] = "Basic " + basicCredentials;
+            var response = await httpClient.SendAsync(requestMessage);
 
-            if (postBytes.Length > 0)
-			{
-				using (Stream requestStream = webRequest.GetRequestStream())
-				{
-					requestStream.Write(postBytes, 0, postBytes.Length);
-					requestStream.Close();
-				}
-			}
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<TResponse>(content);
+            }
+            else
+            {
+                string error = await response.Content.ReadAsStringAsync();
+                throw new Exception(error);
+            }
 
-			HttpWebResponse response;
+            return result;
+        }
 
-			response = (HttpWebResponse)webRequest.GetResponse();
+        #region sealed members
 
-			string httpResponse = new StreamReader(response.GetResponseStream()).ReadToEnd();
-
-			var result = JsonConvert.DeserializeObject<TResponse>(httpResponse);
-
-			return result;
-		}
-
-		#region sealed members
-
-		public override sealed bool Equals(object obj)
+        public override sealed bool Equals(object obj)
 		{
 			return base.Equals(obj);
 		}

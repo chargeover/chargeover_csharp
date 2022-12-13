@@ -14,7 +14,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_AddContact()
+		public async void should_call_AddContact()
 		{
 			//arrange
 			var request = new AddContact
@@ -27,7 +27,7 @@ namespace TestsChargeOver.Wrapper.Services
 				Phone = "888-555-1212",
 			};
 			//act
-			var actual = Sut.AddContact(request);
+			var actual = await Sut.AddContact(request);
 			//assert
 			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -35,12 +35,12 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_GetSpecificContact()
+		public async void should_call_GetSpecificContact()
 		{
 			//arrange
 			var id = AddContact();
 			//act
-			var actual = Sut.GetContact(id);
+			var actual = await Sut.GetContact(id);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -48,11 +48,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_GetListContacts()
+		public async void should_call_GetListContacts()
 		{
 			//arrange
 			//act
-			var actual = Sut.ListContacts();
+			var actual = await Sut.ListContacts();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -60,11 +60,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_QueryForContacts()
+		public async void should_call_QueryForContacts()
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryForContacts();
+			var actual = await Sut.QueryForContacts();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -72,12 +72,12 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_SendPasswordReset()
+		public async void should_call_SendPasswordReset()
 		{
 			//arrange
 			var userId = AddContact();
 			//act
-			var actual = Sut.SendPasswordReset(userId);
+			var actual = await Sut.SendPasswordReset(userId);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -85,7 +85,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_SetPassword()
+		public async void should_call_SetPassword()
 		{
 			//arrange
 			var userId = AddContact();
@@ -94,7 +94,7 @@ namespace TestsChargeOver.Wrapper.Services
 				Password = "here is the new password",
 			};
 			//act
-			var actual = Sut.SetPassword(userId, request);
+			var actual = await Sut.SetPassword(userId, request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -102,12 +102,12 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_LogInUser()
+		public async void should_call_LogInUser()
 		{
 			//arrange
 			var id = AddContact();
 			//act
-			var actual = Sut.LogIn(id);
+			var actual = await Sut.LogIn(id);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -115,12 +115,12 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_DeleteContact()
+		public async void should_call_DeleteContact()
 		{
 			//arrange
 			var request = AddContact();
 			//act
-			var actual = Sut.DeleteContact(request);
+			var actual = await Sut.DeleteContact(request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

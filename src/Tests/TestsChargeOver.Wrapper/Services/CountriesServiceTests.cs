@@ -12,11 +12,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_RetrieveCountryList()
+		public async void should_call_RetrieveCountryList()
 		{
 			//arrange
 			//act
-			var actual = Sut.ListCountries();
+			var actual = await Sut.ListCountries();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

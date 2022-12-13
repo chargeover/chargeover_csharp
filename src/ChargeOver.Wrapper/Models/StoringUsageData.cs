@@ -30,5 +30,10 @@ namespace  ChargeOver.Wrapper.Models
 		/// </summary>
 		[JsonProperty("external_key")]
 		public string ExternalKey { get; set; }
-	}
+        /// <summary>
+		/// Line Item External key value
+		/// </summary>
+		[JsonProperty("line_item_external_key")]
+        public string LineItemExternalKey { get; set; }
+    }
 }
