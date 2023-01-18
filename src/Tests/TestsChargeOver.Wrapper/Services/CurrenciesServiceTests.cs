@@ -12,11 +12,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_ListCurrencies()
+		public async void should_call_ListCurrencies()
 		{
 			//arrange
 			//act
-			var actual = Sut.ListCurrencies();
+			var actual = await Sut.ListCurrencies();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

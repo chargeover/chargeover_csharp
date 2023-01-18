@@ -1,5 +1,6 @@
 using ChargeOver.Wrapper.Models;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -17,27 +18,27 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a list of pending requests
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-chargeoverjs
 		/// </summary>
-		public IResponse<PendingRequestDetail> GetListPendingRequests()
+		public async Task<IResponse<PendingRequestDetail>> GetListPendingRequests()
 		{
-			return GetList<PendingRequestDetail>("_chargeoverjs");
+			return await GetList<PendingRequestDetail>("_chargeoverjs");
 		}
 
 		/// <summary>
 		/// Commit a ChargeOver.js request
 		/// details: https://developer.chargeover.com/apidocs/rest/#commit-chargeoverjs
 		/// </summary>
-		public IIdentityResponse CommitChargeOver(CommitChargeOver request)
+		public async Task<IIdentityResponse> CommitChargeOver(CommitChargeOver request)
 		{
-			return Create("/_chargeoverjs ", request);
+			return await Create("/_chargeoverjs ", request);
 		}
 
 		/// <summary>
 		/// Reject a ChargeOver.js request
 		/// details: https://developer.chargeover.com/apidocs/rest/#reject-chargeoverjs
 		/// </summary>
-		public IIdentityResponse RejectChargeOver(RejectChargeOver request)
+		public async Task<IIdentityResponse> RejectChargeOver(RejectChargeOver request)
 		{
-			return Create("/_chargeoverjs ", request);
+			return await Create("/_chargeoverjs ", request);
 		}
 	}
 }

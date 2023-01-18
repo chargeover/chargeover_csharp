@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using ChargeOver.Wrapper.Models;
 using ChargeOver.Wrapper.Services;
 
@@ -13,7 +14,7 @@ namespace ChargeOver.Wrapper.Examples.Services
 			_service = new CreditCardsService();
 		}
 
-		public void Run()
+		public async void Run()
 		{
 			var request = new StoreCreditCard
 			{
@@ -29,7 +30,7 @@ namespace ChargeOver.Wrapper.Examples.Services
 				Country = "United States",
 			};
 
-			var result = _service.StoreCreditCard(request);
+			var result = await _service.StoreCreditCard(request);
 
 			if (!result.IsSuccess()) throw new Exception("Store credit card failed.");
 

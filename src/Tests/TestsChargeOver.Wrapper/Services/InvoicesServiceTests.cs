@@ -14,7 +14,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_CreateInvoice()
+		public async void should_call_CreateInvoice()
 		{
 			//arrange
 			var id = TakeItemId();
@@ -39,7 +39,7 @@ namespace TestsChargeOver.Wrapper.Services
 				}
 			};
 			//act
-			var actual = Sut.CreateInvoice(request);
+			var actual = await Sut.CreateInvoice(request);
 			//assert
 			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -47,7 +47,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_UpdateInvoice()
+		public async void should_call_UpdateInvoice()
 		{
 			//arrange
 			var request = new UpdateInvoice
@@ -65,7 +65,7 @@ namespace TestsChargeOver.Wrapper.Services
 				}
 			};
 			//act
-			var actual = Sut.UpdateInvoice(TakeInvoice(), request);
+			var actual = await Sut.UpdateInvoice(TakeInvoice(), request);
 			//assert
 			Assert.AreEqual(202, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -73,11 +73,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_GetSpecificInvoice()
+		public async void should_call_GetSpecificInvoice()
 		{
 			//arrange
 			//act
-			var actual = Sut.GetInvoice(TakeInvoice());
+			var actual = await Sut.GetInvoice(TakeInvoice());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -85,11 +85,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_QueryForInvoices()
+		public async void should_call_QueryForInvoices()
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryInvoices();
+			var actual = await Sut.QueryInvoices();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -97,7 +97,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_CreditCardPayment()
+		public async void should_call_CreditCardPayment()
 		{
 			//arrange
 			var request = new CreditCardPayment
@@ -113,7 +113,7 @@ namespace TestsChargeOver.Wrapper.Services
 				Country = "United States",
 			};
 			//act
-			var actual = Sut.CreditCardPayment(TakeInvoice(), request);
+			var actual = await Sut.CreditCardPayment(TakeInvoice(), request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -121,7 +121,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_ACHCheckpayment()
+		public async void should_call_ACHCheckpayment()
 		{
 			//arrange
 			var request = new ACHCheckPayment
@@ -132,7 +132,7 @@ namespace TestsChargeOver.Wrapper.Services
 				Type = "chec",
 			};
 			//act
-			var actual = Sut.ACHCheckpayment(TakeInvoice(), request);
+			var actual = await Sut.ACHCheckpayment(TakeInvoice(), request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -140,7 +140,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_ApplyOpenCustomerBalance()
+		public async void should_call_ApplyOpenCustomerBalance()
 		{
 			//arrange
 			var customerId = TakeCustomerId();
@@ -153,7 +153,7 @@ namespace TestsChargeOver.Wrapper.Services
 				UseCustomerBalance = true,
 			};
 			//act
-			var actual = Sut.ApplyOpenCustomerBalance(invoiceId, request);
+			var actual = await Sut.ApplyOpenCustomerBalance(invoiceId, request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -161,11 +161,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_VoidInvoice()
+		public async void should_call_VoidInvoice()
 		{
 			//arrange
 			//act
-			var actual = Sut.VoidInvoice(TakeInvoice());
+			var actual = await Sut.VoidInvoice(TakeInvoice());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -173,7 +173,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_EmailInvoice()
+		public async void should_call_EmailInvoice()
 		{
 			//arrange
 			var request = new EmailInvoice
@@ -181,7 +181,7 @@ namespace TestsChargeOver.Wrapper.Services
 				Email = "mail@mail.com"
 			};
 			//act
-			var actual = Sut.EmailInvoice(TakeInvoice(), request);
+			var actual = await Sut.EmailInvoice(TakeInvoice(), request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -189,12 +189,12 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_PrintInvoice()
+		public async void should_call_PrintInvoice()
 		{
 			//arrange
 			var request = new PrintInvoice();
 			//act
-			var actual = Sut.PrintInvoice(TakeInvoice(), request);
+			var actual = await Sut.PrintInvoice(TakeInvoice(), request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

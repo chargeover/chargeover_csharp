@@ -1,4 +1,5 @@
 using ChargeOver.Wrapper.Models;
+using System.Threading.Tasks;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -8,12 +9,12 @@ namespace ChargeOver.Wrapper.Services
 		/// Store a pay method token
 		/// details: https://developer.chargeover.com/apidocs/rest/#create-tokenized
 		/// </summary>
-		IIdentityResponse StorePayMethodToken(StorePayMethodToken request);
+		Task<IIdentityResponse> StorePayMethodToken(StorePayMethodToken request);
 
 		/// <summary>
 		/// Delete tokenized pay method
 		/// details: https://developer.chargeover.com/apidocs/rest/#delete-a-tokenized
 		/// </summary>
-		IResponse DeleteTokenizedPayMethod(int id);
+		Task<IResponse> DeleteTokenizedPayMethod(int id);
 	}
 }

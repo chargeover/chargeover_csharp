@@ -1,4 +1,5 @@
 using ChargeOver.Wrapper.Models;
+using System.Threading.Tasks;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -16,18 +17,18 @@ namespace ChargeOver.Wrapper.Services
 		/// Create an item
 		/// details: https://developer.chargeover.com/apidocs/rest/#create-item
 		/// </summary>
-		public IIdentityResponse CreateItem(Models.Item request)
+		public async Task<IIdentityResponse> CreateItem(Models.Item request)
 		{
-			return Create("item", request);
+			return await Create("item", request);
 		}
 
 		/// <summary>
 		/// Querying for items
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-item
 		/// </summary>
-		public IResponse<ItemDetails> QueryItems(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
+		public async Task<IResponse<ItemDetails>> QueryItems(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
-			return Query<ItemDetails>("item");
+			return await Query<ItemDetails>("item");
 		}
 	}
 }

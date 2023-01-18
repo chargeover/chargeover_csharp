@@ -14,7 +14,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_CreatePayment()
+		public async void should_call_CreatePayment()
 		{
 			//arrange
 			var request = new Payment
@@ -34,7 +34,7 @@ namespace TestsChargeOver.Wrapper.Services
 				AutoApply = "best_fit"
 			};
 			//act
-			var actual = Sut.CreatePayment(request);
+			var actual = await Sut.CreatePayment(request);
 			//assert
 			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -42,11 +42,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_GetSpecificTransaction()
+		public async void should_call_GetSpecificTransaction()
 		{
 			//arrange
 			//act
-			var actual = Sut.GetTransaction(AddTransaction());
+			var actual = await Sut.GetTransaction(AddTransaction());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -54,11 +54,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_ListTransactions()
+		public async void should_call_ListTransactions()
 		{
 			//arrange
 			//act
-			var actual = Sut.ListTransactions();
+			var actual = await Sut.ListTransactions();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -66,11 +66,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_QueryForTransactions()
+		public async void should_call_QueryForTransactions()
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryTransactions(limit: 5);
+			var actual = await Sut.QueryTransactions(limit: 5);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -78,7 +78,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_AttemptPayment()
+		public async void should_call_AttemptPayment()
 		{
 			//arrange
 			var customerId = AddCustomer();
@@ -96,7 +96,7 @@ namespace TestsChargeOver.Wrapper.Services
 				}
 			};
 			//act
-			var actual = Sut.AttemptPayment(request);
+			var actual = await Sut.AttemptPayment(request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -104,7 +104,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_CreateRefund()
+		public async void should_call_CreateRefund()
 		{
 			//arrange
 			var request = new Refund
@@ -121,7 +121,7 @@ namespace TestsChargeOver.Wrapper.Services
 				TransactionDate = DateTime.Parse("2016-08-16")
 			};
 			//act
-			var actual = Sut.CreateRefund(request);
+			var actual = await Sut.CreateRefund(request);
 			//assert
 			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -129,7 +129,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_RefundPayment()
+		public async void should_call_RefundPayment()
 		{
 			//arrange
 			var request = new RefundPayment
@@ -140,7 +140,7 @@ namespace TestsChargeOver.Wrapper.Services
 			var cardId = StoreCreditCard(customer);
 			var payment = AttemptPayment(customer, cardId);
 			//act
-			var actual = Sut.RefundPayment(payment, request);
+			var actual = await Sut.RefundPayment(payment, request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -148,11 +148,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_VoidTransaction()
+		public async void should_call_VoidTransaction()
 		{
 			//arrange
 			//act
-			var actual = Sut.VoidTransaction(AddTransaction());
+			var actual = await Sut.VoidTransaction(AddTransaction());
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -160,7 +160,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_EmailReceipt()
+		public async void should_call_EmailReceipt()
 		{
 			//arrange
 			var request = new EmailInvoice
@@ -169,7 +169,7 @@ namespace TestsChargeOver.Wrapper.Services
 			};
 			var customer = AddCustomer();
 			//act
-			var actual = Sut.EmailReceipt(AddTransaction(customer), request);
+			var actual = await Sut.EmailReceipt(AddTransaction(customer), request);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

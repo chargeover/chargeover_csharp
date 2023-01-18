@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using ChargeOver.Wrapper.Models;
 using ChargeOver.Wrapper.Services;
 using NUnit.Framework;
@@ -14,12 +15,12 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_StoringUsageData()
+		public async void should_call_StoringUsageData()
 		{
 			//arrange
 			var customerId = CreateCustomer();
 			var itemId = TakeItemId();
-			var lineItemId = CreateLineItemFromSubscription(customerId, itemId);
+			var lineItemId = await CreateLineItemFromSubscription(customerId, itemId);
 
 			var request = new StoringUsageData
 			{
@@ -29,7 +30,7 @@ namespace TestsChargeOver.Wrapper.Services
 				To = DateTime.Parse("2013-10-16")
 			};
 			//act
-			var actual = Sut.StoreUsageData(request);
+			var actual = await Sut.StoreUsageData(request);
 			//assert
 			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -48,7 +49,7 @@ namespace TestsChargeOver.Wrapper.Services
 			}).Id;
 		}
 
-		private int CreateLineItemFromSubscription(int customerId, int itemId)
+		private async Task<int> CreateLineItemFromSubscription(int customerId, int itemId)
 		{
 			var subscriptionsService = new SubscriptionsService(Config);
 			var subscriptionId = subscriptionsService.CreateSubscription(new Subscription
@@ -65,7 +66,7 @@ namespace TestsChargeOver.Wrapper.Services
 				}
 			}).Id;
 
-			return subscriptionsService.GetSubscription(subscriptionId).Response.LineItems[0].LineItemId;
+			return (await subscriptionsService.GetSubscription(subscriptionId)).Response.LineItems[0].LineItemId;
 		}
 
 		private int TakeItemId()

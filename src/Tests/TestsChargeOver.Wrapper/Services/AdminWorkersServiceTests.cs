@@ -14,11 +14,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_GetListAdminWorkers()
+		public async void should_call_GetListAdminWorkers()
 		{
 			//arrange
 			//act
-			var actual = Sut.ListAdminWorkers();
+			var actual = await Sut.ListAdminWorkers();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -26,11 +26,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_QueryForAdminWorkers()
+		public async void should_call_QueryForAdminWorkers()
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryAdminWorkers();
+			var actual = await Sut.QueryAdminWorkers();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -38,12 +38,12 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_GetSpecificAdminWorker()
+		public async void should_call_GetSpecificAdminWorker()
 		{
 			//arrange
-			var adminWorkers = Sut.ListAdminWorkers().Response.First();
+			var adminWorkers = (await Sut.ListAdminWorkers()).Response.First();
 			//act
-			var actual = Sut.GetAdminWorker(adminWorkers.AdminId);
+			var actual = await Sut.GetAdminWorker(adminWorkers.AdminId);
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

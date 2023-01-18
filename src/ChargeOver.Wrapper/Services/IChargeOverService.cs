@@ -1,4 +1,5 @@
 using ChargeOver.Wrapper.Models;
+using System.Threading.Tasks;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -8,18 +9,18 @@ namespace ChargeOver.Wrapper.Services
 		/// Get a list of pending requests
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-chargeoverjs
 		/// </summary>
-		IResponse<PendingRequestDetail> GetListPendingRequests();
+		Task<IResponse<PendingRequestDetail>> GetListPendingRequests();
 
 		/// <summary>
 		/// Commit a ChargeOver.js request
 		/// details: https://developer.chargeover.com/apidocs/rest/#commit-chargeoverjs
 		/// </summary>
-		IIdentityResponse CommitChargeOver(CommitChargeOver request);
+		Task<IIdentityResponse> CommitChargeOver(CommitChargeOver request);
 
 		/// <summary>
 		/// Reject a ChargeOver.js request
 		/// details: https://developer.chargeover.com/apidocs/rest/#reject-chargeoverjs
 		/// </summary>
-		IIdentityResponse RejectChargeOver(RejectChargeOver request);
+		Task<IIdentityResponse> RejectChargeOver(RejectChargeOver request);
 	}
 }

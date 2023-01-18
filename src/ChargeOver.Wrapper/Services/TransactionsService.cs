@@ -1,5 +1,6 @@
 using ChargeOver.Wrapper.Models;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -17,81 +18,81 @@ namespace ChargeOver.Wrapper.Services
 		/// Create a payment
 		/// details: https://developer.chargeover.com/apidocs/rest/#create-transaction
 		/// </summary>
-		public IIdentityResponse CreatePayment(Payment request)
+		public async Task<IIdentityResponse> CreatePayment(Payment request)
 		{
-			return Create("transaction", request);
+			return await Create("transaction", request);
 		}
 
 		/// <summary>
 		/// Get a specific transaction
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-transaction
 		/// </summary>
-		public ICustomResponse<TransactionDetails> GetTransaction(int id)
+		public async Task<ICustomResponse<TransactionDetails>> GetTransaction(int id)
 		{
-			return GetCustom<TransactionDetails>("transaction", id);
+			return await GetCustom<TransactionDetails>("transaction", id);
 		}
 
 		/// <summary>
 		/// List transactions
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-all-transactions
 		/// </summary>
-		public IResponse<Transaction> ListTransactions()
+		public async Task<IResponse<Transaction>> ListTransactions()
 		{
-			return GetList<Transaction>("transaction");
+			return await GetList<Transaction>("transaction");
 		}
 
 		/// <summary>
 		/// Query for transactions
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-for-transactions
 		/// </summary>
-		public IResponse<Transaction> QueryTransactions(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
+		public async Task<IResponse<Transaction>> QueryTransactions(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
-			return Query<Transaction>("transaction", queries, orders, offset, limit);
+			return await Query<Transaction>("transaction", queries, orders, offset, limit);
 		}
 
 		/// <summary>
 		/// Attempt a payment
 		/// details: https://developer.chargeover.com/apidocs/rest/#pay-transaction
 		/// </summary>
-		public IIdentityResponse AttemptPayment(AttemptPayment request)
+		public async Task<IIdentityResponse> AttemptPayment(AttemptPayment request)
 		{
-			return Create("transaction?action=pay", request);
+			return await Create("transaction?action=pay", request);
 		}
 
 		/// <summary>
 		/// Create a refund
 		/// details: https://developer.chargeover.com/apidocs/rest/#create-transaction-refund
 		/// </summary>
-		public IIdentityResponse CreateRefund(Refund request)
+		public async Task<IIdentityResponse> CreateRefund(Refund request)
 		{
-			return Create("transaction", request);
+			return await Create("transaction", request);
 		}
 
 		/// <summary>
 		/// Refund a payment
 		/// details: https://developer.chargeover.com/apidocs/rest/#refund-transaction
 		/// </summary>
-		public IIdentityResponse RefundPayment(int id, RefundPayment request)
+		public async Task<IIdentityResponse> RefundPayment(int id, RefundPayment request)
 		{
-			return Create($"transaction/{id}?action=refund", request);
+			return await Create($"transaction/{id}?action=refund", request);
 		}
 
 		/// <summary>
 		/// Void a transaction
 		/// details: https://developer.chargeover.com/apidocs/rest/#void-a-transaction
 		/// </summary>
-		public ICustomResponse<bool> VoidTransaction(int id)
+		public async Task<ICustomResponse<bool>> VoidTransaction(int id)
 		{
-			return new CustomResponse<bool>(Request<object, CustomChargeOverResponse<bool>>(MethodType.POST, $"/transaction/{id}/?action=void", null));
+			return new CustomResponse<bool>(await Request<object, CustomChargeOverResponse<bool>>(MethodType.POST, $"/transaction/{id}/?action=void", null));
 		}
 
 		/// <summary>
 		/// Email a receipt
 		/// details: https://developer.chargeover.com/apidocs/rest/#email-a-transaction
 		/// </summary>
-		public ICustomResponse<bool> EmailReceipt(int id, EmailInvoice request)
+		public async Task<ICustomResponse<bool>> EmailReceipt(int id, EmailInvoice request)
 		{
-			return new CustomResponse<bool>(Request<EmailInvoice, CustomChargeOverResponse<bool>>(MethodType.POST, $"/transaction/{id}?action=email", request));
+			return new CustomResponse<bool>(await Request<EmailInvoice, CustomChargeOverResponse<bool>>(MethodType.POST, $"/transaction/{id}?action=email", request));
 		}
 	}
 }

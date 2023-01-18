@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ChargeOver.Wrapper.Models;
 using ChargeOver.Wrapper.Services;
 
@@ -15,7 +16,7 @@ namespace ChargeOver.Wrapper.Examples.Services
 			_service = new CustomersService();
 		}
 
-		public void Run()
+		public async void Run()
 		{
 			var examples = new List<Action>
 			{
@@ -28,7 +29,7 @@ namespace ChargeOver.Wrapper.Examples.Services
 			}
 		}
 
-		private void CreateCustomer()
+		private async void CreateCustomer()
 		{
 			var customer = new Customer
 			{
@@ -40,23 +41,23 @@ namespace ChargeOver.Wrapper.Examples.Services
 				SuperUserEmail = "mail@mail.com"
 			};
 
-			var result = _service.CreateCustomer(customer);
+			var result = await _service.CreateCustomer(customer);
 
 			if (!result.IsSuccess()) throw new Exception("Create customer failed.");
 
 			Console.WriteLine("Customer created with id: " + result.Id);
 		}
 
-		private void QueryCustomerByName()
+		private async void QueryCustomerByName()
 		{
-			var result = _service.QueryCustomers(new[] { "company:EQUALS:Name" });
+			var result = await _service.QueryCustomers(new[] { "company:EQUALS:Name" });
 
 			Console.WriteLine($"Customers found 'by name': {result.Response.Count()}");
 		}
 
-		private void QueryCustomerByEmail()
+		private async void QueryCustomerByEmail()
 		{
-			var result = _service.QueryCustomers(new[] { "superuser_email:EQUALS:mail@mail.com" });
+			var result = await _service.QueryCustomers(new[] { "superuser_email:EQUALS:mail@mail.com" });
 
 			Console.WriteLine($"Customers found 'by email': {result.Response.Count()}");
 		}

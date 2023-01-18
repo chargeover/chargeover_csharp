@@ -13,7 +13,7 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_CreateNote()
+		public async void should_call_CreateNote()
 		{
 			//arrange
 			var result = new CustomersService(Config).CreateCustomer(new Customer
@@ -32,7 +32,7 @@ namespace TestsChargeOver.Wrapper.Services
 				ObjId = result.Id
 			};
 			//act
-			var actual = Sut.CreateNote(request);
+			var actual = await Sut.CreateNote(request);
 			//assert
 			Assert.AreEqual(201, actual.Code);
 			Assert.IsEmpty(actual.Message);
@@ -40,11 +40,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_QueryNotesForObject()
+		public async void should_call_QueryNotesForObject()
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryNotesForObject(new[] { "obj_type:EQUALS:customer,obj_id:EQUALS:" + TakeCustomerId() });
+			var actual = await Sut.QueryNotesForObject(new[] { "obj_type:EQUALS:customer,obj_id:EQUALS:" + TakeCustomerId() });
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

@@ -12,11 +12,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_ListLanguages()
+		public async void should_call_ListLanguages()
 		{
 			//arrange
 			//act
-			var actual = Sut.ListLanguages();
+			var actual = await Sut.ListLanguages();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

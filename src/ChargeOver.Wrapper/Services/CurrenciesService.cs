@@ -1,4 +1,5 @@
 using ChargeOver.Wrapper.Models;
+using System.Threading.Tasks;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -16,9 +17,9 @@ namespace ChargeOver.Wrapper.Services
 		/// List currencies
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-currency
 		/// </summary>
-		public IResponse<Currency> ListCurrencies()
+		public async Task<IResponse<Currency>> ListCurrencies()
 		{
-			return GetList<Currency>("currency");
+			return await GetList<Currency>("currency");
 		}
 	}
 }

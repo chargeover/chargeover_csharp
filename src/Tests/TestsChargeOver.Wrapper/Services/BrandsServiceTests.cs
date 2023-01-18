@@ -12,11 +12,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_RetrieveBrandList()
+		public async void should_call_RetrieveBrandList()
 		{
 			//arrange
 			//act
-			var actual = Sut.ListBrands();
+			var actual = await Sut.ListBrands();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

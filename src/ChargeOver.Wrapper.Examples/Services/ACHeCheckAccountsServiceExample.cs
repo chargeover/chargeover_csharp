@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using ChargeOver.Wrapper.Models;
 using ChargeOver.Wrapper.Services;
 
@@ -13,7 +14,7 @@ namespace ChargeOver.Wrapper.Examples.Services
 			_service = new ACHeCheckAccountsService();
 		}
 
-		public void Run()
+		public async void Run()
 		{
 			var request = new StoreACHAccount
 			{
@@ -23,7 +24,7 @@ namespace ChargeOver.Wrapper.Examples.Services
 				Routing = "072403004",
 			};
 
-			var result = _service.StoreACHAccount(request);
+			var result = await _service.StoreACHAccount(request);
 
 			if (!result.IsSuccess()) throw new Exception("Store ACH failed.");
 

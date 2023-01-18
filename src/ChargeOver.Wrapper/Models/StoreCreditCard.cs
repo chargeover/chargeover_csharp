@@ -65,5 +65,15 @@ namespace  ChargeOver.Wrapper.Models
 		/// </summary>
 		[JsonProperty("country")]
 		public string Country { get; set; }
-	}
+        /// <summary>
+		/// Security Code
+		/// </summary>
+		[JsonProperty("cvv")]
+        public string SecurityCode { get; set; }
+        /// <summary>
+        /// The customer external key #
+        /// </summary>
+        [JsonProperty("customer_external_key")]
+        public int? CustomerExternalKey { get; set; }
+    }
 }

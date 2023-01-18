@@ -1,5 +1,6 @@
 using ChargeOver.Wrapper.Models;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -17,90 +18,90 @@ namespace ChargeOver.Wrapper.Services
 		/// Create an invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#create-an-invoice
 		/// </summary>
-		public IIdentityResponse CreateInvoice(Models.Invoice request)
+		public async Task<IIdentityResponse> CreateInvoice(Models.Invoice request)
 		{
-			return Create("/invoice ", request);
+			return await Create("/invoice ", request);
 		}
 
 		/// <summary>
 		/// Update an invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#update-an-invoice
 		/// </summary>
-		public IIdentityResponse UpdateInvoice(int invoiceId, UpdateInvoice request)
+		public async Task<IIdentityResponse> UpdateInvoice(int invoiceId, UpdateInvoice request)
 		{
-			return new IdentityResponse(Request<UpdateInvoice, IdentityChargeOverResponse>(MethodType.PUT, $"/invoice/{invoiceId}", request));
+			return new IdentityResponse(await Request<UpdateInvoice, IdentityChargeOverResponse>(MethodType.PUT, $"/invoice/{invoiceId}", request));
 		}
 
 		/// <summary>
 		/// Get a specific invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#get-for-invoices
 		/// </summary>
-		public ICustomResponse<InvoiceDetails> GetInvoice(int id)
+		public async Task<ICustomResponse<InvoiceDetails>> GetInvoice(int id)
 		{
-			return GetCustom<InvoiceDetails>("invoice", id);
+			return await GetCustom<InvoiceDetails>("invoice", id);
 		}
 
 		/// <summary>
 		/// Query for invoices
 		/// details: https://developer.chargeover.com/apidocs/rest/#query-for-invoices
 		/// </summary>
-		public IResponse<InvoiceDetails> QueryInvoices(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
+		public async Task<IResponse<InvoiceDetails>> QueryInvoices(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10)
 		{
-			return Query<InvoiceDetails>("invoice", queries, orders, offset, limit);
+			return await Query<InvoiceDetails>("invoice", queries, orders, offset, limit);
 		}
 
 		/// <summary>
 		/// Credit card payment (specify card details)
 		/// details: https://developer.chargeover.com/apidocs/rest/#payment-for-invoice-cc
 		/// </summary>
-		public ICustomResponse<bool> CreditCardPayment(int invoiceId, CreditCardPayment request)
+		public async Task<ICustomResponse<bool>> CreditCardPayment(int invoiceId, CreditCardPayment request)
 		{
-			return new CustomResponse<bool>(Request<CreditCardPayment, CustomChargeOverResponse<bool>>(MethodType.POST, $"/invoice/{invoiceId}?action=pay", request));
+			return new CustomResponse<bool>(await Request<CreditCardPayment, CustomChargeOverResponse<bool>>(MethodType.POST, $"/invoice/{invoiceId}?action=pay", request));
 		}
 
 		/// <summary>
 		/// ACH/eCheck payment (specify ACH details)
 		/// details: https://developer.chargeover.com/apidocs/rest/#payment-for-invoice-ach-new
 		/// </summary>
-		public ICustomResponse<bool> ACHCheckpayment(int invoiceId, ACHCheckPayment request)
+		public async Task<ICustomResponse<bool>> ACHCheckpayment(int invoiceId, ACHCheckPayment request)
 		{
-			return GetCustomBool($"/invoice/{invoiceId}?action=pay", request);
+			return await GetCustomBool($"/invoice/{invoiceId}?action=pay", request);
 		}
 
 		/// <summary>
 		/// Apply an open customer balance
 		/// details: https://developer.chargeover.com/apidocs/rest/#payment-for-invoice-balance
 		/// </summary>
-		public ICustomResponse<bool> ApplyOpenCustomerBalance(int invoiceId, ApplyOpenCustomerBalance request)
+		public async Task<ICustomResponse<bool>> ApplyOpenCustomerBalance(int invoiceId, ApplyOpenCustomerBalance request)
 		{
-			return GetCustomBool($"/invoice/{invoiceId}?action=pay", request);
+			return await GetCustomBool($"/invoice/{invoiceId}?action=pay", request);
 		}
 
 		/// <summary>
 		/// Void an invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#void-an-invoice
 		/// </summary>
-		public IResponse VoidInvoice(int invoiceId)
+		public async Task<IResponse>VoidInvoice(int invoiceId)
 		{
-			return GetCustomBool($"/invoice/{invoiceId}?action=void", new { });
+			return await GetCustomBool($"/invoice/{invoiceId}?action=void", new { });
 		}
 
 		/// <summary>
 		/// Email an invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#email-an-invoice
 		/// </summary>
-		public ICustomResponse<bool> EmailInvoice(int invoiceId, EmailInvoice request)
+		public async Task<ICustomResponse<bool>> EmailInvoice(int invoiceId, EmailInvoice request)
 		{
-			return new CustomResponse<bool>(Request<EmailInvoice, CustomChargeOverResponse<bool>>(MethodType.POST, $"/invoice/{invoiceId}?action=email", request));
+			return new CustomResponse<bool>(await Request<EmailInvoice, CustomChargeOverResponse<bool>>(MethodType.POST, $"/invoice/{invoiceId}?action=email", request));
 		}
 
 		/// <summary>
 		/// Print & mail an invoice
 		/// details: https://developer.chargeover.com/apidocs/rest/#print-an-invoice
 		/// </summary>
-		public ICustomResponse<bool> PrintInvoice(int invoiceId, PrintInvoice request)
+		public async Task<ICustomResponse<bool>> PrintInvoice(int invoiceId, PrintInvoice request)
 		{
-			return GetCustomBool($"/invoice/{invoiceId}?action=print", request);
+			return await GetCustomBool($"/invoice/{invoiceId}?action=print", request);
 		}
 	}
 }

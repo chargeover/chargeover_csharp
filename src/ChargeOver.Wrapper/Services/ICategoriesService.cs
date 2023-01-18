@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace ChargeOver.Wrapper.Services
 {
 	public interface ICategoriesService
@@ -6,6 +8,6 @@ namespace ChargeOver.Wrapper.Services
 		/// Query for categories
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-category
 		/// </summary>
-		IResponse QueryCategories(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10);
+		Task<IResponse> QueryCategories(string[] queries = null, string[] orders = null, int offset = 0, int limit = 10);
 	}
 }

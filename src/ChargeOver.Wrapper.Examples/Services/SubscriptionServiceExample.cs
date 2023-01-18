@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using ChargeOver.Wrapper.Models;
 using ChargeOver.Wrapper.Services;
 
@@ -26,22 +27,21 @@ namespace ChargeOver.Wrapper.Examples.Services
 			}
 		}
 
-		private void CreateSubscription()
+		private async void CreateSubscription()
 		{
-			var result = CreateNewSubscription();
+			var result = await CreateNewSubscription();
 
 			if (!result.IsSuccess()) throw new Exception("Create subscription failed.");
 
 			Console.WriteLine("Subscription created with id: " + result.Id);
 		}
 
-		private IIdentityResponse CreateNewSubscription()
+		private Task<IIdentityResponse> CreateNewSubscription()
 		{
 			var subscription = new Subscription
 			{
 				CustomerId = TakeCustomerId(),
-				HoldUntilDatetime = DateTime.Parse("2018-10-01"),
-				Coupon = 'The coupon code'
+				HoldUntilDatetime = DateTime.Parse("2018-10-01")
 			};
 
 			var line1 = new SubscriptionLineItem
@@ -81,10 +81,10 @@ namespace ChargeOver.Wrapper.Examples.Services
 			return result;
 		}
 
-		private void GetSubscriptionByPackageId()
+		private async void GetSubscriptionByPackageId()
 		{
 			var subscription = CreateNewSubscription();
-			var result = _service.QuerySubscriptions(new[] { "package_id:EQUALS:" + subscription.Id });
+			var result = await _service.QuerySubscriptions(new[] { "package_id:EQUALS:" + subscription.Id });
 
 			Console.WriteLine($"Subscriptions found 'by id': {result.Response.Count()}");
 		}

@@ -12,11 +12,11 @@ namespace TestsChargeOver.Wrapper.Services
 		}
 
 		[Test]
-		public void should_call_QueryForCategories()
+		public async void should_call_QueryForCategories()
 		{
 			//arrange
 			//act
-			var actual = Sut.QueryCategories();
+			var actual = await Sut.QueryCategories();
 			//assert
 			Assert.AreEqual(200, actual.Code);
 			Assert.IsEmpty(actual.Message);

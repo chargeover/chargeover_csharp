@@ -1,7 +1,10 @@
-﻿namespace ChargeOver.Wrapper.Examples.Services
+﻿using System.Threading.Tasks;
+
+namespace ChargeOver.Wrapper.Examples.Services
 {
 	public interface IServiceExample
 	{
-		void Run();
-	}
+		
+        void Run();
+    }
 }

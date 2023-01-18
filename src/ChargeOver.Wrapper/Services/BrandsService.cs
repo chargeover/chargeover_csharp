@@ -1,4 +1,5 @@
 using ChargeOver.Wrapper.Models;
+using System.Threading.Tasks;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -16,9 +17,9 @@ namespace ChargeOver.Wrapper.Services
 		/// Retrieve brand list
 		/// details: https://developer.chargeover.com/apidocs/rest/#list-brand
 		/// </summary>
-		public IResponse<Brand> ListBrands()
+		public async Task<IResponse<Brand>> ListBrands()
 		{
-			return GetList<Brand>("brand");
+			return await GetList<Brand>("brand");
 		}
 	}
 }

@@ -1,4 +1,5 @@
 using ChargeOver.Wrapper.Models;
+using System.Threading.Tasks;
 
 namespace ChargeOver.Wrapper.Services
 {
@@ -8,6 +9,6 @@ namespace ChargeOver.Wrapper.Services
 		/// Storing Usage Data
 		/// details: https://developer.chargeover.com/apidocs/rest/#create-usage
 		/// </summary>
-		IIdentityResponse StoreUsageData(StoringUsageData request);
+		Task<IIdentityResponse> StoreUsageData(StoringUsageData request);
 	}
 }
